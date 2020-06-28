@@ -21,7 +21,7 @@ Category: Standards Track                                   Compaq/W3C
                                                              1999年6月
 
 
-                超文本传输协议 -- HTTP/1.1
+                       超文本传输协议 -- HTTP/1.1
 
 Status of this Memo
 
@@ -404,25 +404,22 @@ RFC 2616                        HTTP/1.1                       June 1999
    level requirements but not all the SHOULD level requirements for its
    protocols is said to be "conditionally compliant."
 
-1.3 Terminology
+1.3 术语
 
-   This specification uses a number of terms to refer to the roles
-   played by participants in, and objects of, the HTTP communication.
+   此规范使用了许多术语来指代 HTTP 通信中的参与者及对象。
 
-   connection
-      A transport layer virtual circuit established between two programs
-      for the purpose of communication.
+   连接
+      建立在两个程序之间用于通信的传输层虚拟电路。
 
-   message
-      The basic unit of HTTP communication, consisting of a structured
-      sequence of octets matching the syntax defined in section 4 and
-      transmitted via the connection.
+   消息
+      HTTP 通信中的基本单元，由结构化的八比特字节序列构成，与第 4 节定义
+      语法相匹配，并通过连接来传输。
 
-   request
-      An HTTP request message, as defined in section 5.
+   请求
+      HTTP 请求消息，见第 5 节中定义。
 
-   response
-      An HTTP response message, as defined in section 6.
+   响应
+      HTTP 响应消息，见第 6 节中定义。
 
 
 
@@ -436,53 +433,40 @@ Fielding, et al.            Standards Track                     [Page 8]
 RFC 2616                        HTTP/1.1                       June 1999
 
 
-   resource
-      A network data object or service that can be identified by a URI,
-      as defined in section 3.2. Resources may be available in multiple
-      representations (e.g. multiple languages, data formats, size, and
-      resolutions) or vary in other ways.
+   资源
+      能够被 URI 标识的网络数据对象或服务，见第 3.2 节。能够以多种表示形
+      式（例如：多种语言、数据格式、大小和分辨率）来得到资源，或变而采取
+      其它方式。
 
-   entity
-      The information transferred as the payload of a request or
-      response. An entity consists of metainformation in the form of
-      entity-header fields and content in the form of an entity-body, as
-      described in section 7.
+   实体
+      请求或响应所承载的有效信息。实体由其头部字段的元信息和其主体中的内
+      容构成，见第 7 节。
 
-   representation
-      An entity included with a response that is subject to content
-      negotiation, as described in section 12. There may exist multiple
-      representations associated with a particular response status.
+   表示形式
+      响应中的实体是由内容协商决定，在第 12 节中有描述。对于一个具体的响
+      应状态，可能存在多种表示形式。
 
-   content negotiation
-      The mechanism for selecting the appropriate representation when
-      servicing a request, as described in section 12. The
-      representation of entities in any response can be negotiated
-      (including error responses).
+   内容协商
+      当服务一个请求时，如何选择适当表示形式的机制，在第 12 节中有描述。
+      在任何响应中的实体的表示形式都是可协商的 (包括错误响应)。
 
-   variant
-      A resource may have one, or more than one, representation(s)
-      associated with it at any given instant. Each of these
-      representations is termed a `varriant'.  Use of the term `variant'
-      does not necessarily imply that the resource is subject to content
-      negotiation.
+   变体
+      在任一给定时刻，一个资源对应的表示形式可以有一个或多个。每个表示形
+      式被称作一个 '变体'。使用术语 '变体' 并不一定意味着资源是由内容协
+      商决定。
 
-   client
-      A program that establishes connections for the purpose of sending
-      requests.
+   客户端
+      为发送请求而建立连接的程序。
 
-   user agent
-      The client which initiates a request. These are often browsers,
-      editors, spiders (web-traversing robots), or other end user tools.
+   用户代理
+      能够初始化请求的客户端。常见如浏览器、编辑器、爬虫 (网络机器人)、
+      或其它的终端用户工具。
 
-   server
-      An application program that accepts connections in order to
-      service requests by sending back responses. Any given program may
-      be capable of being both a client and a server; our use of these
-      terms refers only to the role being performed by the program for a
-      particular connection, rather than to the program's capabilities
-      in general. Likewise, any server may act as an origin server,
-      proxy, gateway, or tunnel, switching behavior based on the nature
-      of each request.
+   服务器
+      一种应用程序，它能够接受连接，发送响应以服务于请求。任何给定程序都
+      能够作为客户端和服务器；我们使用这些术语仅为指代程序在特定连接中所
+      扮演的角色，而不是指通常意义上的程序功能。同样，基于每个请求的性质
+      而切换不同的表现，任何服务器都能够充当源服务器、代理、网关或隧道。
 
 
 
@@ -492,30 +476,22 @@ Fielding, et al.            Standards Track                     [Page 9]
 RFC 2616                        HTTP/1.1                       June 1999
 
 
-   origin server
-      The server on which a given resource resides or is to be created.
+   源服务器
+      保存有资源或能够产生资源的服务器。
 
-   proxy
-      An intermediary program which acts as both a server and a client
-      for the purpose of making requests on behalf of other clients.
-      Requests are serviced internally or by passing them on, with
-      possible translation, to other servers. A proxy MUST implement
-      both the client and server requirements of this specification. A
-      "transparent proxy" is a proxy that does not modify the request or
-      response beyond what is required for proxy authentication and
-      identification. A "non-transparent proxy" is a proxy that modifies
-      the request or response in order to provide some added service to
-      the user agent, such as group annotation services, media type
-      transformation, protocol reduction, or anonymity filtering. Except
-      where either transparent or non-transparent behavior is explicitly
-      stated, the HTTP proxy requirements apply to both types of
-      proxies.
+   代理
+      一个中间程序，它能够同时作为服务器和客户端，并代表其它的客户端发送
+      请求。发向代理的请求会在代理内部得到服务，或在经过可能的转换后发送
+      给其它服务器。一个代理必须实现此规范的客户端和服务器的要求。“透明
+      代理" 对不在其认证和识别要求中的请求或响应，不会进行修改。"不透明
+      代理" 会修改请求或响应，以向用户代理提附加服务，例如组标注服务、媒
+      体类型转换、协议简化、或匿名过滤。除非透明或非透明行为被明确指出，
+      否则，对 HTTP 代理的要求同时应用于两者。
 
-   gateway
-      A server which acts as an intermediary for some other server.
-      Unlike a proxy, a gateway receives requests as if it were the
-      origin server for the requested resource; the requesting client
-      may not be aware that it is communicating with a gateway.
+   网关
+      一种服务器，扮演并代表其它服务器来为客户端提供服务的中间者。不用于
+      代理，网关接收请求时，就如同它是源服务器；发送请求的客户端可能察觉
+      不到它正在同网关进行通信。
 
    tunnel
       An intermediary program which is acting as a blind relay between
