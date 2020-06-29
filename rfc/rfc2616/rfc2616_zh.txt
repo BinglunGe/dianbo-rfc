@@ -65,7 +65,7 @@ RFC 2616                        HTTP/1.1                       June 1999
    1.4   总体操作 ....................................................12
    2   符号习惯和一般语法 ............................................14
    2.1   扩充的 BNF ..................................................14
-   2.2   Basic Rules .................................................15
+   2.2   基本规则 ....................................................15
    3   Protocol Parameters ...........................................17
    3.1   HTTP Version ................................................17
    3.2   Uniform Resource Identifiers ................................18
@@ -659,42 +659,36 @@ RFC 2616                        HTTP/1.1                       June 1999
 2.1 扩充的 BNF
 
    本文档规定的所有机制均使用两种方法描述: 散文体、类似于在 RFC 822 [9]
-   中使用的扩充的巴科斯-诺尔范式 (BNF)。要理解本规范，实现者需要熟悉相关
+   中使用的扩充的巴科斯-诺尔范式 (BNF)。要理解本规范, 实现者需要熟悉相关
    符号。扩充的 BNF 具有如下结构:
 
-   name = definition
-      The name of a rule is simply the name itself (without any
-      enclosing "<" and ">") and is separated from its definition by the
-      equal "=" character. White space is only significant in that
-      indentation of continuation lines is used to indicate a rule
-      definition that spans more than one line. Certain basic rules are
-      in uppercase, such as SP, LWS, HT, CRLF, DIGIT, ALPHA, etc. Angle
-      brackets are used within definitions whenever their presence will
-      facilitate discerning the use of rule names.
+   名字 = 定义
+      规则的名字只是名字本身 (没有符号 "<" 和 ">" 的包围), 并使用 "=" 字
+      符与定义分隔开。通过连续多行的缩进来表示跨越多行的定义时, 空白才有
+      意义。某些基础规则使用大写字母表示, 例如 SP, LWS, HT, CRLF, DIGIT,
+      ALPHA等。当尖括号的存在方便识别规则名时, 则在定义中使用尖括号。
 
-   "literal"
-      Quotation marks surround literal text. Unless stated otherwise,
-      the text is case-insensitive.
+   "字面文本"
+      使用引号包围字面文本。除非特别说明, 否则字面文本不区分大小写。
 
-   rule1 | rule2
-      Elements separated by a bar ("|") are alternatives, e.g., "yes |
-      no" will accept yes or no.
+   规则1 | 规则2
+      被竖线 ("|") 所分开的元素是可相互替换的, 例如 "yes | no" 将接受
+      yes 或 no。
 
-   (rule1 rule2)
-      Elements enclosed in parentheses are treated as a single element.
-      Thus, "(elem (foo | bar) elem)" allows the token sequences "elem
-      foo elem" and "elem bar elem".
+   (规则1 规则2)
+      括号包围的多个元素被视作一个元素。因此, "(elem (foo | bar) elem)"
+      允许标记序列是 "elem foo elem" 和 "elem bar elem"。
 
-   *rule
-      The character "*" preceding an element indicates repetition. The
-      full form is "<n>*<m>element" indicating at least <n> and at most
-      <m> occurrences of element. Default values are 0 and infinity so
-      that "*(element)" allows any number, including zero; "1*element"
-      requires at least one; and "1*2element" allows one or two.
+   *规则
+      元素前面的 "*" 字符表示重复该元素。表达式的完整形式为
+      "<n>*<m>element", 表示 element 最少出现 <n> 次, 最多出现 <m> 次。
+      默认值为 0 和正无穷, 因此表达式 "*(element)" 允许 element 出现任意
+      次数, 包括零次; 表达式 "1*element" 要求 element 出现至少一次; 表达
+      式 "1*2element" 表示 element 只能出现一次或两次。
 
-   [rule]
-      Square brackets enclose optional elements; "[foo bar]" is
-      equivalent to "*1(foo bar)".
+   [规则]
+      被方括号包围的元素是可选择; 表达式 "[foo bar]" 与 "*1(foo bar)" 相
+      等。
 
 
 
@@ -703,52 +697,42 @@ Fielding, et al.            Standards Track                    [Page 14]
 RFC 2616                        HTTP/1.1                       June 1999
 
 
-   N rule
-      Specific repetition: "<n>(element)" is equivalent to
-      "<n>*<n>(element)"; that is, exactly <n> occurrences of (element).
-      Thus 2DIGIT is a 2-digit number, and 3ALPHA is a string of three
-      alphabetic characters.
+   N 规则
+      特定次数的重复: 表达式 "<n>(element)" 与 "<n>*<n>(element)" 相等;
+      就是说, (element) 正好出现 <n> 次。因此 2DIGIT 表示两位的数字, 而
+      3ALPHA 是由三个字符构成的字符串。
 
-   #rule
-      A construct "#" is defined, similar to "*", for defining lists of
-      elements. The full form is "<n>#<m>element" indicating at least
-      <n> and at most <m> elements, each separated by one or more commas
-      (",") and OPTIONAL linear white space (LWS). This makes the usual
-      form of lists very easy; a rule such as
+   #规则
+      类似于 "*", 结构 "#" 用于定义元素的列表。表达式的完整形式为
+      "<n>#<m>element", 表示 element 至少有 <n> 个, 最多有 <m> 个, 且互
+      相之间用一个或多个 (",") 和可选的线性空白 (LWS) 分隔开。这使得通常
+      形式的列表的更加容易表示; 例如规则
          ( *LWS element *( *LWS "," *LWS element ))
-      can be shown as
+      能够被表示为
          1#element
-      Wherever this construct is used, null elements are allowed, but do
-      not contribute to the count of elements present. That is,
-      "(element), , (element) " is permitted, but counts as only two
-      elements. Therefore, where at least one element is required, at
-      least one non-null element MUST be present. Default values are 0
-      and infinity so that "#element" allows any number, including zero;
-      "1#element" requires at least one; and "1#2element" allows one or
-      two.
+      无论在哪里使用此结构, 空元素都是允许的, 但是不计入元素的出现次数。
+      就是说, 表达式 "(element), , (element) " 是允许的, 但是仅算作两个
+      元素。因此, 当在某处至少需要一个元素时, 必须存在至少一个非空元素。
+      默认值为 0 和正无穷, 所以表达式 "#element" 允许任意数量的 element,
+      包括零; 表达式 "1#element" 要求 element 至少出现一次; 表达式
+      "1#2element" 要求 element 出现一次或两次。
 
-   ; comment
-      A semi-colon, set off some distance to the right of rule text,
-      starts a comment that continues to the end of line. This is a
-      simple way of including useful notes in parallel with the
-      specifications.
+   ; 注释
+      在规则文本的右侧相隔一段距离, 使用分号开始一个注释, 该注释一直延伸
+      至行尾。这是为说明添加注释的简单方法。
 
-   implied *LWS
-      The grammar described by this specification is word-based. Except
-      where noted otherwise, linear white space (LWS) can be included
-      between any two adjacent words (token or quoted-string), and
-      between adjacent words and separators, without changing the
-      interpretation of a field. At least one delimiter (LWS and/or
+   隐式的 *LWS
+      本规范所描述的语法是基于单词的。除非特别说明, 线性空白 (LWS) 可以
+      被包含在任意两个相邻的单词间 (标记或带引号的字符串), 以及相邻的单
+      词和分隔符之间, 而不改变字段的解释。在两个标记 (后面会给出 "标记"
+      的定义) 之间必须至少存在一个分隔符号 (LWS 且/或 分隔符), 否则它们
+      会被解释为单个标记。
 
-      separators) MUST exist between any two tokens (for the definition
-      of "token" below), since they would otherwise be interpreted as a
-      single token.
 
-2.2 Basic Rules
+2.2 基本规则
 
-   The following rules are used throughout this specification to
-   describe basic parsing constructs. The US-ASCII coded character set
-   is defined by ANSI X3.4-1986 [21].
+   下面的规则将贯穿于本规范, 用于描述基本的解析结构。US-ASCII 编码字符集
+   是由 ANSI X3.4-1986 [21] 定义的。
 
 
 
@@ -759,49 +743,44 @@ Fielding, et al.            Standards Track                    [Page 15]
 RFC 2616                        HTTP/1.1                       June 1999
 
 
-       OCTET          = <any 8-bit sequence of data>
-       CHAR           = <any US-ASCII character (octets 0 - 127)>
-       UPALPHA        = <any US-ASCII uppercase letter "A".."Z">
-       LOALPHA        = <any US-ASCII lowercase letter "a".."z">
+       OCTET          = <任意 8-bit 数据序列>
+       CHAR           = <任意 US-ASCII 字符 (octets 0 - 127)>
+       UPALPHA        = <任意 US-ASCII 大写字母 "A".."Z">
+       LOALPHA        = <任意 US-ASCII 小写字母 "a".."z">
        ALPHA          = UPALPHA | LOALPHA
-       DIGIT          = <any US-ASCII digit "0".."9">
-       CTL            = <any US-ASCII control character
+       DIGIT          = <任意 US-ASCII 数字 "0".."9">
+       CTL            = <任意 US-ASCII 控制字符
                         (octets 0 - 31) and DEL (127)>
-       CR             = <US-ASCII CR, carriage return (13)>
-       LF             = <US-ASCII LF, linefeed (10)>
-       SP             = <US-ASCII SP, space (32)>
-       HT             = <US-ASCII HT, horizontal-tab (9)>
-       <">            = <US-ASCII double-quote mark (34)>
+       CR             = <US-ASCII CR, 回车 (13)>
+       LF             = <US-ASCII LF, 换行 (10)>
+       SP             = <US-ASCII SP, 空格 (32)>
+       HT             = <US-ASCII HT, 水平制表符 (9)>
+       <">            = <US-ASCII 双引号 (34)>
 
-   HTTP/1.1 defines the sequence CR LF as the end-of-line marker for all
-   protocol elements except the entity-body (see appendix 19.3 for
-   tolerant applications). The end-of-line marker within an entity-body
-   is defined by its associated media type, as described in section 3.7.
+   HTTP/1.1 将 CR LF 序列定义为, 除了实体主体外, 所有的协议元素的行尾
+   标记 (关于容错应用, 见附录第 19.3 节)。实体主体的行尾标记是由与其相关
+   的媒体类型来定义, 如第 3.7 节所述。
 
        CRLF           = CR LF
 
-   HTTP/1.1 header field values can be folded onto multiple lines if the
-   continuation line begins with a space or horizontal tab. All linear
-   white space, including folding, has the same semantics as SP. A
-   recipient MAY replace any linear white space with a single SP before
-   interpreting the field value or forwarding the message downstream.
+   HTTP/1.1 的头部字段值可以用多行表示, 只要其后续新行由空格或水平制表符
+   开始, 即所谓的折叠标记。所有的线性空白、折叠标记, 具有与 SP 相同的语
+   义。接收者在解释字段值或将消息向下游转发前, 可能会将任意线性空白替换
+   为单个 SP。
 
        LWS            = [CRLF] 1*( SP | HT )
 
-   The TEXT rule is only used for descriptive field contents and values
-   that are not intended to be interpreted by the message parser. Words
-   of *TEXT MAY contain characters from character sets other than ISO-
-   8859-1 [22] only when encoded according to the rules of RFC 2047
-   [14].
+   TEXT 规则仅被用于描述性字段的内容和值, 其不会被消息解析器所解释。表达
+   式 *TEXT 可能会包含除 ISO-8859-1 [22] 以外的字符集中的字符, 只要其按
+   照 RFC 2047 [14] 中的规则进行编码即可。
 
-       TEXT           = <any OCTET except CTLs,
-                        but including LWS>
+       TEXT           = <除 CTLs 以外的任意 OCTET,
+                        但是包括 LWS>
 
-   A CRLF is allowed in the definition of TEXT only as part of a header
-   field continuation. It is expected that the folding LWS will be
-   replaced with a single SP before interpretation of the TEXT value.
+   CRLF 只有在作为头部字段延续的一部分时, 才被允许出现在 TEXT 的定义中。
+   在解析 TEXT 的值之前, 折叠标记 LWS 将被替换为单个 SP。
 
-   Hexadecimal numeric characters are used in several protocol elements.
+   十六进制数字字符被用于多个协议元素中。
 
        HEX            = "A" | "B" | "C" | "D" | "E" | "F"
                       | "a" | "b" | "c" | "d" | "e" | "f" | DIGIT
@@ -815,34 +794,29 @@ Fielding, et al.            Standards Track                    [Page 16]
 RFC 2616                        HTTP/1.1                       June 1999
 
 
-   Many HTTP/1.1 header field values consist of words separated by LWS
-   or special characters. These special characters MUST be in a quoted
-   string to be used within a parameter value (as defined in section
-   3.6).
+   许多 HTTP/1.1 头部字段值是由多个被 LWS 或特殊字符分隔的单词组成。这些
+   特殊字符必须包含在带引号的字符串中, 以被用作参数值 (见第 3.6 节的定
+   义)。
 
-       token          = 1*<any CHAR except CTLs or separators>
+       token          = 1*<除 CTLs 和 separators 以外的任意 CHAR>
        separators     = "(" | ")" | "<" | ">" | "@"
                       | "," | ";" | ":" | "\" | <">
                       | "/" | "[" | "]" | "?" | "="
                       | "{" | "}" | SP | HT
 
-   Comments can be included in some HTTP header fields by surrounding
-   the comment text with parentheses. Comments are only allowed in
-   fields containing "comment" as part of their field value definition.
-   In all other fields, parentheses are considered part of the field
-   value.
+   通过用括号包围注释文本, 可以将注释包含在某些 HTTP 头部字段中。只有在
+   字段值的定义中包含有 "comment" 时, 才能在该字段中使用注释。在其他所有
+   字段, 括号会被视为字段值的一部分。
 
        comment        = "(" *( ctext | quoted-pair | comment ) ")"
-       ctext          = <any TEXT excluding "(" and ")">
+       ctext          = <除 "(" 和 ")" 以外的任意 TEXT>
 
-   A string of text is parsed as a single word if it is quoted using
-   double-quote marks.
+   被双引号包围起来的文本字符串, 会被解析为一个单词。
 
        quoted-string  = ( <"> *(qdtext | quoted-pair ) <"> )
-       qdtext         = <any TEXT except <">>
+       qdtext         = <除 <"> 以外的任意 TEXT>
 
-   The backslash character ("\") MAY be used as a single-character
-   quoting mechanism only within quoted-string and comment constructs.
+   反斜线 ("\") 只能在带引号的字符串或注释结构中, 被用于单字符引用机制。
 
        quoted-pair    = "\" CHAR
 
