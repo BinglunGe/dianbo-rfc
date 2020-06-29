@@ -62,9 +62,9 @@ RFC 2616                        HTTP/1.1                       June 1999
    1.1   目的 .........................................................7
    1.2   Requirements .................................................8
    1.3   术语 .........................................................8
-   1.4   Overall Operation ...........................................12
-   2   Notational Conventions and Generic Grammar ....................14
-   2.1   Augmented BNF ...............................................14
+   1.4   总体操作 ....................................................12
+   2   符号习惯和一般语法 ............................................14
+   2.1   扩充的 BNF ..................................................14
    2.2   Basic Rules .................................................15
    3   Protocol Parameters ...........................................17
    3.1   HTTP Version ................................................17
@@ -568,49 +568,40 @@ RFC 2616                        HTTP/1.1                       June 1999
       入站和出站是指请求和响应消息的路径: "入站" 表示 "向源服务器发送",
       "出站" 表示 "向用户代理发送"。
 
-1.4 Overall Operation
+1.4 总体操作
 
-   The HTTP protocol is a request/response protocol. A client sends a
-   request to the server in the form of a request method, URI, and
-   protocol version, followed by a MIME-like message containing request
-   modifiers, client information, and possible body content over a
-   connection with a server. The server responds with a status line,
-   including the message's protocol version and a success or error code,
-   followed by a MIME-like message containing server information, entity
-   metainformation, and possible entity-body content. The relationship
-   between HTTP and MIME is described in appendix 19.4.
+   HTTP 协议是一种请求/响应协议。客户端通过与服务器的连接, 向服务器发送
+   请求, 请求由请求方法、URI、协议版本、及跟随其后的类 MIME 消息构成, 类
+   MIME 消息中包含有请求修饰符、客户端信息、及可能的主体内容。服务器用一
+   个状态行来响应, 其中包含消息的协议版本、请求成功/错误的的代码、及跟随
+   其后的类 MIME 消息, 在类 MIME 消息中含有服务器信息、实体元信息、及可
+   能的主题内容。HTTP 与 MIME 两者间的关系在附录第 19.4 节中有描述。
 
-   Most HTTP communication is initiated by a user agent and consists of
-   a request to be applied to a resource on some origin server. In the
-   simplest case, this may be accomplished via a single connection (v)
-   between the user agent (UA) and the origin server (O).
 
-          request chain ------------------------>
+   大部分 HTTP 通信是由客户代理发起的, 其包含应用于某个源服务器上的资源
+   的请求。在最简单的情况下, 这可以通过用户代理 (UA) 和 源服务器 (O) 之
+   间的单个连接 (v) 来实现。
+
+          请求链 ------------------------------->
        UA -------------------v------------------- O
-          <----------------------- response chain
+          <------------------------------- 响应链
 
-   A more complicated situation occurs when one or more intermediaries
-   are present in the request/response chain. There are three common
-   forms of intermediary: proxy, gateway, and tunnel. A proxy is a
-   forwarding agent, receiving requests for a URI in its absolute form,
-   rewriting all or part of the message, and forwarding the reformatted
-   request toward the server identified by the URI. A gateway is a
-   receiving agent, acting as a layer above some other server(s) and, if
-   necessary, translating the requests to the underlying server's
-   protocol. A tunnel acts as a relay point between two connections
-   without changing the messages; tunnels are used when the
-   communication needs to pass through an intermediary (such as a
-   firewall) even when the intermediary cannot understand the contents
-   of the messages.
+   当在请求/响应链中存在一个或多个中间者时, 情况变得复杂起来。有三种常见
+   形式的中间者: 代理 (proxy)、网关 (gateway)、隧道 (tunnel)。代理是一种
+   转发代理 (forwarding agent), 它接收具有绝对路径形式的 URI 的请求, 重
+   写其中的全部或部分消息, 并将重新格式化的请求转发给由 URI 所标识的服务
+   器。网关是一种接收代理 (receiving agent), 作为其它服务器的上层, 并在
+   必要时将请求转换为底层服务器所用的协议。隧道是两个连接的中继点, 它不
+   会改变消息; 它可用于当通信需要穿过一个中间者 (例如防火墙时) 时, 即使
+   中间者不能够理解消息的内容。
 
-          request chain -------------------------------------->
+          请求链 --------------------------------------------->
        UA -----v----- A -----v----- B -----v----- C -----v----- O
-          <------------------------------------- response chain
+          <--------------------------------------------- 响应链
 
-   The figure above shows three intermediaries (A, B, and C) between the
-   user agent and origin server. A request or response message that
-   travels the whole chain will pass through four separate connections.
-   This distinction is important because some HTTP communication options
+   上图展示了用户代理和源服务器间的三个中间者 (A, B 和 C)。在整个链路中
+   传递的请求或响应消息将穿过四个独立的连接。这一区别很重要, 因为 HTTP
+   通信中的一些选项: 
 
 
 
@@ -619,53 +610,37 @@ Fielding, et al.            Standards Track                    [Page 12]
 RFC 2616                        HTTP/1.1                       June 1999
 
 
-   may apply only to the connection with the nearest, non-tunnel
-   neighbor, only to the end-points of the chain, or to all connections
-   along the chain. Although the diagram is linear, each participant may
-   be engaged in multiple, simultaneous communications. For example, B
-   may be receiving requests from many clients other than A, and/or
-   forwarding requests to servers other than C, at the same time that it
-   is handling A's request.
+   仅应用于最近的非隧道邻居的连接; 仅应用于链路的端点; 或应用到链路中的
+   所有连接。尽管图示是线性的, 实际上每个参与者可能同时忙于多个连接。例
+   如, B 可能接收到除 A 外的许多客户端的请求, 且/或转发请求至除 C 外的其
+   它服务器, 同时它也在处理 A 的请求。
 
-   Any party to the communication which is not acting as a tunnel may
-   employ an internal cache for handling requests. The effect of a cache
-   is that the request/response chain is shortened if one of the
-   participants along the chain has a cached response applicable to that
-   request. The following illustrates the resulting chain if B has a
-   cached copy of an earlier response from O (via C) for a request which
-   has not been cached by UA or A.
+   除了隧道, 通信中的任一参与者都有可能使用内部缓存来处理请求。缓存所带
+   来的影响是, 当链路中的参与者之一缓存了适用于某一请求的响应时, 请求/响
+   应链会被缩短。下图展示了, 来自服务器 O 的响应副本, 被 B 缓存但是未被
+   UA 或 A 缓存时, 所对应的请求响应链。
 
-          request chain ---------->
+          请求链 ----------------->
        UA -----v----- A -----v----- B - - - - - - C - - - - - - O
-          <--------- response chain
+          <----------------- 响应链
 
-   Not all responses are usefully cacheable, and some requests may
-   contain modifiers which place special requirements on cache behavior.
-   HTTP requirements for cache behavior and cacheable responses are
-   defined in section 13.
+   并不是所有的响应都能被有效缓存, 有一些请求可能包含修饰符, 这些修饰符
+   会对缓存行为有特殊的要求。HTTP 对缓存行为和可缓存响应的要求在第 13 节
+   中有定义。
 
-   In fact, there are a wide variety of architectures and configurations
-   of caches and proxies currently being experimented with or deployed
-   across the World Wide Web. These systems include national hierarchies
-   of proxy caches to save transoceanic bandwidth, systems that
-   broadcast or multicast cache entries, organizations that distribute
-   subsets of cached data via CD-ROM, and so on. HTTP systems are used
-   in corporate intranets over high-bandwidth links, and for access via
-   PDAs with low-power radio links and intermittent connectivity. The
-   goal of HTTP/1.1 is to support the wide diversity of configurations
-   already deployed while introducing protocol constructs that meet the
-   needs of those who build web applications that require high
-   reliability and, failing that, at least reliable indications of
-   failure.
+   实际上, 有大量不同架构和配置的缓存和代理被实验性地部署在万维网上。这
+   些系统包括: 国家层面的代理缓存以节省跨洋带宽、对缓存项广播或多播的系
+   统、通过 CD-ROM 来分发缓存数据子集的组织等。HTTP 系统被用于具有高带宽
+   链路的企业内网中, 并通过 PDA 设备进行低功耗且无线的、间歇连接的访问。
+   HTTP/1.1 的目标是支持各种各样的已被部署的配置, 同时引入一种协议结构, 
+   使其能够满足那些 web 应用开发者所要求的高可靠性, 再次至少能提供可靠的
+   故障指示。
 
-   HTTP communication usually takes place over TCP/IP connections. The
-   default port is TCP 80 [19], but other ports can be used. This does
-   not preclude HTTP from being implemented on top of any other protocol
-   on the Internet, or on other networks. HTTP only presumes a reliable
-   transport; any protocol that provides such guarantees can be used;
-   the mapping of the HTTP/1.1 request and response structures onto the
-   transport data units of the protocol in question is outside the scope
-   of this specification.
+   HTTP 通信通常建立在 TCP/IP 连接之上。默认端口为 TCP 80 [19], 不过也可
+   以使用其它端口。这并不妨碍在其它的互联网协议之上或其它的网络上实现
+   HTTP。HTTP 仅假设具有一个可靠的传输; 任何能够提供这一保证的协议都能够
+   被使用; 如何将 HTTP/1.1 的请求和响应结构映射到传输数据单元的问题超出
+   了本规范的范围。
 
 
 
@@ -675,20 +650,17 @@ Fielding, et al.            Standards Track                    [Page 13]
 RFC 2616                        HTTP/1.1                       June 1999
 
 
-   In HTTP/1.0, most implementations used a new connection for each
-   request/response exchange. In HTTP/1.1, a connection may be used for
-   one or more request/response exchanges, although connections may be
-   closed for a variety of reasons (see section 8.1).
+   在 HTTP/1.0 中, 对于每次的请求/响应的交换, 大部分实现都会建立一个新的
+   连接。在 HTTP/1.1中, 一个连接可能被用于一次或多次的请求/响应的交换,
+   虽然连接可能会因各种原因被关闭 (见第 8.1节)。
 
-2 Notational Conventions and Generic Grammar
+2 符号习惯和一般语法
 
-2.1 Augmented BNF
+2.1 扩充的 BNF
 
-   All of the mechanisms specified in this document are described in
-   both prose and an augmented Backus-Naur Form (BNF) similar to that
-   used by RFC 822 [9]. Implementors will need to be familiar with the
-   notation in order to understand this specification. The augmented BNF
-   includes the following constructs:
+   本文档规定的所有机制均使用两种方法描述: 散文体、类似于在 RFC 822 [9]
+   中使用的扩充的巴科斯-诺尔范式 (BNF)。要理解本规范，实现者需要熟悉相关
+   符号。扩充的 BNF 具有如下结构:
 
    name = definition
       The name of a rule is simply the name itself (without any
