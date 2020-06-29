@@ -38,13 +38,13 @@ Copyright Notice
 摘要
 
    超文本传输协议 (HTTP) 是一种用于分布式、协作式、超媒体信息系统的应用
-   层协议。它是一种通用的、无状态的协议，通过扩展它的请求方法、错误代码
-   和消息头部 [47]，它可以被用于除超文本以外的很多任务，例如域名服务器和
-   分布式对象管理系统。HTTP的一个特性是数据表示的归类与协商，允许独立于
+   层协议。它是一种通用的、无状态的协议, 通过扩展它的请求方法、错误代码
+   和消息头部 [47], 它可以被用于除超文本以外的很多任务, 例如域名服务器和
+   分布式对象管理系统。HTTP的一个特性是数据表示的归类与协商, 允许独立于
    所传输的数据来构建系统。
 
-   自 1990 年以来，HTTP 就被用于万维网全球信息倡议中。此规范定义了被称为
-   "HTTP/1.1" 的协议，其是对 RFC 2068 [33] 的更新。
+   自 1990 年以来, HTTP 就被用于万维网全球信息倡议中。此规范定义了被称为
+   "HTTP/1.1" 的协议, 其是对 RFC 2068 [33] 的更新。
 
 
 
@@ -56,12 +56,12 @@ Fielding, et al.            Standards Track                     [Page 1]
 RFC 2616                        HTTP/1.1                       June 1999
 
 
-Table of Contents
+目录
 
-   1   Introduction ...................................................7
-   1.1    Purpose......................................................7
+   1   引言 ...........................................................7
+   1.1   目的 .........................................................7
    1.2   Requirements .................................................8
-   1.3   Terminology ..................................................8
+   1.3   术语 .........................................................8
    1.4   Overall Operation ...........................................12
    2   Notational Conventions and Generic Grammar ....................14
    2.1   Augmented BNF ...............................................14
@@ -357,21 +357,21 @@ RFC 2616                        HTTP/1.1                       June 1999
 1.1 目的
 
    超文本传输协议 (HTTP) 是一种用于分布式、协作式、超媒体信息系统的应用
-   层协议。自 1990 年以来，HTTP 就被用于万维网全球信息倡议中。HTTP 的第
-   一个版本被称为 HTTP/0.9，是一个简单的协议，用于在互联网上传输原始数
-   据。在 RFC 1945 [6] 中定义的 HTTP/1.0 改进了该协议，允许消息采用类似
-   于 MIME 消息的格式，其中包含有关所传数据的元信息和请求/响应语意的修饰
-   符。但是，HTTP/1.0 没有充分考虑分层代理、缓存、持久连接、虚拟主机。此
-   外，有大量自称 "HTTP/1.0" 实际上并未完全实现的应用程序，它们需要一个
-   新版本的协议，以便通信中的两个应用程序可以确定彼此的可用功能。
+   层协议。自 1990 年以来, HTTP 就被用于万维网全球信息倡议中。HTTP 的第
+   一个版本被称为 HTTP/0.9, 是一个简单的协议, 用于在互联网上传输原始数
+   据。在 RFC 1945 [6] 中定义的 HTTP/1.0 改进了该协议, 允许消息采用类似
+   于 MIME 消息的格式, 其中包含有关所传数据的元信息和请求/响应语义的修饰
+   符。但是, HTTP/1.0 没有充分考虑分层代理、缓存、持久连接、虚拟主机。此
+   外, 有大量自称 "HTTP/1.0" 实际上并未完全实现的应用程序, 它们需要一个
+   新版本的协议, 以便通信中的两个应用程序可以确定彼此的可用功能。
 
    此规范定义了被称为 "HTTP/1.1" 的协议。此协议包含了比 HTTP/1.0 更严格
-   的要求，以确保其功能的可靠实现。
+   的要求, 以确保其功能的可靠实现。
 
-   实际的信息系统需要比简单检索更多的功能，包括搜索、前段更新、注释。
-   HTTP 允许一组无限制的消息方法和头部，用于指示请求的目的 [47]。其建立
-   在由统一资源标识符 (URI) 所提供索引的基础上，URI 可以作为位置信息
-   (URL) 或名称信息 (URN)，来指出某一方法将要作用到的资源。
+   实际的信息系统需要比简单检索更多的功能, 包括搜索、前段更新、注释。
+   HTTP 允许一组无限制的消息方法和头部, 用于指示请求的目的 [47]。其建立
+   在由统一资源标识符 (URI) 所提供索引的基础上, URI 可以作为位置信息
+   (URL) 或名称信息 (URN), 来指出某一方法将要作用到的资源。
 
 
 
@@ -382,12 +382,12 @@ Fielding, et al.            Standards Track                     [Page 7]
 RFC 2616                        HTTP/1.1                       June 1999
 
 
-   消息的传递格式类似于互联网邮件 [9] 所使用的格式，由多用途互联网邮件扩
+   消息的传递格式类似于互联网邮件 [9] 所使用的格式, 由多用途互联网邮件扩
    展类型 (MIME) [7] 来定义。
 
-   HTTP 也被用作一种通用协议，提供用户代理和到其它互联网系统的代理/网关
-   之间的通信，包括 SMTP [16]，NNTP [13]，FTP [18]，Gopher [2] 和 WAIS
-   [10] 这些协议。通过这种方式，HTTP 允许来自不同的应用程序，进行基本的
+   HTTP 也被用作一种通用协议, 提供用户代理和到其它互联网系统的代理/网关
+   之间的通信, 包括 SMTP [16], NNTP [13], FTP [18], Gopher [2] 和 WAIS
+   [10] 这些协议。通过这种方式, HTTP 允许来自不同的应用程序, 进行基本的
    超媒体资源获取。
 
 1.2 Requirements
@@ -412,14 +412,14 @@ RFC 2616                        HTTP/1.1                       June 1999
       建立在两个程序之间用于通信的传输层虚拟电路。
 
    消息
-      HTTP 通信中的基本单元，由结构化的八比特字节序列构成，与第 4 节定义
-      语法相匹配，并通过连接来传输。
+      HTTP 通信中的基本单元, 由结构化的八比特字节序列构成, 与第 4 节定义
+      语法相匹配, 并通过连接来传输。
 
    请求
-      HTTP 请求消息，见第 5 节中定义。
+      HTTP 请求消息, 见第 5 节中定义。
 
    响应
-      HTTP 响应消息，见第 6 节中定义。
+      HTTP 响应消息, 见第 6 节中定义。
 
 
 
@@ -434,24 +434,24 @@ RFC 2616                        HTTP/1.1                       June 1999
 
 
    资源
-      能够被 URI 标识的网络数据对象或服务，见第 3.2 节。能够以多种表示形
-      式（例如：多种语言、数据格式、大小和分辨率）来得到资源，或变而采取
+      能够被 URI 标识的网络数据对象或服务, 见第 3.2 节。能够以多种表示形
+      式 (例如: 多种语言、数据格式、大小和分辨率) 来得到资源, 或变而采取
       其它方式。
 
    实体
       请求或响应所承载的有效信息。实体由其头部字段的元信息和其主体中的内
-      容构成，见第 7 节。
+      容构成, 见第 7 节。
 
    表示形式
-      响应中的实体是由内容协商决定，在第 12 节中有描述。对于一个具体的响
-      应状态，可能存在多种表示形式。
+      响应中的实体是由内容协商决定, 在第 12 节中有描述。对于一个具体的响
+      应状态, 可能存在多种表示形式。
 
    内容协商
-      当服务一个请求时，如何选择适当表示形式的机制，在第 12 节中有描述。
+      当服务一个请求时, 如何选择适当表示形式的机制, 在第 12 节中有描述。
       在任何响应中的实体的表示形式都是可协商的 (包括错误响应)。
 
    变体
-      在任一给定时刻，一个资源对应的表示形式可以有一个或多个。每个表示形
+      在任一给定时刻, 一个资源对应的表示形式可以有一个或多个。每个表示形
       式被称作一个 '变体'。使用术语 '变体' 并不一定意味着资源是由内容协
       商决定。
 
@@ -463,10 +463,10 @@ RFC 2616                        HTTP/1.1                       June 1999
       或其它的终端用户工具。
 
    服务器
-      一种应用程序，它能够接受连接，发送响应以服务于请求。任何给定程序都
-      能够作为客户端和服务器；我们使用这些术语仅为指代程序在特定连接中所
-      扮演的角色，而不是指通常意义上的程序功能。同样，基于每个请求的性质
-      而切换不同的表现，任何服务器都能够充当源服务器、代理、网关或隧道。
+      一种应用程序, 它能够接受连接, 发送响应以服务于请求。任何给定程序都
+      能够作为客户端和服务器; 我们使用这些术语仅为指代程序在特定连接中所
+      扮演的角色, 而不是指通常意义上的程序功能。同样, 基于每个请求的性质
+      而切换不同的表现, 任何服务器都能够充当源服务器、代理、网关或隧道。
 
 
 
@@ -480,41 +480,35 @@ RFC 2616                        HTTP/1.1                       June 1999
       保存有资源或能够产生资源的服务器。
 
    代理
-      一个中间程序，它能够同时作为服务器和客户端，并代表其它的客户端发送
-      请求。发向代理的请求会在代理内部得到服务，或在经过可能的转换后发送
-      给其它服务器。一个代理必须实现此规范的客户端和服务器的要求。“透明
-      代理" 对不在其认证和识别要求中的请求或响应，不会进行修改。"不透明
-      代理" 会修改请求或响应，以向用户代理提附加服务，例如组标注服务、媒
-      体类型转换、协议简化、或匿名过滤。除非透明或非透明行为被明确指出，
-      否则，对 HTTP 代理的要求同时应用于两者。
+      一个中间程序, 它能够同时作为服务器和客户端, 并代表其它的客户端发送
+      请求。发向代理的请求会在代理内部得到服务, 或在经过可能的转换后发送
+      给其它服务器。一个代理必须实现此规范的客户端和服务器的要求。"透明
+      代理" 对不在其认证和识别要求中的请求或响应, 不会进行修改。"不透明
+      代理" 会修改请求或响应, 以向用户代理提附加服务, 例如组标注服务、媒
+      体类型转换、协议简化、或匿名过滤。除非透明或非透明行为被明确指出,
+      否则, 对 HTTP 代理的要求同时应用于两者。
 
    网关
-      一种服务器，扮演并代表其它服务器来为客户端提供服务的中间者。不用于
-      代理，网关接收请求时，就如同它是源服务器；发送请求的客户端可能察觉
+      一种服务器, 扮演并代表其它服务器来为客户端提供服务的中间者。不用于
+      代理, 网关接收请求时, 就如同它是源服务器; 发送请求的客户端可能察觉
       不到它正在同网关进行通信。
 
-   tunnel
-      An intermediary program which is acting as a blind relay between
-      two connections. Once active, a tunnel is not considered a party
-      to the HTTP communication, though the tunnel may have been
-      initiated by an HTTP request. The tunnel ceases to exist when both
-      ends of the relayed connections are closed.
+   隧道
+      扮演两个连接之间的盲中继的中间程序。一旦隧道建立, 隧道便不再被视为
+      HTTP 通信的参与者, 尽管隧道本身可能是通过 HTTP 请求来初始化的。当
+      隧道两端的中继连接都关闭时, 隧道便不存在了。
 
-   cache
-      A program's local store of response messages and the subsystem
-      that controls its message storage, retrieval, and deletion. A
-      cache stores cacheable responses in order to reduce the response
-      time and network bandwidth consumption on future, equivalent
-      requests. Any client or server may include a cache, though a cache
-      cannot be used by a server that is acting as a tunnel.
+   缓存
+      程序的响应消息的本地存储, 以及用于控制其消息的存储、检索、删除的子
+      系统。缓存通过存储可缓存的响应, 来减少对将来相同请求的响应时间和
+      网络带宽的消耗。除了作为隧道使用的服务器, 任何客户端或服务器都可以
+      包含缓存。
 
-   cacheable
-      A response is cacheable if a cache is allowed to store a copy of
-      the response message for use in answering subsequent requests. The
-      rules for determining the cacheability of HTTP responses are
-      defined in section 13. Even if a resource is cacheable, there may
-      be additional constraints on whether a cache can use the cached
-      copy for a particular request.
+   可缓存的
+      称一个响应是可缓存的, 只要缓存能够存储该响应消息的副本来应答后续的
+      请求。第 13 节定义了用于确定 HTTP 响应可缓存性的规则。即使资源是可
+      缓存的, 对于缓存是否可以将缓存副本用于特定的请求, 仍可能存在其它的
+      限制。
 
 
 
@@ -524,52 +518,42 @@ Fielding, et al.            Standards Track                    [Page 10]
 RFC 2616                        HTTP/1.1                       June 1999
 
 
-   first-hand
-      A response is first-hand if it comes directly and without
-      unnecessary delay from the origin server, perhaps via one or more
-      proxies. A response is also first-hand if its validity has just
-      been checked directly with the origin server.
+   第一手的
+      一个响应被称为第一手的, 是指该响应直接来自源服务器, 可能经过了若干
+      代理, 但是没有不必要的延迟。如果一个响应的有效性得到了源服务器的直
+      接验证, 那么该响应也被称为第一手的。
 
-   explicit expiration time
-      The time at which the origin server intends that an entity should
-      no longer be returned by a cache without further validation.
+   显式过期时间
+      由源服务器提供的一个时间, 当超过该时间后, 没有得到源服务器进一步验
+      证的实体不应再由缓存返回。
 
-   heuristic expiration time
-      An expiration time assigned by a cache when no explicit expiration
-      time is available.
+   启发式过期时间
+      当没有显式过期时间可用时, 由缓存分配的过期时间。
 
-   age
-      The age of a response is the time since it was sent by, or
-      successfully validated with, the origin server.
+   年龄
+      响应的年龄是指, 从该响应被源服务器发送或成功验证以来的时间。
 
-   freshness lifetime
-      The length of time between the generation of a response and its
-      expiration time.
+   保鲜寿命
+      响应的产生时间和它的终止时间之间的时间长度。
 
-   fresh
-      A response is fresh if its age has not yet exceeded its freshness
-      lifetime.
+   新鲜的
+      如果一个响应的年龄没有超过其保鲜寿命, 那么就称该响应是新鲜的。
 
-   stale
-      A response is stale if its age has passed its freshness lifetime.
+   过期的
+      如果一个响应的年龄超过了其保鲜寿命, 那么就称该响应是新鲜的。
 
-   semantically transparent
-      A cache behaves in a "semantically transparent" manner, with
-      respect to a particular response, when its use affects neither the
-      requesting client nor the origin server, except to improve
-      performance. When a cache is semantically transparent, the client
-      receives exactly the same response (except for hop-by-hop headers)
-      that it would have received had its request been handled directly
-      by the origin server.
+   语义透明的
+      如果一个缓存对于某特定响应, 除了提高性能外, 对客户端和服务器均不产
+      生影响, 那么称该缓存的行为是 "语意透明的"。如果一个缓存是语意透明
+      的, 客户端从缓存接收的响应应与由源服务器直接处理请求后得到的响应完
+      全相同 (除了 hop-by-hop 头部字段)。
 
-   validator
-      A protocol element (e.g., an entity tag or a Last-Modified time)
-      that is used to find out whether a cache entry is an equivalent
-      copy of an entity.
+   验证器
+      一个协议元素 (例如实体标签或者最后更改时间等), 用来确定一个缓存项
+      是否是一个实体的等效副本。
 
-   upstream/downstream
-      Upstream and downstream describe the flow of a message: all
-      messages flow from upstream to downstream.
+   上游/下游
+      上游和下游的概念用于描述消息流: 所有的消息都是从上游流向下游。
 
 
 
@@ -580,10 +564,9 @@ Fielding, et al.            Standards Track                    [Page 11]
 RFC 2616                        HTTP/1.1                       June 1999
 
 
-   inbound/outbound
-      Inbound and outbound refer to the request and response paths for
-      messages: "inbound" means "traveling toward the origin server",
-      and "outbound" means "traveling toward the user agent"
+   入站/出站
+      入站和出站是指请求和响应消息的路径: "入站" 表示 "向源服务器发送",
+      "出站" 表示 "向用户代理发送"。
 
 1.4 Overall Operation
 
