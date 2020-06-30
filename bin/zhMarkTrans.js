@@ -27,16 +27,16 @@ args.outFile = program.output || args.dftFile;
 
     { // 中文逗号、中文冒号、中文分号
         text = errPat(text, /^\s*，/mg, errSig); // 1. 行首的中文逗号
-        text = text.replace(/，\s*$/mg, ','); // 2. 行末的中文逗号
-        text = text.replace(/，\s*/g, ', '); // 3. 剩余的中文逗号
+        text = text.replace(/，[ \t]*$/mg, ','); // 2. 行末的中文逗号
+        text = text.replace(/，[ \t]*/g, ', '); // 3. 剩余的中文逗号
 
         text = errPat(text, /^\s*：/mg, errSig); // 1. 行首的中文冒号
-        text = text.replace(/：\s*$/mg, ':'); // 2. 行末的中文冒号
-        text = text.replace(/：\s*/g, ': '); // 3. 剩余的中文冒号
+        text = text.replace(/：[ \t]*$/mg, ':'); // 2. 行末的中文冒号
+        text = text.replace(/：[ \t]*/g, ': '); // 3. 剩余的中文冒号
 
         text = errPat(text, /^\s*；/mg, errSig); // 1. 行首的中文分号
-        text = text.replace(/；\s*$/mg, ';'); // 2. 行末的中文分号
-        text = text.replace(/；\s*/g, '; '); // 3. 剩余的中文分号
+        text = text.replace(/；[ \t]*$/mg, ';'); // 2. 行末的中文分号
+        text = text.replace(/；[ \t]*/g, '; '); // 3. 剩余的中文分号
     }
     { // 中文括号、中文双引号、中文单引号
         { // 中文括号
