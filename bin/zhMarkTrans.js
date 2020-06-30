@@ -25,25 +25,51 @@ args.outFile = program.output || args.dftFile;
 
     const errSig = '' + 'errorr'.repeat(20) + 'e';
 
-    text = errPat(text, /^\s*，/mg, errSig); // 1. 行首的中文逗号
-    text = text.replace(/，\s*$/mg, ',');    // 2. 行末的中文逗号
-    text = text.replace(/，\s*/g, ', ');     // 3. 剩余的中文逗号
+    { // 中文逗号、中文冒号、中文分号
+        text = errPat(text, /^\s*，/mg, errSig); // 1. 行首的中文逗号
+        text = text.replace(/，\s*$/mg, ','); // 2. 行末的中文逗号
+        text = text.replace(/，\s*/g, ', '); // 3. 剩余的中文逗号
 
-    text = errPat(text, /^\s*：/mg, errSig); // 1. 行首的中文冒号
-    text = text.replace(/：\s*$/mg, ':');    // 2. 行末的中文冒号
-    text = text.replace(/：\s*/g, ': ');     // 3. 剩余的中文冒号
+        text = errPat(text, /^\s*：/mg, errSig); // 1. 行首的中文冒号
+        text = text.replace(/：\s*$/mg, ':'); // 2. 行末的中文冒号
+        text = text.replace(/：\s*/g, ': '); // 3. 剩余的中文冒号
 
-    text = errPat(text, /^\s*；/mg, errSig); // 1. 行首的中文分号
-    text = text.replace(/；\s*$/mg, ';');    // 2. 行末的中文分号
-    text = text.replace(/；\s*/g, '; ');     // 3. 剩余的中文分号
+        text = errPat(text, /^\s*；/mg, errSig); // 1. 行首的中文分号
+        text = text.replace(/；\s*$/mg, ';'); // 2. 行末的中文分号
+        text = text.replace(/；\s*/g, '; '); // 3. 剩余的中文分号
+    }
+    { // 中文括号、中文双引号、中文单引号
+        { // 中文括号
+            text = text.replace(/^(\s*)（/mg, '$1('); // 1. 行首的中文左括号
+            text = errPat(text, /（\s*$/mg, errSig); // 2. 行末的中文左括号
+            text = text.replace(/\s*（/g, ' ('); // 3. 剩余的中文左括号
 
-    text = text.replace(/^\s*（/mg, '(');    // 1. 行首的中文左括号
-    text = errPat(text, /（\s*$/mg, errSig); // 2. 行末的中文左括号
-    text = text.replace(/\s*（/g, ' (');     // 3. 剩余的中文左括号
+            text = errPat(text, /^\s*）/mg, errSig); // 1. 行首的中文右括号
+            text = text.replace(/）\s*$/mg, ')'); // 2. 行末的中文右括号
+            text = text.replace(/）\s*([。，；；.,;;])/g, ')$1'); // 3. 中文右括号后跟其它符号
+            text = text.replace(/）\s*/g, ') '); // 4. 剩余的中文右括号
+        }
+        { //中文双引号
+            text = text.replace(/^(\s*)“/mg, '$1"'); // 1. 行首的中文左双引号
+            text = errPat(text, /“\s*$/mg, errSig); // 2. 行末的中文左双引号
+            text = text.replace(/\s*“/g, ' "'); // 3. 剩余的中文左双引号
 
-    text = errPat(text, /^\s*）/mg, errSig); // 1. 行首的中文右括号
-    text = text.replace(/）\s*$/mg, ')');    // 2. 行末的中文右括号
-    text = text.replace(/）\s*/g, ') ');     // 3. 剩余的中文右括号
+            text = errPat(text, /^\s*”/mg, errSig); // 1. 行首的中文右双引号
+            text = text.replace(/”\s*$/mg, '"'); // 2. 行末的中文右双引号
+            text = text.replace(/”\s*([。，；；.,;;])/g, '"$1'); // 3. 中文右双引号后跟其它符号
+            text = text.replace(/”\s*/g, '" '); // 4. 剩余的中文右双引号
+        }
+        { //中文单引号
+            text = text.replace(/^(\s*)‘/mg, "$1'"); // 1. 行首的中文左单引号
+            text = errPat(text, /‘\s*$/mg, errSig); // 2. 行末的中文左单引号
+            text = text.replace(/\s*‘/g, " '"); // 3. 剩余的中文左单引号
+
+            text = errPat(text, /^\s*’/mg, errSig); // 1. 行首的中文右单引号
+            text = text.replace(/’\s*$/mg, "'"); // 2. 行末的中文右单引号
+            text = text.replace(/’\s*([。，；；.,;;])/g, "'$1"); // 3. 中文右单引号后跟其它符号
+            text = text.replace(/’\s*/g, "' "); // 4. 剩余的中文右单引号
+        }
+    }
 
     const errList = text.match(RegExp(errSig, 'g'));
     if (errList !== null)
