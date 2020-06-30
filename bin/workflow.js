@@ -51,7 +51,7 @@ args.index = program.index;
     {
         console.log(`Transform Chinese mark in ${path.basename(text_zh)}:`);
         const script = path.join(__dirname, 'zhMarkTrans.js');
-        const { stdout, stderr } = await execFile(script, ['-f', text_zh]);
+        const { stdout, stderr } = await execFile(script, ['-i', text_zh, '-o', text_zh]);
         console.log(stdout, stderr);
     }
     {
