@@ -71,11 +71,11 @@ RFC 2616                        HTTP/1.1                       June 1999
    3.2   统一资源标识符 ..............................................18
    3.2.1    通用语法 .................................................19
    3.2.2    http URL .................................................19
-   3.2.3    URI Comparison ...........................................20
-   3.3   Date/Time Formats ...........................................20
-   3.3.1    Full Date ................................................20
+   3.2.3    URI 比较 .................................................20
+   3.3   日期/时间格式 ...............................................20
+   3.3.1    完整日期 .................................................20
    3.3.2    Delta Seconds ............................................21
-   3.4   Character Sets ..............................................21
+   3.4   字符集 ......................................................21
    3.4.1    Missing Charset ..........................................22
    3.5   Content Codings .............................................23
    3.6   Transfer Codings ............................................24
@@ -974,14 +974,11 @@ Fielding, et al.            Standards Track                    [Page 20]
 RFC 2616                        HTTP/1.1                       June 1999
 
 
-   All HTTP date/time stamps MUST be represented in Greenwich Mean Time
-   (GMT), without exception. For the purposes of HTTP, GMT is exactly
-   equal to UTC (Coordinated Universal Time). This is indicated in the
-   first two formats by the inclusion of "GMT" as the three-letter
-   abbreviation for time zone, and MUST be assumed when reading the
-   asctime format. HTTP-date is case sensitive and MUST NOT include
-   additional LWS beyond that specifically included as SP in the
-   grammar.
+   所有 HTTP 的日期/时间都必须以格林威治标准时间 (GMT) 来表示, 无例外。
+   就 HTTP 而言, GMT 完全等同于 UTC (世界协调时间)。在前两种格式中包含的
+   "GMT" 是时区的缩写, 当读取 asctime 格式的时间时, 必须假定使用的是 GMT
+   时间。HTTP-date 是大小写敏感的, 且不能包含额外的 LWS, 除非在语法中特
+   别说明将 LWS 包含到 SP 中。
 
        HTTP-date    = rfc1123-date | rfc850-date | asctime-date
        rfc1123-date = wkday "," SP date1 SP time SP "GMT"
@@ -1003,23 +1000,19 @@ RFC 2616                        HTTP/1.1                       June 1999
                     | "May" | "Jun" | "Jul" | "Aug"
                     | "Sep" | "Oct" | "Nov" | "Dec"
 
-      Note: HTTP requirements for the date/time stamp format apply only
-      to their usage within the protocol stream. Clients and servers are
-      not required to use these formats for user presentation, request
-      logging, etc.
+      注意: HTTP 对时间/日期的格式要求, 仅应用在协议流中。客户端和服务器
+      不必将这种格式用于用户展示、及请求日志等。
 
 3.3.2 Delta Seconds
 
-   Some HTTP header fields allow a time value to be specified as an
-   integer number of seconds, represented in decimal, after the time
-   that the message was received.
+   一些 HTTP 头部字段允许将时间值设置为十进制整数, 表示接收到消息后经过
+   的秒数。
 
        delta-seconds  = 1*DIGIT
 
-3.4 Character Sets
+3.4 字符集
 
-   HTTP uses the same definition of the term "character set" as that
-   described for MIME:
+   HTTP 所采用的 "字符集" 的定义, 与用于描述 MIME 时的字符集的定义相同:
 
 
 
@@ -1030,39 +1023,28 @@ Fielding, et al.            Standards Track                    [Page 21]
 RFC 2616                        HTTP/1.1                       June 1999
 
 
-   The term "character set" is used in this document to refer to a
-   method used with one or more tables to convert a sequence of octets
-   into a sequence of characters. Note that unconditional conversion in
-   the other direction is not required, in that not all characters may
-   be available in a given character set and a character set may provide
-   more than one sequence of octets to represent a particular character.
-   This definition is intended to allow various kinds of character
-   encoding, from simple single-table mappings such as US-ASCII to
-   complex table switching methods such as those that use ISO-2022's
-   techniques. However, the definition associated with a MIME character
-   set name MUST fully specify the mapping to be performed from octets
-   to characters. In particular, use of external profiling information
-   to determine the exact mapping is not permitted.
+   本文档中使用的术语 "字符集" 涉及到使用一个或多个转换表, 将一个八位字
+   节序列转换成一个字符序列的方法。注意, 不要求进行反方向的无条件转换,
+   因为在不是所有字符都可以在给定的字符集中找到, 且一个字符集可能提供多
+   种的八进制序列来表示一个特定的字符。这可定义的目的是为了允许不同种类
+   的字符编码, 例如: 像 US-ASCII 一样的简单的单表映射、及使用 ISO-2022
+   技术的复杂的表切换方法等。但是, 涉及与 MIME 字符集名称相关的定义时,
+   必须完整说明从八位字节到字符的映射。特别的, 不允许使用外部配置信息来
+   确定具体的映射。
 
-      Note: This use of the term "character set" is more commonly
-      referred to as a "character encoding." However, since HTTP and
-      MIME share the same registry, it is important that the terminology
-      also be shared.
+      注意: 这里使用的术语 "字符集", 更多的是指 "字符编码"。不过, 由于
+      HTTP 和 MIME 在同一机构注册, 因此术语的统一也很重要。
 
-   HTTP character sets are identified by case-insensitive tokens. The
-   complete set of tokens is defined by the IANA Character Set registry
-   [19].
+   HTTP 字符集使用不区分大小写的标记来表示。标记的完整集合, 由 IANA 字符
+   集注册表 [19] 定义。
 
        charset = token
 
-   Although HTTP allows an arbitrary token to be used as a charset
-   value, any token that has a predefined value within the IANA
-   Character Set registry [19] MUST represent the character set defined
-   by that registry. Applications SHOULD limit their use of character
-   sets to those defined by the IANA registry.
+   尽管 HTTP 允许使用任意的标记作为字符集的值, 但是任何在 IANA 字符注册
+   表 [19] 中具有预定义值的标记, 必须使用该注册表所定义的字符集。应用程
+   序应当仅限于使用在 IANA 注册表中已定义的那些字符集。
 
-   Implementors should be aware of IETF character set requirements [38]
-   [41].
+   实现者应该知晓 IETF 字符集的要求 [38] [41]。
 
 3.4.1 Missing Charset
 
