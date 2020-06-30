@@ -20,6 +20,11 @@ args.url = `https://www.rfc-editor.org/rfc/rfc${args.index}.txt`;
 args.file = path.join(args.dir, `rfc${args.index}.txt`);
 
 (async () => {
+    if (await fse.pathExists(args.file)) {
+        console.log(`Already exists: ${args.file}`);
+        return;
+    }
+
     await fse.ensureDir(args.dir);
     const data = await httpsGet(args.url);
     await fse.writeFile(args.file, data);
