@@ -66,10 +66,10 @@ RFC 2616                        HTTP/1.1                       June 1999
    2   符号习惯和一般语法 ............................................14
    2.1   扩充的 BNF ..................................................14
    2.2   基本规则 ....................................................15
-   3   Protocol Parameters ...........................................17
-   3.1   HTTP Version ................................................17
-   3.2   Uniform Resource Identifiers ................................18
-   3.2.1    General Syntax ...........................................19
+   3   协议参数 ......................................................17
+   3.1   HTTP 版本 ...................................................17
+   3.2   统一资源标识符 ..............................................18
+   3.2.1    通用语法 .................................................19
    3.2.2    http URL .................................................19
    3.2.3    URI Comparison ...........................................20
    3.3   Date/Time Formats ...........................................20
@@ -820,23 +820,17 @@ RFC 2616                        HTTP/1.1                       June 1999
 
        quoted-pair    = "\" CHAR
 
-3 Protocol Parameters
+3 协议参数
 
-3.1 HTTP Version
+3.1 HTTP 版本
 
-   HTTP uses a "<major>.<minor>" numbering scheme to indicate versions
-   of the protocol. The protocol versioning policy is intended to allow
-   the sender to indicate the format of a message and its capacity for
-   understanding further HTTP communication, rather than the features
-   obtained via that communication. No change is made to the version
-   number for the addition of message components which do not affect
-   communication behavior or which only add to extensible field values.
-   The <minor> number is incremented when the changes made to the
-   protocol add features which do not change the general message parsing
-   algorithm, but which may add to the message semantics and imply
-   additional capabilities of the sender. The <major> number is
-   incremented when the format of a message within the protocol is
-   changed. See RFC 2145 [36] for a fuller explanation.
+   HTTP使用形如 "<major>.<minor>" 的编码方案来指明协议的版本号。协议版本
+   的控制策略旨在: 允许发送方指明其消息的格式, 以及它对后续通信的理解能
+   力, 而非通过该通信所能获得的特性。如果一消息组件不会影响通信行为, 或
+   只被添加至可扩展字段值, 则增加该组件不会更改版本号。向协议中添加新的
+   特性, 且这些特性不会改变通用的消息解析算法, 而仅仅是增加新的语义来表
+   明发送方的额外功能时, 会对数字 <minor> 进行递增。当协议中的消息格式被
+   改变时, 会对数字 <major> 进行递增。更完整的解释, 见 RFC 2145 [36]。
 
 
 
@@ -845,54 +839,41 @@ Fielding, et al.            Standards Track                    [Page 17]
 RFC 2616                        HTTP/1.1                       June 1999
 
 
-   The version of an HTTP message is indicated by an HTTP-Version field
-   in the first line of the message.
+   HTTP 消息的版本, 由位于消息第一行的 HTTP-Version 字段指明。
 
        HTTP-Version   = "HTTP" "/" 1*DIGIT "." 1*DIGIT
 
-   Note that the major and minor numbers MUST be treated as separate
-   integers and that each MAY be incremented higher than a single digit.
-   Thus, HTTP/2.4 is a lower version than HTTP/2.13, which in turn is
-   lower than HTTP/12.3. Leading zeros MUST be ignored by recipients and
-   MUST NOT be sent.
+   需要注意数字 major 和 minor 必须被当作两个独立的整数来处理, 且每个数
+   字都可以增加至高于一位数。因此, HTTP/2.4 的版本低于 HTTP/2.13, 而后者
+   的版本又低于 HTTP/12.3。前导零必须被接受者忽略, 且不能被发送。
 
-   An application that sends a request or response message that includes
-   HTTP-Version of "HTTP/1.1" MUST be at least conditionally compliant
-   with this specification. Applications that are at least conditionally
-   compliant with this specification SHOULD use an HTTP-Version of
-   "HTTP/1.1" in their messages, and MUST do so for any message that is
-   not compatible with HTTP/1.0. For more details on when to send
-   specific HTTP-Version values, see RFC 2145 [36].
+   一个应用程序发送的请求或响应消息中, 若要设置 HTTP-Version 字段的值为
+   "HTTP/1.1", 则该应用程序必须最少条件遵循此规范。最少条件遵循此规范的
+   应用程序应当在消息中将 HTTP-Version 字段设置为 "HTTP/1.1", 且对于任何
+   与 HTTP/1.0 不兼容的消息必须也这样做。关于何时发送特定的 HTTP-Version
+   字段值, 详见 RFC 2145 [36]。
 
-   The HTTP version of an application is the highest HTTP version for
-   which the application is at least conditionally compliant.
+   应用程序的 HTTP 版本是应用程序最少条件遵循的最高 HTTP 版本。
 
-   Proxy and gateway applications need to be careful when forwarding
-   messages in protocol versions different from that of the application.
-   Since the protocol version indicates the protocol capability of the
-   sender, a proxy/gateway MUST NOT send a message with a version
-   indicator which is greater than its actual version. If a higher
-   version request is received, the proxy/gateway MUST either downgrade
-   the request version, or respond with an error, or switch to tunnel
-   behavior.
+   代理和网关应用程序在转发与其协议版本不同的消息时, 应当非常谨慎。因为,
+   协议版本指明了发送者所支持的协议功能, 代理/网关不得发送协议版本大于其
+   实际值的消息。如果收到了一个更高版本的请求, 代理/网关必须要么降低请求
+   的协议版本, 要么响应一个错误, 要么切换到隧道行为。
 
-   Due to interoperability problems with HTTP/1.0 proxies discovered
-   since the publication of RFC 2068[33], caching proxies MUST, gateways
-   MAY, and tunnels MUST NOT upgrade the request to the highest version
-   they support. The proxy/gateway's response to that request MUST be in
-   the same major version as the request.
+   由于, 自 RFC 2068 [33] 发布后, 所发现的存在于 HTTP/1.0 代理中的互操作
+   性问题, 缓存代理必须将收到的请求升级到它们所支持最高版本, 而网关可以
+   选择这么做, 但隧道绝对不能。代理/网关必须用与请求相同的主版本号来响应
+   请求。
 
-      Note: Converting between versions of HTTP may involve modification
-      of header fields required or forbidden by the versions involved.
+      注意: 在不同的 HTTP 版本之间进行转换, 可能会修改所涉及版本中, 被要
+      求或禁止的头部字段。
 
-3.2 Uniform Resource Identifiers
+3.2 统一资源标识符
 
-   URIs have been known by many names: WWW addresses, Universal Document
-   Identifiers, Universal Resource Identifiers [3], and finally the
-   combination of Uniform Resource Locators (URL) [4] and Names (URN)
-   [20]. As far as HTTP is concerned, Uniform Resource Identifiers are
-   simply formatted strings which identify--via name, location, or any
-   other characteristic--a resource.
+   URI 的许多名字已为人所知: WWW 地址、通用文档标识符、通用资源标识符
+   [3]、以及统一资源定位符 (URL) [4] 和统一资源名 (URN) [20]。就 HTTP 而
+   言, 统一资源标识符是简单的格式化字符串, 它通过名字、位置、或任何其它
+   特征来标识资源。
 
 
 
@@ -901,49 +882,39 @@ Fielding, et al.            Standards Track                    [Page 18]
 RFC 2616                        HTTP/1.1                       June 1999
 
 
-3.2.1 General Syntax
+3.2.1 通用语法
 
-   URIs in HTTP can be represented in absolute form or relative to some
-   known base URI [11], depending upon the context of their use. The two
-   forms are differentiated by the fact that absolute URIs always begin
-   with a scheme name followed by a colon. For definitive information on
-   URL syntax and semantics, see "Uniform Resource Identifiers (URI):
-   Generic Syntax and Semantics," RFC 2396 [42] (which replaces RFCs
-   1738 [4] and RFC 1808 [11]). This specification adopts the
-   definitions of "URI-reference", "absoluteURI", "relativeURI", "port",
-   "host","abs_path", "rel_path", and "authority" from that
-   specification.
+   根据不同的使用场景, HTTP 中的 URI 既可以使用绝对形式, 也可以使用基于
+   已知 URI 的相对形式 [11]。这两种形式的区别在于: 绝对形式的 URI 总是以
+   方案名开始, 并后跟一个冒号。关于 URL 的语法和语义的详情, 见 "统一资源
+   描述符 (URI): 通用语法和语义", RFC 2396 [42] (替代了 RFC 1738 [4] 和
+   RFC 1808 [11])。本规范采用了上述规范中有关 "URI-reference",
+   "absoluteURI", "relativeURI", "port", "host","abs_path", "rel_path"
+   和 "authority" 的定义。
 
-   The HTTP protocol does not place any a priori limit on the length of
-   a URI. Servers MUST be able to handle the URI of any resource they
-   serve, and SHOULD be able to handle URIs of unbounded length if they
-   provide GET-based forms that could generate such URIs. A server
-   SHOULD return 414 (Request-URI Too Long) status if a URI is longer
-   than the server can handle (see section 10.4.15).
+   HTTP 协议没有对 URI 的长度做任何事先的限制。服务器必须能够处理它所提
+   供任何资源的 URI, 应该能够处理无限长度的 URI, 这种无限长度的 URI 可能
+   由基于 GET 形式的请求产生。如果一个 URI 的长度超出了服务器的处理能力,
+   则服务器应该返回 414 (表示请求的 URI 过长) 状态 (见第 10.4.15 节)。
 
-      Note: Servers ought to be cautious about depending on URI lengths
-      above 255 bytes, because some older client or proxy
-      implementations might not properly support these lengths.
+      注意: 服务器在依赖长度超过 255 字节的 URI 时因谨慎, 因为一些较老的
+      客户端或代理的实现可能不支持这些长度。
 
 3.2.2 http URL
 
-   The "http" scheme is used to locate network resources via the HTTP
-   protocol. This section defines the scheme-specific syntax and
-   semantics for http URLs.
+   在 HTTP 协议中, "http" 方案被用于定位网络资源。这一节定义了此方案具体
+   的语法和语义。
 
    http_URL = "http:" "//" host [ ":" port ] [ abs_path [ "?" query ]]
 
-   If the port is empty or not given, port 80 is assumed. The semantics
-   are that the identified resource is located at the server listening
-   for TCP connections on that port of that host, and the Request-URI
-   for the resource is abs_path (section 5.1.2). The use of IP addresses
-   in URLs SHOULD be avoided whenever possible (see RFC 1900 [24]). If
-   the abs_path is not present in the URL, it MUST be given as "/" when
-   used as a Request-URI for a resource (section 5.1.2). If a proxy
-   receives a host name which is not a fully qualified domain name, it
-   MAY add its domain to the host name it received. If a proxy receives
-   a fully qualified domain name, the proxy MUST NOT change the host
-   name.
+   如果端口 port 为空或为给出, 则假定为 80。上面表达式的语义为, 被标识的
+   资源位于由 host 给出的服务器上, 并在 port 给出的端口上进行侦听, 等待
+   即将到来的 TCP 连接, 且被请求资源的 URI 以绝对路径 abs_path 给出 (见
+   第 5.1.2 节)。应尽可能避免在 URL 中使用 IP 地址 (见 RFC 1900 [24])。
+   如果 URL 中没有绝对路径 abs_path, 则在请求资源时, 必须将其指定为 "/"
+   (见第 5.1.2 节)。如果代理接收到的主机名 host 不是完全限定域名, 则代理
+   应当在接收到的主机名 host 中添加自己的域名。如果代理接收到完全限定域
+   名, 则代理不得改变主机名 host 的值。
 
 
 
@@ -957,54 +928,44 @@ Fielding, et al.            Standards Track                    [Page 19]
 RFC 2616                        HTTP/1.1                       June 1999
 
 
-3.2.3 URI Comparison
+3.2.3 URI 比较
 
-   When comparing two URIs to decide if they match or not, a client
-   SHOULD use a case-sensitive octet-by-octet comparison of the entire
-   URIs, with these exceptions:
+   当比较两个 URI 是否匹配时, 客户端应当区分大小写、逐字节地比较整个
+   URI, 除非:
+      - 端口 port 为空或为给出, 等于使用默认端口;
+      - 主机名 host 的比较必须是大小写不敏感的;
 
-      - A port that is empty or not given is equivalent to the default
-        port for that URI-reference;
+      - 方案名 scheme 的比较必须是大小写不敏感的;
 
-        - Comparisons of host names MUST be case-insensitive;
+      - 绝对路径 abs_path 为空, 等于将 abs_path 设置为 "/".
 
-        - Comparisons of scheme names MUST be case-insensitive;
+   不在 "保留" 字符集和 "不安全" 字符集中的字符 (见 RFC 2396 [42]), 等效
+   于它们的 ""%" HEX HEX" 形式的编码。
 
-        - An empty abs_path is equivalent to an abs_path of "/".
-
-   Characters other than those in the "reserved" and "unsafe" sets (see
-   RFC 2396 [42]) are equivalent to their ""%" HEX HEX" encoding.
-
-   For example, the following three URIs are equivalent:
-
+   例如, 以下三个 URI 是相同的:
       http://abc.com:80/~smith/home.html
       http://ABC.com/%7Esmith/home.html
       http://ABC.com:/%7esmith/home.html
 
-3.3 Date/Time Formats
+3.3 日期/时间格式
 
-3.3.1 Full Date
+3.3.1 完整日期
 
-   HTTP applications have historically allowed three different formats
-   for the representation of date/time stamps:
-
+   HTTP 应用曾经允许三种不同的日期/时间的展示格式:
       Sun, 06 Nov 1994 08:49:37 GMT  ; RFC 822, updated by RFC 1123
       Sunday, 06-Nov-94 08:49:37 GMT ; RFC 850, obsoleted by RFC 1036
       Sun Nov  6 08:49:37 1994       ; ANSI C's asctime() format
 
-   The first format is preferred as an Internet standard and represents
-   a fixed-length subset of that defined by RFC 1123 [8] (an update to
-   RFC 822 [9]). The second format is in common use, but is based on the
-   obsolete RFC 850 [12] date format and lacks a four-digit year.
-   HTTP/1.1 clients and servers that parse the date value MUST accept
-   all three formats (for compatibility with HTTP/1.0), though they MUST
-   only generate the RFC 1123 format for representing HTTP-date values
-   in header fields. See section 19.3 for further information.
+   第一种格式是作为互联网标准的首选, 它用固定长度表示, 是 RFC 1123 [8]
+   (对 RFC 822 [9] 的更新) 所定义的一个子集。第二种格式使用普遍, 但是它
+   基于已废弃的 RFC 850 [12] 中的日期格式, 缺少四位数字的年份信息。
+   HTTP/1.1 的客户端和服务器必须能够解析这三种格式的日期 (为了兼容
+   HTTP/1.0), 但是它们只能生成 RFC 1123 格式的日期, 以在头部字段中展示
+   HTTP-date 相关的值。更多信息见第 19.3 节。
 
-      Note: Recipients of date values are encouraged to be robust in
-      accepting date values that may have been sent by non-HTTP
-      applications, as is sometimes the case when retrieving or posting
-      messages via proxies/gateways to SMTP or NNTP.
+      注意: 日期值的接收者被鼓励能够鲁棒地接收由非 HTTP 应用所发送的日期
+      值, 因为在通过代理/网关来向 SMTP 或 NNTP 取回或发送消息时, 会遇到
+      这种情况。
 
 
 
