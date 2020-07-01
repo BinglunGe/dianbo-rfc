@@ -48,7 +48,7 @@ args.outFile = program.output || args.dftFile;
             text = errPat(text, /^[ \t]*）/mg, errSig); // 1. 行首的中文右括号
             text = text.replace(/^([ \t]*[a-b])）/mg, '$1)'); // 2. 用于小标题的中文右括号
             text = text.replace(/）[ \t]*$/mg, ')'); // 3. 行末的中文右括号
-            text = text.replace(/）[ \t]*([。，；、；.,;;])/g, ')$1'); // 4. 中文右括号后跟其它符号
+            text = text.replace(/）[ \t]*([。，；：、.,;:])/g, ')$1'); // 4. 中文右括号后跟其它符号
             text = text.replace(/）[ \t]*/g, ') '); // 5. 剩余的中文右括号
         }
         { //中文双引号
@@ -59,7 +59,7 @@ args.outFile = program.output || args.dftFile;
 
             text = errPat(text, /^[ \t]*”/mg, errSig); // 1. 行首的中文右双引号
             text = text.replace(/”[ \t]*$/mg, '"'); // 2. 行末的中文右双引号
-            text = text.replace(/”[ \t]*([。，；；、.,;;])/g, '"$1'); // 3. 中文右双引号后跟其它符号
+            text = text.replace(/”[ \t]*([。，；：、.,;:])/g, '"$1'); // 3. 中文右双引号后跟其它符号
             text = text.replace(/”[ \t]*/g, '" '); // 4. 剩余的中文右双引号
         }
         { //中文单引号
@@ -70,7 +70,7 @@ args.outFile = program.output || args.dftFile;
 
             text = errPat(text, /^[ \t]*’/mg, errSig); // 1. 行首的中文右单引号
             text = text.replace(/’[ \t]*$/mg, "'"); // 2. 行末的中文右单引号
-            text = text.replace(/’[ \t]*([。，；；、.,;;])/g, "'$1"); // 3. 中文右单引号后跟其它符号
+            text = text.replace(/’[ \t]*([。，；：、.,;:])/g, "'$1"); // 3. 中文右单引号后跟其它符号
             text = text.replace(/’[ \t]*/g, "' "); // 4. 剩余的中文右单引号
         }
     }
