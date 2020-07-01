@@ -81,13 +81,13 @@ RFC 2616                        HTTP/1.1                       June 1999
    3.6   传输编码 ....................................................24
    3.6.1    分块传输编码 .............................................25
    3.7   媒体类型 ....................................................26
-   3.7.1    Canonicalization and Text Defaults .......................27
-   3.7.2    Multipart Types ..........................................27
-   3.8   Product Tokens ..............................................28
-   3.9   Quality Values ..............................................29
-   3.10  Language Tags ...............................................29
-   3.11  Entity Tags .................................................30
-   3.12  Range Units .................................................30
+   3.7.1    规范化和文本缺省 .........................................27
+   3.7.2    多部分类型 ...............................................27
+   3.8   产品标记 ....................................................28
+   3.9   质量值 ......................................................29
+   3.10  语言标签 ....................................................29
+   3.11  实体标签 ....................................................30
+   3.12  范围单位 ....................................................30
    4   HTTP Message ..................................................31
    4.1   Message Types ...............................................31
    4.2   Message Headers .............................................31
@@ -1252,44 +1252,33 @@ RFC 2616                        HTTP/1.1                       June 1999
    媒体类型的值被注册在互联网编号分配局 (IANA [19])。媒体类型注册的流程
    在 RFC 1590 [17] 中有概述。不鼓励使用未注册的媒体类型。
 
-3.7.1 Canonicalization and Text Defaults
+3.7.1 规范化和文本缺省
 
-   Internet media types are registered with a canonical form. An
-   entity-body transferred via HTTP messages MUST be represented in the
-   appropriate canonical form prior to its transmission except for
-   "text" types, as defined in the next paragraph.
+   互联网媒体类型以规范化的格式被注册。通过 HTTP 消息传输的实体主体, 除
+   非是 "text" 类型, 必须在其发送前以规范化的格式来表示, 如下一段所述。
 
-   When in canonical form, media subtypes of the "text" type use CRLF as
-   the text line break. HTTP relaxes this requirement and allows the
-   transport of text media with plain CR or LF alone representing a line
-   break when it is done consistently for an entire entity-body. HTTP
-   applications MUST accept CRLF, bare CR, and bare LF as being
-   representative of a line break in text media received via HTTP. In
-   addition, if the text is represented in a character set that does not
-   use octets 13 and 10 for CR and LF respectively, as is the case for
-   some multi-byte character sets, HTTP allows the use of whatever octet
-   sequences are defined by that character set to represent the
-   equivalent of CR and LF for line breaks. This flexibility regarding
-   line breaks applies only to text media in the entity-body; a bare CR
-   or LF MUST NOT be substituted for CRLF within any of the HTTP control
-   structures (such as header fields and multipart boundaries).
+   当使用规范化格式时, "text" 类型的子媒体类型使用 CRLF 作为换行符。HTTP
+   放宽了这一限制, 允许在传输文本类型的媒体时使用单独的 CR 或 LF 来表示
+   换行符, 只要在整个的实体主体中保持一致。HTTP 应用程序必须能够接收
+   CRLF, 且当通过 HTTP 传输文本类型的媒体时, 可以处理以 CR 及 LF 作为换
+   行符。另外, 如果文本使用的字符集, 没有使用八位字节值 13 和 10 来分别
+   表示 CR 和 LF, 比如一些多字节字符集的情况, 则 HTTP 允许使用由该字符集
+   所定义的任意八位字节序列来等效地表示 CR 和 LF 换行符。对换行符的灵活
+   处理只能应用于实体主体中的文本类型的媒体; 在任何 HTTP 的控制结构中
+   (例如头部字段和多部分边界), 都不得用单独的 CR 或 LF 来替换 CRLF。
 
-   If an entity-body is encoded with a content-coding, the underlying
-   data MUST be in a form defined above prior to being encoded.
+   如果实体主体要被使用内容编码, 则其底层数据必须先通过上述的方式编码。
 
-   The "charset" parameter is used with some media types to define the
-   character set (section 3.4) of the data. When no explicit charset
-   parameter is provided by the sender, media subtypes of the "text"
-   type are defined to have a default charset value of "ISO-8859-1" when
-   received via HTTP. Data in character sets other than "ISO-8859-1" or
-   its subsets MUST be labeled with an appropriate charset value. See
-   section 3.4.1 for compatibility problems.
+   "charset" 参数被用于一些媒体类型来定义字符集 (第 3.4 节)。当发送者没
+   有提供明确的字符集参数时, "text" 类型的子媒体类型会被定义为字符集的缺
+   省值 "ISO-8859-1"。若数据使用的不是 "ISO-8859-1" 或者其子集的字符集,
+   则数据必须被标明合适的字符集参数值。兼容性问题见 3.4.1 节。
 
-3.7.2 Multipart Types
+3.7.2 多部分类型
 
-   MIME provides for a number of "multipart" types -- encapsulations of
-   one or more entities within a single message-body. All multipart
-   types share a common syntax, as defined in section 5.1.1 of RFC 2046
+   MIME 提供了一系列 "多部分" 类型 -- 在一个消息体中包装了一个或多个实
+   体。所有的多部分类型使用同一个公共语法, 见 RFC 2046 中第 5.1.1 节中的
+   定义 [40], 且必须将边界参数作为媒体类型值的一部分。
 
 
 
@@ -1298,49 +1287,36 @@ Fielding, et al.            Standards Track                    [Page 27]
 RFC 2616                        HTTP/1.1                       June 1999
 
 
-   [40], and MUST include a boundary parameter as part of the media type
-   value. The message body is itself a protocol element and MUST
-   therefore use only CRLF to represent line breaks between body-parts.
-   Unlike in RFC 2046, the epilogue of any multipart message MUST be
-   empty; HTTP applications MUST NOT transmit the epilogue (even if the
-   original multipart contains an epilogue). These restrictions exist in
-   order to preserve the self-delimiting nature of a multipart message-
-   body, wherein the "end" of the message-body is indicated by the
-   ending multipart boundary.
+   消息体本身就是一个协议元素, 因此必须只用 CRLF 来表示各主体部分间的换
+   行符。不同于 RFC 2046, 多部分消息的尾部必须为空 (即使原始的多部分包含
+   一个结尾)。这些限制的存在是为了保护多部分消息体自带的自我定界特性,
+   使用多部分边界的结束来标明消息体的结束。
 
-   In general, HTTP treats a multipart message-body no differently than
-   any other media type: strictly as payload. The one exception is the
-   "multipart/byteranges" type (appendix 19.2) when it appears in a 206
-   (Partial Content) response, which will be interpreted by some HTTP
-   caching mechanisms as described in sections 13.5.4 and 14.16. In all
-   other cases, an HTTP user agent SHOULD follow the same or similar
-   behavior as a MIME user agent would upon receipt of a multipart type.
-   The MIME header fields within each body-part of a multipart message-
-   body do not have any significance to HTTP beyond that defined by
-   their MIME semantics.
+   通常, HTTP 对多部分消息体的处理, 与其它媒体类型无异: 严格地将其作为有
+   效负载。唯一的例外是 "multipart/byteranges" 类型 (见附录第 19.2 节),
+   当它出现在状态码为 206 (表示部分内容) 的响应中时, 将会被一些 HTTP 缓
+   存机制所解析, 见第 13.5.4 节和第 14.16 节的描述。在所有其他的情况下,
+   依据接收到的多部分类型, 一个 HTTP 用户代理应当遵循同 MIME 用户代理类
+   似的行为。一个多部分类型的消息体的每个部分中内的 MIME 头部字段, 除了
+   对定义它的 MIME 的语义有意义外, 对 HTTP 没有任何意义。
 
-   In general, an HTTP user agent SHOULD follow the same or similar
-   behavior as a MIME user agent would upon receipt of a multipart type.
-   If an application receives an unrecognized multipart subtype, the
-   application MUST treat it as being equivalent to "multipart/mixed".
+   通常, 依据接收到的多部分类型, 一个 HTTP 用户代理应当遵循同 MIME 用户
+   代理类似的行为。如果应用程序收到了一个无法识别的多部分类型的子类型,
+   则应用程序必须认为它等同于 "multipart/mixed"。
 
-      Note: The "multipart/form-data" type has been specifically defined
-      for carrying form data suitable for processing via the POST
-      request method, as described in RFC 1867 [15].
+      注意: "multipart/form-data" 类型已被特别地定义为: 当用使用 POST 请
+      求方法时, 用于携带便于处理的表单数据, 见 RFC 1867 [15] 中的描述。
 
-3.8 Product Tokens
+3.8 产品标记
 
-   Product tokens are used to allow communicating applications to
-   identify themselves by software name and version. Most fields using
-   product tokens also allow sub-products which form a significant part
-   of the application to be listed, separated by white space. By
-   convention, the products are listed in order of their significance
-   for identifying the application.
+   产品标记允许正在通信的应用程序通过软件名和版本识别对方。大多数使用产
+   品标记的字段也允许列出构成应用程序重要部分的子产品, 用空格隔开。按照
+   惯例, 产品按其对识别应用程序的重要性顺序列出。
 
        product         = token ["/" product-version]
        product-version = token
 
-   Examples:
+   例:
 
        User-Agent: CERN-LineMode/2.15 libwww/2.17b3
        Server: Apache/0.8.4
@@ -1354,51 +1330,38 @@ Fielding, et al.            Standards Track                    [Page 28]
 RFC 2616                        HTTP/1.1                       June 1999
 
 
-   Product tokens SHOULD be short and to the point. They MUST NOT be
-   used for advertising or other non-essential information. Although any
-   token character MAY appear in a product-version, this token SHOULD
-   only be used for a version identifier (i.e., successive versions of
-   the same product SHOULD only differ in the product-version portion of
-   the product value).
+   产品标记应当言简意赅。它们不得是广告或其它非必要信息。尽管产品版本中
+   可能会出现任何标记字符, 此标记应当仅被用作版本标识符 (例, 同一产品的
+   后续版本, 应当仅在产品标记值的产品版本部分有区别)。
 
-3.9 Quality Values
+3.9 质量值
 
-   HTTP content negotiation (section 12) uses short "floating point"
-   numbers to indicate the relative importance ("weight") of various
-   negotiable parameters.  A weight is normalized to a real number in
-   the range 0 through 1, where 0 is the minimum and 1 the maximum
-   value. If a parameter has a quality value of 0, then content with
-   this parameter is `not acceptable' for the client. HTTP/1.1
-   applications MUST NOT generate more than three digits after the
-   decimal point. User configuration of these values SHOULD also be
-   limited in this fashion.
+   HTTP 内容协商 (第 12 节) 使用短 "浮点" 数字来指明不同协商参数的相对重
+   要性。权重被规范化成 0 到 1 间的实数, 最小值为 0, 最大值为 1.如果参数
+   的质量值为 0, 则此参数的内容对客户端而言是 "不可接受的"。HTTP/1.1 的
+   应用程序不得产生多于三位小数的实数。用户配置这些值的格式限制如下:
 
        qvalue         = ( "0" [ "." 0*3DIGIT ] )
                       | ( "1" [ "." 0*3("0") ] )
 
-   "Quality values" is a misnomer, since these values merely represent
-   relative degradation in desired quality.
+   "质量值" 是一个不当用此, 因为这些值仅仅代表所需质量的相对降低。
 
-3.10 Language Tags
+3.10 语言标签
 
-   A language tag identifies a natural language spoken, written, or
-   otherwise conveyed by human beings for communication of information
-   to other human beings. Computer languages are explicitly excluded.
-   HTTP uses language tags within the Accept-Language and Content-
-   Language fields.
+   语言标签用于识别一种自然语言, 这种语言能说、能写、或被用于人与人的沟
+   通。计算机语言明显被排除在外。HTTP 在 Accept-Language 字段和 Content-
+   Language 字段中使用语言标签。
 
-   The syntax and registry of HTTP language tags is the same as that
-   defined by RFC 1766 [1]. In summary, a language tag is composed of 1
-   or more parts: A primary language tag and a possibly empty series of
-   subtags:
+   HTTP 语言标签的语法和注册, 同 RFC 1766 [1] 中定义的一样。总之, 一个语
+   言标签有一个或多个部分构成: 一个主要语言标签和一个可能为空的自标签系
+   列:
 
         language-tag  = primary-tag *( "-" subtag )
         primary-tag   = 1*8ALPHA
         subtag        = 1*8ALPHA
 
-   White space is not allowed within the tag and all tags are case-
-   insensitive. The name space of language tags is administered by the
-   IANA. Example tags include:
+   标签内不允许有空白, 且所有的标签是不区分大小写的。语言标签的中的名称
+   空间由 IANA 来管理。示例标签包括:
 
        en, en-US, en-cockney, i-cherokee, x-pig-latin
 
@@ -1410,54 +1373,45 @@ Fielding, et al.            Standards Track                    [Page 29]
 RFC 2616                        HTTP/1.1                       June 1999
 
 
-   where any two-letter primary-tag is an ISO-639 language abbreviation
-   and any two-letter initial subtag is an ISO-3166 country code. (The
-   last three tags above are not registered tags; all but the last are
-   examples of tags which could be registered in future.)
+   上面的任何由两个字母构成的主标签是 ISO-639 中的语言缩写, 任何由两个字
+   母构成的子标签是 ISO-639 中的国家缩写。 (上面的最后三个标签不是被注册
+   标签; 除了最后一个标签示例, 其它的标签将会在未来被注册)。
 
-3.11 Entity Tags
+3.11 实体
 
-   Entity tags are used for comparing two or more entities from the same
-   requested resource. HTTP/1.1 uses entity tags in the ETag (section
-   14.19), If-Match (section 14.24), If-None-Match (section 14.26), and
-   If-Range (section 14.27) header fields. The definition of how they
-   are used and compared as cache validators is in section 13.3.3. An
-   entity tag consists of an opaque quoted string, possibly prefixed by
-   a weakness indicator.
-
+   实体标签被用于比较来自同一被请求资源的两个或更多的实体。HTTP/1.1 在
+   ETag (第 14.19 节)、If-Match (第 14.24 节)、If-None-Match (第 14.26
+   节)、及 If-Range (第 14.27 节) 头部字段中使用实体标签。关于如何将它们
+   作为缓存验证器被使用和比较, 定义在第 13.3.3 节中。实体标签由一个晦涩
+   的带引号的字符串构成, 还可能带有一个弱指示器前缀。
+   
+   
       entity-tag = [ weak ] opaque-tag
       weak       = "W/"
       opaque-tag = quoted-string
 
-   A "strong entity tag" MAY be shared by two entities of a resource
-   only if they are equivalent by octet equality.
+   一个 "强实体标签" 可能被同一资源的两个实体所共享, 仅当它们字节相等。
 
-   A "weak entity tag," indicated by the "W/" prefix, MAY be shared by
-   two entities of a resource only if the entities are equivalent and
-   could be substituted for each other with no significant change in
-   semantics. A weak entity tag can only be used for weak comparison.
+   一个 "弱实体标签" 由 "W/" 前缀标明, 它可能被同一资源的两个实体共享,
+   仅当它们是等价的, 且互相替换不会带来语义上的显著变化。弱实体标签只能
+   被用于弱比较。
 
-   An entity tag MUST be unique across all versions of all entities
-   associated with a particular resource. A given entity tag value MAY
-   be used for entities obtained by requests on different URIs. The use
-   of the same entity tag value in conjunction with entities obtained by
-   requests on different URIs does not imply the equivalence of those
-   entities.
+   在与某一具体资源相关的所有版本的实体中, 其实体标签必须唯一。一个给定
+   的实体标签值可能会被不同 URI 请求用于获取实体。不同 URI 请求使用相同
+   的实体标签来获取实体, 并不意味着这些取回的实体是等价的。
 
-3.12 Range Units
+3.12 范围单位
 
-   HTTP/1.1 allows a client to request that only part (a range of) the
-   response entity be included within the response. HTTP/1.1 uses range
-   units in the Range (section 14.35) and Content-Range (section 14.16)
-   header fields. An entity can be broken down into subranges according
-   to various structural units.
+   HTTP/1.1 允许客户端只请求响应实体的一部分 (某一范围)。HTTP/1.1 在
+   Range (第 14.35 节) 和 Content-Range (第 14.16 节) 头部字段中使用范围
+   单位。一个实体根据其不同的结构单元, 可以被分解成多个子范围。
 
       range-unit       = bytes-unit | other-range-unit
       bytes-unit       = "bytes"
       other-range-unit = token
 
-   The only range unit defined by HTTP/1.1 is "bytes". HTTP/1.1
-   implementations MAY ignore ranges specified using other units.
+   HTTP/1.1 中定义的唯一的范围单位是 "bytes"。HTTP/1.1 的实现可能会忽略
+   使用了其它单位的范围信息。
 
 
 
@@ -1466,8 +1420,7 @@ Fielding, et al.            Standards Track                    [Page 30]
 RFC 2616                        HTTP/1.1                       June 1999
 
 
-   HTTP/1.1 has been designed to allow implementations of applications
-   that do not depend on knowledge of ranges.
+   HTTP/1.1 被设计成允许, 应用程序的实现不用依靠与范围相关的知识。
 
 4 HTTP Message
 
