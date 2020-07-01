@@ -76,11 +76,11 @@ RFC 2616                        HTTP/1.1                       June 1999
    3.3.1    完整日期 .................................................20
    3.3.2    Delta Seconds ............................................21
    3.4   字符集 ......................................................21
-   3.4.1    Missing Charset ..........................................22
-   3.5   Content Codings .............................................23
-   3.6   Transfer Codings ............................................24
-   3.6.1    Chunked Transfer Coding ..................................25
-   3.7   Media Types .................................................26
+   3.4.1    缺失字符集 ...............................................22
+   3.5   内容编码 ....................................................23
+   3.6   传输编码 ....................................................24
+   3.6.1    分块传输编码 .............................................25
+   3.7   媒体类型 ....................................................26
    3.7.1    Canonicalization and Text Defaults .......................27
    3.7.2    Multipart Types ..........................................27
    3.8   Product Tokens ..............................................28
@@ -1165,14 +1165,11 @@ RFC 2616                        HTTP/1.1                       June 1999
    码 (表示未实现), 并关闭连接。服务器不得向 HTTP/1.0 的客户端发送传输编
    码。
 
-3.6.1 块传输编码
+3.6.1 分块传输编码
 
-   The chunked encoding modifies the body of a message in order to
-   transfer it as a series of chunks, each with its own size indicator,
-   followed by an OPTIONAL trailer containing entity-header fields. This
-   allows dynamically produced content to be transferred along with the
-   information necessary for the recipient to verify that it has
-   received the full message.
+   分块编码会修改消息的主体, 以便将其作为一系列块进行传输, 每个块都标明
+   自己的大小, 并后跟一个可选的包含实体头部字段的尾部。这允许发送者动态
+   地生成内容, 并携带必要的信息, 使得接收者能够验证所接收消息的完整性。
 
        Chunked-Body   = *chunk
                         last-chunk
@@ -1190,14 +1187,11 @@ RFC 2616                        HTTP/1.1                       June 1999
        chunk-data     = chunk-size(OCTET)
        trailer        = *(entity-header CRLF)
 
-   The chunk-size field is a string of hex digits indicating the size of
-   the chunk. The chunked encoding is ended by any chunk whose size is
-   zero, followed by the trailer, which is terminated by an empty line.
+   chunk-size 字段的值为十六进制数字的字符串, 以指明块的大小。分块编码以
+   任何大小为零的块结束, 紧接着是尾部, 最后以空行终止。
 
-   The trailer allows the sender to include additional HTTP header
-   fields at the end of the message. The Trailer header field can be
-   used to indicate which header fields are included in a trailer (see
-   section 14.40).
+   尾部允许发送者在消息的末尾包含额外的 HTTP 头部字段。消息的 Trailer 头
+   部字段被用于指明有哪些头部字段被包含到了消息的尾部 (见第 14.40节)。
 
 
 
@@ -1207,54 +1201,42 @@ Fielding, et al.            Standards Track                    [Page 25]
 RFC 2616                        HTTP/1.1                       June 1999
 
 
-   A server using chunked transfer-coding in a response MUST NOT use the
-   trailer for any header fields unless at least one of the following is
-   true:
+   一个在响应中使用分块传输编码的服务器, 不得在尾部包含任何的头部字段,除
+   非在下列情况中, 至少一条为真:
 
-   a)the request included a TE header field that indicates "trailers" is
-     acceptable in the transfer-coding of the  response, as described in
-     section 14.39; or,
+   a)请求中包含有一个 TE 头部字段, 以指明在使用传输编码的响应中, 添加
+     "尾部" 是可接受的, 见第 14.39 节的描述; 或,
 
-   b)the server is the origin server for the response, the trailer
-     fields consist entirely of optional metadata, and the recipient
-     could use the message (in a manner acceptable to the origin server)
-     without receiving this metadata.  In other words, the origin server
-     is willing to accept the possibility that the trailer fields might
-     be silently discarded along the path to the client.
+   b)使用源服务器作为响应服务器, 其尾部字段会包含有完整的可选的元信息,
+     而接收者可以在不接收这些元信息的情况下, 正常使用接收到的消息 (以一
+     种服务器可接受的方式)。换句话说, 源服务器愿意接受: 尾部会在消息发
+     往客户端的途中被悄悄丢弃的可能性。
 
-   This requirement prevents an interoperability failure when the
-   message is being received by an HTTP/1.1 (or later) proxy and
-   forwarded to an HTTP/1.0 recipient. It avoids a situation where
-   compliance with the protocol would have necessitated a possibly
-   infinite buffer on the proxy.
+   此要求防止了一种互操作性失败的场景, 即当消息被 HTTP/1.1 的代理所接收
+   并被转发给 HTTP/1.0 的接收者。它避免了这样一种情况, 即遵守协议的代理
+   需要一个可能无限大的缓冲区。
 
-   An example process for decoding a Chunked-Body is presented in
-   appendix 19.4.6.
+   附录第 19.4.6 节中的例子展示了解码被分块正文的过程。
 
-   All HTTP/1.1 applications MUST be able to receive and decode the
-   "chunked" transfer-coding, and MUST ignore chunk-extension extensions
-   they do not understand.
+   所有的 HTTP/1.1 应用程序必须能够接收和解码 "分块" 传输编码, 且必须忽
+   略它们无法理解的 chunk-extension 扩展内容。
 
-3.7 Media Types
+3.7 媒体类型
 
-   HTTP uses Internet Media Types [17] in the Content-Type (section
-   14.17) and Accept (section 14.1) header fields in order to provide
-   open and extensible data typing and type negotiation.
+   HTTP 通过在 Content-Type (第 14.17 节) 中使用互联网媒体类型 [17], 以
+   及通过使用 Accept (第 14.1 节) 头部字段, 来提供开放的、可扩展的数据归
+   类及类型协商。
 
        media-type     = type "/" subtype *( ";" parameter )
        type           = token
        subtype        = token
 
-   Parameters MAY follow the type/subtype in the form of attribute/value
-   pairs (as defined in section 3.6).
+   参数采用属性/值对的形式 (在第 3.6 节定义), 跟在 type/subtype 后面 。
 
-   The type, subtype, and parameter attribute names are case-
-   insensitive. Parameter values might or might not be case-sensitive,
-   depending on the semantics of the parameter name. Linear white space
-   (LWS) MUST NOT be used between the type and subtype, nor between an
-   attribute and its value. The presence or absence of a parameter might
-   be significant to the processing of a media-type, depending on its
-   definition within the media type registry.
+   类型、子类型、及参数属性的名称是不区分大小写的。参数值可能是区分大小
+   写的, 也可能不是, 这取决于参数名的语义。线性空白 (LWS) 不能被用在类型
+   和子类型之间, 也不能用在属性名及其值之间。参数值的确实与否可能对媒体
+   类型的处理很重要, 这取决于其在媒体类型注册表中的定义。
 
 
 
@@ -1263,15 +1245,12 @@ Fielding, et al.            Standards Track                    [Page 26]
 RFC 2616                        HTTP/1.1                       June 1999
 
 
-   Note that some older HTTP applications do not recognize media type
-   parameters. When sending data to older HTTP applications,
-   implementations SHOULD only use media type parameters when they are
-   required by that type/subtype definition.
+   注意, 一些老旧的 HTTP 应用程序无法识别媒体类型的参数。当向老旧的 HTTP
+   应用程序发送数据时, 发送端的实现者应当仅在被 type/subtype 的定义所要
+   求时, 才使用媒体类型参数。
 
-   Media-type values are registered with the Internet Assigned Number
-   Authority (IANA [19]). The media type registration process is
-   outlined in RFC 1590 [17]. Use of non-registered media types is
-   discouraged.
+   媒体类型的值被注册在互联网编号分配局 (IANA [19])。媒体类型注册的流程
+   在 RFC 1590 [17] 中有概述。不鼓励使用未注册的媒体类型。
 
 3.7.1 Canonicalization and Text Defaults
 
