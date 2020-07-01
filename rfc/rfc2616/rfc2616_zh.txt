@@ -93,12 +93,12 @@ RFC 2616                        HTTP/1.1                       June 1999
    4.2   消息头部 ....................................................31
    4.3   消息主体 ....................................................32
    4.4   消息长度 ....................................................33
-   4.5   General Header Fields .......................................34
-   5   Request .......................................................35
-   5.1   Request-Line ................................................35
-   5.1.1    Method ...................................................36
-   5.1.2    Request-URI ..............................................36
-   5.2   The Resource Identified by a Request ........................38
+   4.5   通用头部字段 ................................................34
+   5   请求 (Request) ................................................35
+   5.1   请求行 (Request-Line) .......................................35
+   5.1.1    方法 (Method) ............................................36
+   5.1.2    请求-URI (Request-URI) ...................................36
+   5.2   请求所标识的资源 ............................................38
    5.3   Request Header Fields .......................................38
    6   Response ......................................................39
    6.1   Status-Line .................................................39
@@ -1579,17 +1579,16 @@ RFC 2616                        HTTP/1.1                       June 1999
    码 (第 3.6 节), 因此在无法提前确定消息长度的时候, 对消息使用此机制。
 
    消息不得同时包含 Content-Length 头部字段和 identity 以外的传输编码。
-   如果一消息确实出现这种情况，则必须忽略其 Content-Length 头部字段。
+   如果一消息确实出现这种情况, 则必须忽略其 Content-Length 头部字段。
 
-   当一个允许带有消息主体的消息中，给出了 Content-Length 头部字段，则该
+   当一个允许带有消息主体的消息中, 给出了 Content-Length 头部字段, 则该
    字段值必须精确等于消息主体的八位字节的数量。当 HTTP/1.1 用户代理接收
-   并检测到一个无效长度时，它必须通知用户。
+   并检测到一个无效长度时, 它必须通知用户。
 
-4.5 General Header Fields
+4.5 通用头部字段
 
-   There are a few header fields which have general applicability for
-   both request and response messages, but which do not apply to the
-   entity being transferred. These header fields apply only to the
+   有一些头部字段同时适用于请求和响应消息, 但是它们并不适用于被传输的实
+   体。这些头部字段仅能被应用到被传输的消息。
 
 
 
@@ -1598,44 +1597,39 @@ Fielding, et al.            Standards Track                    [Page 34]
 RFC 2616                        HTTP/1.1                       June 1999
 
 
-   message being transmitted.
 
-       general-header = Cache-Control            ; Section 14.9
-                      | Connection               ; Section 14.10
-                      | Date                     ; Section 14.18
-                      | Pragma                   ; Section 14.32
-                      | Trailer                  ; Section 14.40
-                      | Transfer-Encoding        ; Section 14.41
-                      | Upgrade                  ; Section 14.42
-                      | Via                      ; Section 14.45
-                      | Warning                  ; Section 14.46
+       general-header = Cache-Control            ; 第 14.9  节
+                      | Connection               ; 第 14.10 节
+                      | Date                     ; 第 14.18 节
+                      | Pragma                   ; 第 14.32 节
+                      | Trailer                  ; 第 14.40 节
+                      | Transfer-Encoding        ; 第 14.41 节
+                      | Upgrade                  ; 第 14.42 节
+                      | Via                      ; 第 14.45 节
+                      | Warning                  ; 第 14.46 节
 
-   General-header field names can be extended reliably only in
-   combination with a change in the protocol version. However, new or
-   experimental header fields may be given the semantics of general
-   header fields if all parties in the communication recognize them to
-   be general-header fields. Unrecognized header fields are treated as
-   entity-header fields.
+   General-header 字段名称可以可靠地扩展, 但这要与协议版本地更新相结合。
+   但是, 新的或实验性质的头部字段可以被赋予通用头部字段的语义, 只要通信
+   中的各方能够将它们识别为 general-header 字段。不能被识别的头部字段会
+   被认作是实体头部字段。
 
-5 Request
+5 请求 (Request)
 
-   A request message from a client to a server includes, within the
-   first line of that message, the method to be applied to the resource,
-   the identifier of the resource, and the protocol version in use.
+   请求消息由客户端发往服务器, 在消息的首行包含有: 应用到资源上的方法、
+   资源的标识符、所用的协议版本。
 
-        Request       = Request-Line              ; Section 5.1
-                        *(( general-header        ; Section 4.5
-                         | request-header         ; Section 5.3
-                         | entity-header ) CRLF)  ; Section 7.1
+        Request       = Request-Line              ; 第 5.1 节
+                        *(( general-header        ; 第 4.5 节
+                         | request-header         ; 第 5.3 节
+                         | entity-header ) CRLF)  ; 第 7.1 节
                         CRLF
-                        [ message-body ]          ; Section 4.3
+                        [ message-body ]          ; 第 4.3 节
 
-5.1 Request-Line
+5.1 请求行 (Request-Line)
 
-   The Request-Line begins with a method token, followed by the
-   Request-URI and the protocol version, and ending with CRLF. The
-   elements are separated by SP characters. No CR or LF is allowed
-   except in the final CRLF sequence.
+   请求行 (Request-Line) 以一个方法标记开始, 后跟Request-URI与协议版本,
+   最后以 CRLF 终止。这些元素以字符 SP 分隔。除了最后的 CRLF, 不允许使用
+   CR 或 LF。
 
         Request-Line   = Method SP Request-URI SP HTTP-Version CRLF
 
@@ -1654,54 +1648,46 @@ Fielding, et al.            Standards Track                    [Page 35]
 RFC 2616                        HTTP/1.1                       June 1999
 
 
-5.1.1 Method
+5.1.1 方法 (Method)
 
-   The Method  token indicates the method to be performed on the
-   resource identified by the Request-URI. The method is case-sensitive.
+   方法 (Method) 标记指明了作用在资源上的执行方法, 其中资源由请求URI
+   (Request-URI) 标识。方法是大小写敏感的。
 
-       Method         = "OPTIONS"                ; Section 9.2
-                      | "GET"                    ; Section 9.3
-                      | "HEAD"                   ; Section 9.4
-                      | "POST"                   ; Section 9.5
-                      | "PUT"                    ; Section 9.6
-                      | "DELETE"                 ; Section 9.7
-                      | "TRACE"                  ; Section 9.8
-                      | "CONNECT"                ; Section 9.9
+       Method         = "OPTIONS"                ; 第 9.2 节
+                      | "GET"                    ; 第 9.3 节
+                      | "HEAD"                   ; 第 9.4 节
+                      | "POST"                   ; 第 9.5 节
+                      | "PUT"                    ; 第 9.6 节
+                      | "DELETE"                 ; 第 9.7 节
+                      | "TRACE"                  ; 第 9.8 节
+                      | "CONNECT"                ; 第 9.9 节
                       | extension-method
        extension-method = token
 
-   The list of methods allowed by a resource can be specified in an
-   Allow header field (section 14.7). The return code of the response
-   always notifies the client whether a method is currently allowed on a
-   resource, since the set of allowed methods can change dynamically. An
-   origin server SHOULD return the status code 405 (Method Not Allowed)
-   if the method is known by the origin server but not allowed for the
-   requested resource, and 501 (Not Implemented) if the method is
-   unrecognized or not implemented by the origin server. The methods GET
-   and HEAD MUST be supported by all general-purpose servers. All other
-   methods are OPTIONAL; however, if the above methods are implemented,
-   they MUST be implemented with the same semantics as those specified
-   in section 9.
+   被允许应用到某一资源上的方法列表, 可以通过 Allow 头部字段来指定 (见第
+   14.7 节)。响应返回的状态码总是通知客户端, 一个方法对于一个资源是否可
+   用, 因此可以动态地修改被允许的方法集合。如果源服务器能够识别方法, 但
+   是所请求的资源不允许使用该方法, 则源服务器应当返回状态码 405 (犯法不
+   被允许); 如果源服务器无法识别方法或该方法尚未实现, 则源服务器应当返回
+   状态码 501 (尚未实现)。所有的通用目的服务器都必须实现 GET 方法和 HEAD
+   方法。所有其它方法是可选的; 不过, 如果实现了上述方法, 则这些方法必须
+   实现的语义要同第 9 节中的规定一致。
 
-5.1.2 Request-URI
+5.1.2 请求-URI (Request-URI)
 
-   The Request-URI is a Uniform Resource Identifier (section 3.2) and
-   identifies the resource upon which to apply the request.
+   Request-URI 是统一资源标识符 (第 3.2 节), 用来指明所请求的资源。
 
        Request-URI    = "*" | absoluteURI | abs_path | authority
 
-   The four options for Request-URI are dependent on the nature of the
-   request. The asterisk "*" means that the request does not apply to a
-   particular resource, but to the server itself, and is only allowed
-   when the method used does not necessarily apply to a resource. One
-   example would be
+   Request-URI 中的四个选项依赖于请求的性质。星号 "*" 意味着当前请求没有
+   具体的应用对象, 而是应用于服务器本身, 这只有在所用的方法不是仅限于特
+   定资源的情况。举例如下:
 
        OPTIONS * HTTP/1.1
 
-   The absoluteURI form is REQUIRED when the request is being made to a
-   proxy. The proxy is requested to forward the request or service it
-   from a valid cache, and return the response. Note that the proxy MAY
-   forward the request on to another proxy or directly to the server
+   向代理 (proxy) 提交请求时要求使用绝对 URI (absoluteURI) 的形式。代理
+   被要求转发请求或通过有效的缓存来提供服务, 然后返回响应。注意, 代理可
+   能会将请求发往另一个代理, 或者直接将请求发给由绝对 URI 指出的服务器。
 
 
 
@@ -1710,51 +1696,41 @@ Fielding, et al.            Standards Track                    [Page 36]
 RFC 2616                        HTTP/1.1                       June 1999
 
 
-   specified by the absoluteURI. In order to avoid request loops, a
-   proxy MUST be able to recognize all of its server names, including
-   any aliases, local variations, and the numeric IP address. An example
-   Request-Line would be:
+   为了避免循环请求, 代理必须能够识别其服务器的所有名字, 包括别名、本地
+   变量、及数字 IP 地址。一个请求行 (Request-Line) 的例子如下:
 
        GET http://www.w3.org/pub/WWW/TheProject.html HTTP/1.1
 
-   To allow for transition to absoluteURIs in all requests in future
-   versions of HTTP, all HTTP/1.1 servers MUST accept the absoluteURI
-   form in requests, even though HTTP/1.1 clients will only generate
-   them in requests to proxies.
+   为了在未来版本的 HTTP 中能够将所有的请求过渡成绝对 URI 的形式, 所有
+   HTTP/1.1 的服务器必须能够接受绝对 URI 形式的请求, 即使 HTTP/1.1 的客
+   户端仅在向代理发送请求是才生成绝对 URI。
 
-   The authority form is only used by the CONNECT method (section 9.9).
+   授权 (authority) 形式的请求 URI 仅在 CONNECT 方法中使用 (第 9.9 节)。
 
-   The most common form of Request-URI is that used to identify a
-   resource on an origin server or gateway. In this case the absolute
-   path of the URI MUST be transmitted (see section 3.2.1, abs_path) as
-   the Request-URI, and the network location of the URI (authority) MUST
-   be transmitted in a Host header field. For example, a client wishing
-   to retrieve the resource above directly from the origin server would
-   create a TCP connection to port 80 of the host "www.w3.org" and send
-   the lines:
+   最常见形式的 Request-URI 是被用于标识源服务器或网关上的资源。在这种情
+   况下, 必须将 URI 的路径 (path) 部分作为 Request-URI 来发送, 且必须将
+   URI (authority) 的网络位置通过 Host 头部字段来发送。例如, 一个客户端
+   希望直接从源服务器上取回资源, 则它将向主机 "www.w3.org" 的 80 号端口
+   发起一个 TCP 连接, 并发送如下行:
 
        GET /pub/WWW/TheProject.html HTTP/1.1
        Host: www.w3.org
 
-   followed by the remainder of the Request. Note that the absolute path
-   cannot be empty; if none is present in the original URI, it MUST be
-   given as "/" (the server root).
+   后跟请求的剩余部分。注意, 使用的绝对路径不能为空; 如果在原始的 URI 中
+   没有路径, 则它必须被设为 "/" (服务器根目录)。
 
-   The Request-URI is transmitted in the format specified in section
-   3.2.1. If the Request-URI is encoded using the "% HEX HEX" encoding
-   [42], the origin server MUST decode the Request-URI in order to
-   properly interpret the request. Servers SHOULD respond to invalid
-   Request-URIs with an appropriate status code.
+   Request-URI 以第 3.2.1 节中规定的格式传输。如果 Request-URI 被用
+   "% HEX HEX" 编码 [42], 则源服务器必须要对 Request-URI 解码, 以正确地
+   解析请求。服务器应当使用合适的状态码来响应无效的 Request-URI。
 
-   A transparent proxy MUST NOT rewrite the "abs_path" part of the
-   received Request-URI when forwarding it to the next inbound server,
-   except as noted above to replace a null abs_path with "/".
+   一个透明代理在向下一个入站服务器转发请求时, 不得重写所收到的
+   Request-URI 的 "abs_path" 部分, 除非如上所述: 使用 "/" 来替换空的绝对
+   路径 (abs_path)。
 
-      Note: The "no rewrite" rule prevents the proxy from changing the
-      meaning of the request when the origin server is improperly using
-      a non-reserved URI character for a reserved purpose.  Implementors
-      should be aware that some pre-HTTP/1.1 proxies have been known to
-      rewrite the Request-URI.
+      注意: 有时源服务器出于保留目的, 而不正确地使用非保留 URI 字符时,
+      "不重写" 规则能够防止代理修改请求的含义。实现者应当清楚有一些
+      HTTP/1.1 之前的代理会重写 Request-URI。
+
 
 
 
@@ -1766,36 +1742,31 @@ Fielding, et al.            Standards Track                    [Page 37]
 RFC 2616                        HTTP/1.1                       June 1999
 
 
-5.2 The Resource Identified by a Request
+5.2 请求所标识的资源
 
-   The exact resource identified by an Internet request is determined by
-   examining both the Request-URI and the Host header field.
+   互联网请求所标识的具体资源, 是由 Request-URI 和 Host 头部字段共同决定
+   的。
 
-   An origin server that does not allow resources to differ by the
-   requested host MAY ignore the Host header field value when
-   determining the resource identified by an HTTP/1.1 request. (But see
-   section 19.6.1.1 for other requirements on Host support in HTTP/1.1.)
+   当通过 HTTP/1.1 的请求来标识资源时, 一个源服务器若不依赖于被请求的主
+   机名来区分资源的话, 则它可能会忽略掉请求中的 HOST 头部字段值。(但是在
+   HTTP/1.1 中, 关于 Host 字段有其他要求, 见第 19.6.1.1 节。)
 
-   An origin server that does differentiate resources based on the host
-   requested (sometimes referred to as virtual hosts or vanity host
-   names) MUST use the following rules for determining the requested
-   resource on an HTTP/1.1 request:
+   一个源服务器若基于被请求的主机名来区分资源的话 (有时称之为虚拟主机或
+   虚拟主机名), 则对于 HTTP/1.1 的请求, 它必须遵循以下的规则来确定所请求
+   的资源:
 
-   1. If Request-URI is an absoluteURI, the host is part of the
-     Request-URI. Any Host header field value in the request MUST be
-     ignored.
+   1. 如果 absoluteURI 是绝对地址 (absoluteURI), 则主机名是 absoluteURI
+     的一部分。请求中的任何 Host 头部字段值必须忽略。
 
-   2. If the Request-URI is not an absoluteURI, and the request includes
-     a Host header field, the host is determined by the Host header
-     field value.
+   2. 如果 absoluteURI 不是绝对地址 (absoluteURI), 且请求中包含 Host 头
+     部字段, 则主机名由 Host 头部字段值来确定。
 
-   3. If the host as determined by rule 1 or 2 is not a valid host on
-     the server, the response MUST be a 400 (Bad Request) error message.
+   3. 如果由规则 1 或 2 所确定的主机名不是服务器上有效的主机名, 则必须响
+     应一个状态码为 400 (错误的请求) 的消息。
 
-   Recipients of an HTTP/1.0 request that lacks a Host header field MAY
-   attempt to use heuristics (e.g., examination of the URI path for
-   something unique to a particular host) in order to determine what
-   exact resource is being requested.
+   如果接收到的 HTTP/1.0 的请求缺少 Host 头部字段, 则接收者可能会尝试用
+   启发式的方法 (例如, 检查 URI 路径对某个主机是否唯一) 来确定所请求的具
+   体资源。
 
 5.3 Request Header Fields
 
