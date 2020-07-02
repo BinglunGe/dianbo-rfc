@@ -57,7 +57,7 @@ args.index = program.index;
     {
         console.log(`Max line width of ${path.basename(text_zh)}:`);
         const script = path.join(__dirname, 'maxLineWidth.js');
-        const { stdout, stderr } = await execFile(script, ['-f', text_zh]);
+        const { stdout, stderr } = await execFile(script, ['-f', text_zh, '-l', '72']);
         console.log(stdout, stderr);
     }
 })().catch(e => console.log(e));
