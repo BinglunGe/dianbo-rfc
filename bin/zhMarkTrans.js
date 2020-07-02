@@ -38,18 +38,29 @@ args.outFile = program.output || args.dftFile;
         text = text.replace(/；[ \t]*$/mg, ';'); // 2. 行末的中文分号
         text = text.replace(/；[ \t]*/g, '; '); // 3. 剩余的中文分号
     }
-    { // 中文括号、中文双引号、中文单引号
-        { // 中文括号
-            text = text.replace(/^([ \t]*)（/mg, '$1('); // 1. 行首的中文左括号
-            text = errPat(text, /（[ \t]*$/mg, errSig); // 2. 行末的中文左括号
-            text = text.replace(/([。（、(])[ \t]*（/g, '$1('); // 3. 其它符号后跟中文左括号
-            text = text.replace(/[ \t]*（/g, ' ('); // 4. 剩余的中文左括号
+    { // 中文圆括号、中文方括号、中文双引号、中文单引号
+        { // 中文圆括号
+            text = text.replace(/^([ \t]*)（/mg, '$1('); // 1. 行首的中文左圆括号
+            text = errPat(text, /（[ \t]*$/mg, errSig); // 2. 行末的中文左圆括号
+            text = text.replace(/([。（、(])[ \t]*（/g, '$1('); // 3. 其它符号后跟中文左圆括号
+            text = text.replace(/[ \t]*（/g, ' ('); // 4. 剩余的中文左圆括号
 
-            text = errPat(text, /^[ \t]*）/mg, errSig); // 1. 行首的中文右括号
-            text = text.replace(/^([ \t]*[a-b])）/mg, '$1)'); // 2. 用于小标题的中文右括号
-            text = text.replace(/）[ \t]*$/mg, ')'); // 3. 行末的中文右括号
-            text = text.replace(/）[ \t]*([。，；：）、.,;:)])/g, ')$1'); // 4. 中文右括号后跟其它符号
-            text = text.replace(/）[ \t]*/g, ') '); // 5. 剩余的中文右括号
+            text = errPat(text, /^[ \t]*）/mg, errSig); // 1. 行首的中文右圆括号
+            text = text.replace(/^([ \t]*[a-b])）/mg, '$1)'); // 2. 用于小标题的中文右圆括号
+            text = text.replace(/）[ \t]*$/mg, ')'); // 3. 行末的中文右圆括号
+            text = text.replace(/）[ \t]*([。，；：）、.,;:)])/g, ')$1'); // 4. 中文右圆括号后跟其它符号
+            text = text.replace(/）[ \t]*/g, ') '); // 5. 剩余的中文右圆括号
+        }
+        { // 中文方括号
+            text = text.replace(/^([ \t]*)【/mg, '$1['); // 1. 行首的中文左方括号
+            text = errPat(text, /【[ \t]*$/mg, errSig); // 2. 行末的中文左方括号
+            text = text.replace(/([。（、(])[ \t]*【/g, '$1['); // 3. 其它符号后跟中文左方括号
+            text = text.replace(/[ \t]*【/g, ' ['); // 4. 剩余的中文左方括号
+
+            text = errPat(text, /^[ \t]*】/mg, errSig); // 1. 行首的中文右方括号
+            text = text.replace(/】[ \t]*$/mg, ']'); // 2. 行末的中文右方括号
+            text = text.replace(/】[ \t]*([。，；：）、.,;:)])/g, ']$1'); // 3. 中文右方括号后跟其它符号
+            text = text.replace(/】[ \t]*/g, '] '); // 4. 剩余的中文右方括号
         }
         { //中文双引号
             text = text.replace(/^([ \t]*)“/mg, '$1"'); // 1. 行首的中文左双引号
