@@ -25,5 +25,18 @@
   - 同一种对象，有多种中文表达     需要一个中英对照表
   - 同一个英文，有多种中文表达
 + 需要一个固定的翻译模式，以便于后期渲染
-+ MUST、SHOULD、MAY（NOT）等用词的翻译（大小写形式的强调）
++ MUST、SHOULD、MAY（NOT）等用词的翻译（大小写形式的强调）《应当》「应当」
++ 中文术语（English Term）：使用一种特殊的表示形式，可以动态的显式两者（hover事件？）
++ 尽可能与原始 RFC 文档的格式保持一致
++ header 头域
++    Clients which assume persistent connections and pipeline immediately
+   after connection establishment SHOULD be prepared to retry their
+   connection if the first pipelined attempt fails.
+   主语的定语从句部分，相当于主语应满足的条件
+   if后面也是相当于条件
+      一个服务器若在连接建立后即假设连接为持续连接和管道，则该服务器在第一
+   次管道连接尝试时，应当准备重新尝试连接。
+   过于复杂的从句，考虑用特殊符号「」《》标出？
++ with：跟，and：与/和
+
 https://blog.csdn.net/runner_diego/article/details/51379116
