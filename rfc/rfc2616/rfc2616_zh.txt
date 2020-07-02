@@ -99,11 +99,11 @@ RFC 2616                        HTTP/1.1                       June 1999
    5.1.1    方法 (Method) ............................................36
    5.1.2    请求-URI (Request-URI) ...................................36
    5.2   请求所标识的资源 ............................................38
-   5.3   Request Header Fields .......................................38
-   6   Response ......................................................39
-   6.1   Status-Line .................................................39
-   6.1.1    Status Code and Reason Phrase ............................39
-   6.2   Response Header Fields ......................................41
+   5.3   请求头部字段 ................................................38
+   6   响应 (Response) ...............................................39
+   6.1   状态行 (Status-Line) ........................................39
+   6.1.1    状态码和原因短语 .........................................39
+   6.2   响应头部字段 ................................................41
 
 
 
@@ -1608,10 +1608,10 @@ RFC 2616                        HTTP/1.1                       June 1999
                       | Via                      ; 第 14.45 节
                       | Warning                  ; 第 14.46 节
 
-   General-header 字段名称可以可靠地扩展, 但这要与协议版本地更新相结合。
-   但是, 新的或实验性质的头部字段可以被赋予通用头部字段的语义, 只要通信
-   中的各方能够将它们识别为 general-header 字段。不能被识别的头部字段会
-   被认作是实体头部字段。
+   general-header 字段名称可以可靠地扩展, 但这要与协议版本的更新相结合。
+   但是, 新的或实验性质的头部字段可以被赋予通用头部 (general-header) 字
+   段的语义, 只要通信中的各方能够将它们识别为通用头部 (general-header)
+   字段。不能被识别的头部字段会被认作是实体头部字段。
 
 5 请求 (Request)
 
@@ -1768,23 +1768,21 @@ RFC 2616                        HTTP/1.1                       June 1999
    启发式的方法 (例如, 检查 URI 路径对某个主机是否唯一) 来确定所请求的具
    体资源。
 
-5.3 Request Header Fields
+5.3 请求头部字段
 
-   The request-header fields allow the client to pass additional
-   information about the request, and about the client itself, to the
-   server. These fields act as request modifiers, with semantics
-   equivalent to the parameters on a programming language method
-   invocation.
+   请求头部 (request-header) 中的字段允许客户端向服务器传递关于请求及客
+   户端自身的额外信息。这些字段作为请求的修饰符, 其语义等同于编程语言方
+   法调用中的那些参数。
 
-       request-header = Accept                   ; Section 14.1
-                      | Accept-Charset           ; Section 14.2
-                      | Accept-Encoding          ; Section 14.3
-                      | Accept-Language          ; Section 14.4
-                      | Authorization            ; Section 14.8
-                      | Expect                   ; Section 14.20
-                      | From                     ; Section 14.22
-                      | Host                     ; Section 14.23
-                      | If-Match                 ; Section 14.24
+       request-header = Accept                   ; 第 14.1 节
+                      | Accept-Charset           ; 第 14.2 节
+                      | Accept-Encoding          ; 第 14.3 节
+                      | Accept-Language          ; 第 14.4 节
+                      | Authorization            ; 第 14.8 节
+                      | Expect                   ; 第 14.20 节
+                      | From                     ; 第 14.22 节
+                      | Host                     ; 第 14.23 节
+                      | If-Match                 ; 第 14.24 节
 
 
 
@@ -1793,54 +1791,47 @@ Fielding, et al.            Standards Track                    [Page 38]
 RFC 2616                        HTTP/1.1                       June 1999
 
 
-                      | If-Modified-Since        ; Section 14.25
-                      | If-None-Match            ; Section 14.26
-                      | If-Range                 ; Section 14.27
-                      | If-Unmodified-Since      ; Section 14.28
-                      | Max-Forwards             ; Section 14.31
-                      | Proxy-Authorization      ; Section 14.34
-                      | Range                    ; Section 14.35
-                      | Referer                  ; Section 14.36
-                      | TE                       ; Section 14.39
-                      | User-Agent               ; Section 14.43
+                      | If-Modified-Since        ; 第 14.25 节
+                      | If-None-Match            ; 第 14.26 节
+                      | If-Range                 ; 第 14.27 节
+                      | If-Unmodified-Since      ; 第 14.28 节
+                      | Max-Forwards             ; 第 14.31 节
+                      | Proxy-Authorization      ; 第 14.34 节
+                      | Range                    ; 第 14.35 节
+                      | Referer                  ; 第 14.36 节
+                      | TE                       ; 第 14.39 节
+                      | User-Agent               ; 第 14.43 节
 
-   Request-header field names can be extended reliably only in
-   combination with a change in the protocol version. However, new or
-   experimental header fields MAY be given the semantics of request-
-   header fields if all parties in the communication recognize them to
-   be request-header fields. Unrecognized header fields are treated as
-   entity-header fields.
+   request-header 字段名称可以可靠地扩展, 但这要与协议版本的更新相结合。
+   但是, 新的或实验性质的头部字段可以被赋予请求头部 (request-header) 字
+   段的语义, 只要通信中的各方能够将它们识别为请求头部 (request-header)
+   字段。不能被识别的头部字段会被认作是实体头部字段。
 
-6 Response
+6 响应 (Response)
 
-   After receiving and interpreting a request message, a server responds
-   with an HTTP response message.
+   在接收并解析请求消息后, 服务器会用响应消息来应答。
 
-       Response      = Status-Line               ; Section 6.1
-                       *(( general-header        ; Section 4.5
-                        | response-header        ; Section 6.2
-                        | entity-header ) CRLF)  ; Section 7.1
+       Response      = Status-Line               ; 第 6.1 节
+                       *(( general-header        ; 第 4.5 节
+                        | response-header        ; 第 6.2 节
+                        | entity-header ) CRLF)  ; 第 7.1 节
                        CRLF
-                       [ message-body ]          ; Section 7.2
+                       [ message-body ]          ; 第 7.2 节
 
-6.1 Status-Line
+6.1 状态行 (Status-Line)
 
-   The first line of a Response message is the Status-Line, consisting
-   of the protocol version followed by a numeric status code and its
-   associated textual phrase, with each element separated by SP
-   characters. No CR or LF is allowed except in the final CRLF sequence.
+   响应消息的第一行是状态行 (Status-Line), 它由协议版本、数字状态码、及
+   相关的文本短语组成, 每个元素用 SP 字符隔开。除了最后的 CRLF, 不允许使
+   用 CR 或 LF。
 
        Status-Line = HTTP-Version SP Status-Code SP Reason-Phrase CRLF
 
-6.1.1 Status Code and Reason Phrase
+6.1.1 状态码和原因短语
 
-   The Status-Code element is a 3-digit integer result code of the
-   attempt to understand and satisfy the request. These codes are fully
-   defined in section 10. The Reason-Phrase is intended to give a short
-   textual description of the Status-Code. The Status-Code is intended
-   for use by automata and the Reason-Phrase is intended for the human
-   user. The client is not required to examine or display the Reason-
-   Phrase.
+   状态码 (Status-Code) 是一个 3 为的整数, 它是服务器试图理解和满足请求
+   后的结果代码。这些代码的完整定义在第 10 节。原因短语 (Reason-Phrase)
+   试图给出状态码的简短文本描述。状态码被用于自动机, 而原因短语被用于人
+   类用户。客户端不需要检查并展示原因短语。
 
 
 
@@ -1849,54 +1840,47 @@ Fielding, et al.            Standards Track                    [Page 39]
 RFC 2616                        HTTP/1.1                       June 1999
 
 
-   The first digit of the Status-Code defines the class of response. The
-   last two digits do not have any categorization role. There are 5
-   values for the first digit:
+   状态码的第一位数字定义了响应类型, 后两位数字与分类无关。第一位数字共
+   有 5 种值:
 
-      - 1xx: Informational - Request received, continuing process
+      - 1xx: 信息的 - 已接收到请求, 需要继续处理
 
-      - 2xx: Success - The action was successfully received,
-        understood, and accepted
+      - 2xx: 成功 - 行动已被成功接收、理解、接受
 
-      - 3xx: Redirection - Further action must be taken in order to
-        complete the request
+      - 3xx: 重定向 - 为了完成请求, 需要采取进一步行动
 
-      - 4xx: Client Error - The request contains bad syntax or cannot
-        be fulfilled
+      - 4xx: 客户端出错 - 请求包含错误的语法, 或不能完成
 
-      - 5xx: Server Error - The server failed to fulfill an apparently
-        valid request
+      - 5xx: 服务器出错 - 服务器无法完成显然有效的请求
 
-   The individual values of the numeric status codes defined for
-   HTTP/1.1, and an example set of corresponding Reason-Phrase's, are
-   presented below. The reason phrases listed here are only
-   recommendations -- they MAY be replaced by local equivalents without
-   affecting the protocol.
+   下面给出了为 HTTP/1.1 所定义的数字状态码的各个值, 以及相应的原因短语
+   的示例集。这里列出的原因短语仅仅是建议 -- 它们可以被本地同义词替换,
+   而不会影响协议。
 
       Status-Code    =
-            "100"  ; Section 10.1.1: Continue
-          | "101"  ; Section 10.1.2: Switching Protocols
-          | "200"  ; Section 10.2.1: OK
-          | "201"  ; Section 10.2.2: Created
-          | "202"  ; Section 10.2.3: Accepted
-          | "203"  ; Section 10.2.4: Non-Authoritative Information
-          | "204"  ; Section 10.2.5: No Content
-          | "205"  ; Section 10.2.6: Reset Content
-          | "206"  ; Section 10.2.7: Partial Content
-          | "300"  ; Section 10.3.1: Multiple Choices
-          | "301"  ; Section 10.3.2: Moved Permanently
-          | "302"  ; Section 10.3.3: Found
-          | "303"  ; Section 10.3.4: See Other
-          | "304"  ; Section 10.3.5: Not Modified
-          | "305"  ; Section 10.3.6: Use Proxy
-          | "307"  ; Section 10.3.8: Temporary Redirect
-          | "400"  ; Section 10.4.1: Bad Request
-          | "401"  ; Section 10.4.2: Unauthorized
-          | "402"  ; Section 10.4.3: Payment Required
-          | "403"  ; Section 10.4.4: Forbidden
-          | "404"  ; Section 10.4.5: Not Found
-          | "405"  ; Section 10.4.6: Method Not Allowed
-          | "406"  ; Section 10.4.7: Not Acceptable
+            "100"  ; 第 10.1.1 节: Continue
+          | "101"  ; 第 10.1.2 节: Switching Protocols
+          | "200"  ; 第 10.2.1 节: OK
+          | "201"  ; 第 10.2.2 节: Created
+          | "202"  ; 第 10.2.3 节: Accepted
+          | "203"  ; 第 10.2.4 节: Non-Authoritative Information
+          | "204"  ; 第 10.2.5 节: No Content
+          | "205"  ; 第 10.2.6 节: Reset Content
+          | "206"  ; 第 10.2.7 节: Partial Content
+          | "300"  ; 第 10.3.1 节: Multiple Choices
+          | "301"  ; 第 10.3.2 节: Moved Permanently
+          | "302"  ; 第 10.3.3 节: Found
+          | "303"  ; 第 10.3.4 节: See Other
+          | "304"  ; 第 10.3.5 节: Not Modified
+          | "305"  ; 第 10.3.6 节: Use Proxy
+          | "307"  ; 第 10.3.8 节: Temporary Redirect
+          | "400"  ; 第 10.4.1 节: Bad Request
+          | "401"  ; 第 10.4.2 节: Unauthorized
+          | "402"  ; 第 10.4.3 节: Payment Required
+          | "403"  ; 第 10.4.4 节: Forbidden
+          | "404"  ; 第 10.4.5 节: Not Found
+          | "405"  ; 第 10.4.6 节: Method Not Allowed
+          | "406"  ; 第 10.4.7 节: Not Acceptable
 
 
 
@@ -1905,54 +1889,49 @@ Fielding, et al.            Standards Track                    [Page 40]
 RFC 2616                        HTTP/1.1                       June 1999
 
 
-          | "407"  ; Section 10.4.8: Proxy Authentication Required
-          | "408"  ; Section 10.4.9: Request Time-out
-          | "409"  ; Section 10.4.10: Conflict
-          | "410"  ; Section 10.4.11: Gone
-          | "411"  ; Section 10.4.12: Length Required
-          | "412"  ; Section 10.4.13: Precondition Failed
-          | "413"  ; Section 10.4.14: Request Entity Too Large
-          | "414"  ; Section 10.4.15: Request-URI Too Large
-          | "415"  ; Section 10.4.16: Unsupported Media Type
-          | "416"  ; Section 10.4.17: Requested range not satisfiable
-          | "417"  ; Section 10.4.18: Expectation Failed
-          | "500"  ; Section 10.5.1: Internal Server Error
-          | "501"  ; Section 10.5.2: Not Implemented
-          | "502"  ; Section 10.5.3: Bad Gateway
-          | "503"  ; Section 10.5.4: Service Unavailable
-          | "504"  ; Section 10.5.5: Gateway Time-out
-          | "505"  ; Section 10.5.6: HTTP Version not supported
+          | "407"  ; 第 10.4.8 节: Proxy Authentication Required
+          | "408"  ; 第 10.4.9 节: Request Time-out
+          | "409"  ; 第 10.4.10 节: Conflict
+          | "410"  ; 第 10.4.11 节: Gone
+          | "411"  ; 第 10.4.12 节: Length Required
+          | "412"  ; 第 10.4.13 节: Precondition Failed
+          | "413"  ; 第 10.4.14 节: Request Entity Too Large
+          | "414"  ; 第 10.4.15 节: Request-URI Too Large
+          | "415"  ; 第 10.4.16 节: Unsupported Media Type
+          | "416"  ; 第 10.4.17 节: Requested range not satisfiable
+          | "417"  ; 第 10.4.18 节: Expectation Failed
+          | "500"  ; 第 10.5.1 节: Internal Server Error
+          | "501"  ; 第 10.5.2 节: Not Implemented
+          | "502"  ; 第 10.5.3 节: Bad Gateway
+          | "503"  ; 第 10.5.4 节: Service Unavailable
+          | "504"  ; 第 10.5.5 节: Gateway Time-out
+          | "505"  ; 第 10.5.6 节: HTTP Version not supported
           | extension-code
 
       extension-code = 3DIGIT
       Reason-Phrase  = *<TEXT, excluding CR, LF>
 
-   HTTP status codes are extensible. HTTP applications are not required
-   to understand the meaning of all registered status codes, though such
-   understanding is obviously desirable. However, applications MUST
-   understand the class of any status code, as indicated by the first
-   digit, and treat any unrecognized response as being equivalent to the
-   x00 status code of that class, with the exception that an
-   unrecognized response MUST NOT be cached. For example, if an
-   unrecognized status code of 431 is received by the client, it can
-   safely assume that there was something wrong with its request and
-   treat the response as if it had received a 400 status code. In such
-   cases, user agents SHOULD present to the user the entity returned
-   with the response, since that entity is likely to include human-
-   readable information which will explain the unusual status.
+   HTTP 状态码是可扩展的。不要求 HTTP 应用程序理解所有的已注册状态码的含
+   义, 尽管这一行为是值得期待的。但是, 应用程序必须能够理解每个状态码类
+   别的含义, 其类别由状态码的第一位数字标明, 并将任何无法识别的响应视为
+   同类别的 x00 状态码, 除非该无法识别的响应禁止缓存。例如, 客户端收到了
+   一个无法识别的状态码 431, 则可以安全地假设请求中存在错误, 并像接收到
+   状态码 400 一样来对处理响应。在这种情况下, 客户代理应当向客户展示响应
+   所返回的实体, 因为此实体中可能包含有人类可读的信息, 用来解释当前这个
+   不正常的状态。
 
-6.2 Response Header Fields
 
-   The response-header fields allow the server to pass additional
-   information about the response which cannot be placed in the Status-
-   Line. These header fields give information about the server and about
-   further access to the resource identified by the Request-URI.
+6.2 响应头部字段
 
-       response-header = Accept-Ranges           ; Section 14.5
-                       | Age                     ; Section 14.6
-                       | ETag                    ; Section 14.19
-                       | Location                ; Section 14.30
-                       | Proxy-Authenticate      ; Section 14.33
+   响应头部 (response-header) 中的字段允许服务器传递关于响应的额外信息,
+   而这些信息无法被放在状态行 (Status-Line) 中。这些头部字段会给出关于服
+   务器的信息, 以及如何进一步获取由 Request-URI 所标识的资源。
+
+       response-header = Accept-Ranges           ; 第 14.5 节
+                       | Age                     ; 第 14.6 节
+                       | ETag                    ; 第 14.19 节
+                       | Location                ; 第 14.30 节
+                       | Proxy-Authenticate      ; 第 14.33 节
 
 
 
@@ -1961,17 +1940,15 @@ Fielding, et al.            Standards Track                    [Page 41]
 RFC 2616                        HTTP/1.1                       June 1999
 
 
-                       | Retry-After             ; Section 14.37
-                       | Server                  ; Section 14.38
-                       | Vary                    ; Section 14.44
-                       | WWW-Authenticate        ; Section 14.47
+                       | Retry-After             ; 第 14.37 节
+                       | Server                  ; 第 14.38 节
+                       | Vary                    ; 第 14.44 节
+                       | WWW-Authenticate        ; 第 14.47 节
 
-   Response-header field names can be extended reliably only in
-   combination with a change in the protocol version. However, new or
-   experimental header fields MAY be given the semantics of response-
-   header fields if all parties in the communication recognize them to
-   be response-header fields. Unrecognized header fields are treated as
-   entity-header fields.
+   response-header 字段名称可以可靠地扩展, 但这要与协议版本的更新相结合。
+   但是, 新的或实验性质的头部字段可以被赋予响应头部 (response-header) 字
+   段的语义, 只要通信中的各方能够将它们识别为响应头部 (response-header)
+   字段。不能被识别的头部字段会被认作是实体头部字段。
 
 7 Entity
 
