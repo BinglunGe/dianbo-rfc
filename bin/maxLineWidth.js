@@ -10,6 +10,7 @@ const reFatChar = /[^\x00-\x7F“”]/g;
 
 program
     .requiredOption('-f, --file <path>', 'Input file')
+    .option('-l, --limit <int>', 'Width limit')
     .parse(process.argv);
 
 (async () => {
@@ -19,6 +20,7 @@ program
         const fatCharList = item.match(reFatChar);
         const fatCharCnt = fatCharList ? fatCharList.length : 0;
         const width = item.length + fatCharCnt;
+        if (program.limit && width > program.limit) console.log(item);
         return maxWidth > width ? maxWidth : width;
     }, 0);
 
