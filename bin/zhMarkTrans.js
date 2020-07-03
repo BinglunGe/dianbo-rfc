@@ -9,7 +9,7 @@ const path = require('path');
 
 program
     .requiredOption('-i, --input <file>', 'Input file')
-    .option('-o, --output <file>', 'Input file')
+    .option('-o, --output <file>', 'Output file')
     .parse(process.argv);
 
 const args = {};
