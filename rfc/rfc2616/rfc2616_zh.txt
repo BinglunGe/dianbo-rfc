@@ -140,11 +140,11 @@ RFC 2616                        HTTP/1.1                       June 1999
    9.7   DELETE ......................................................56
    9.8   TRACE .......................................................56
    9.9   CONNECT .....................................................57
-   10   Status Code Definitions ......................................57
-   10.1  Informational 1xx ...........................................57
-   10.1.1   100 Continue .............................................58
-   10.1.2   101 Switching Protocols ..................................58
-   10.2  Successful 2xx ..............................................58
+   10   状态码定义 ...................................................57
+   10.1  信息 1xx ....................................................57
+   10.1.1   100 继续 (Continue) ......................................58
+   10.1.2   101 切换协议 (Switching Protocols) .......................58
+   10.2  成功 2xx ....................................................58
    10.2.1   200 OK ...................................................58
    10.2.2   201 Created ..............................................59
    10.2.3   202 Accepted .............................................59
@@ -2409,31 +2409,26 @@ RFC 2616                        HTTP/1.1                       June 1999
 
    对此方法的响应是不可缓存的。
 
-   If the OPTIONS request includes an entity-body (as indicated by the
-   presence of Content-Length or Transfer-Encoding), then the media type
-   MUST be indicated by a Content-Type field. Although this
-   specification does not define any use for such a body, future
-   extensions to HTTP might use the OPTIONS body to make more detailed
-   queries on the server. A server that does not support such an
-   extension MAY discard the request body.
+   如果 OPTIONS 请求中包含实体主体 (entity-body) (其由 Content-Length 或
+   Transfer-Encoding 头部字段指出), 则媒体类型必须由 Content-Type 字段指
+   出。尽管此规范没有定义该主体的使用方法, 未来对 HTTP 的扩展可能会使用
+   OPTIONS 请求的主体来询问服务器的更多细节。一个不支持该扩展的服务器可
+   以丢弃请求消息的主体。
 
-   If the Request-URI is an asterisk ("*"), the OPTIONS request is
-   intended to apply to the server in general rather than to a specific
-   resource. Since a server's communication options typically depend on
-   the resource, the "*" request is only useful as a "ping" or "no-op"
-   type of method; it does nothing beyond allowing the client to test
-   the capabilities of the server. For example, this can be used to test
-   a proxy for HTTP/1.1 compliance (or lack thereof).
+   如果 Request-URI 是星号 ("*"), 则 OPTIONS 请求将会被应用于服务器而非
+   特定的资源。因为服务器通信选项通常依赖于资源, 所以 "*" 类的请求仅作为
+   "ping" 或 "no-op" 类的工具时才是有用的; 它只能够用于测试服务器的能
+   力。例如, 它可以被用于测试一个代理是否遵循 HTTP/1.1。
 
-   If the Request-URI is not an asterisk, the OPTIONS request applies
-   only to the options that are available when communicating with that
-   resource.
+   如果 Request-URI 不是星号, 则 OPTIONS 请求仅被用于同 Request-URI 所指
+   资源通信时的可用选项。
 
-   A 200 response SHOULD include any header fields that indicate
-   optional features implemented by the server and applicable to that
-   resource (e.g., Allow), possibly including extensions not defined by
-   this specification. The response body, if any, SHOULD also include
-   information about the communication options. The format for such a
+   一个状态为 200 的响应应当包含一些头部字段, 来标明服务器实现的或可应用
+   某一资源的可选特性 (例如, Allow字段), 这可能包含一些未有本规范所定义
+   的扩展。响应消息主体如果存在, 应当包含关于通信选项的信息。本规范为定
+   义此类主体的格式, 但是可能由将来的 HTTP 扩展来定义。可以通过内容协商
+   来选择合适的响应格式。如果响应中没有主体, 则响应必须包含一个值为 "0"
+   的 Content-Length 头部字段。
 
 
 
@@ -2442,51 +2437,38 @@ Fielding, et al.            Standards Track                    [Page 52]
 RFC 2616                        HTTP/1.1                       June 1999
 
 
-   body is not defined by this specification, but might be defined by
-   future extensions to HTTP. Content negotiation MAY be used to select
-   the appropriate response format. If no response body is included, the
-   response MUST include a Content-Length field with a field-value of
-   "0".
 
-   The Max-Forwards request-header field MAY be used to target a
-   specific proxy in the request chain. When a proxy receives an OPTIONS
-   request on an absoluteURI for which request forwarding is permitted,
-   the proxy MUST check for a Max-Forwards field. If the Max-Forwards
-   field-value is zero ("0"), the proxy MUST NOT forward the message;
-   instead, the proxy SHOULD respond with its own communication options.
-   If the Max-Forwards field-value is an integer greater than zero, the
-   proxy MUST decrement the field-value when it forwards the request. If
-   no Max-Forwards field is present in the request, then the forwarded
-   request MUST NOT include a Max-Forwards field.
+   Max-Forwards 请求头部字段可以被用于针对请求链中的特定代理。当代理接收
+   到一个具有绝对URI (absoluteURI) 的 OPTIONS 请求, 且该请求允许转发时,
+   代理必须检查其 Max-Forwards 字段。如果 Max-Forwards 字段值为零 ("0")
+   则代理不得转发该消息, 而应当用其自身通信选项进行响应。如果 Max-
+   Forwards 字段值为一个大于零的整数, 则代理必须在转发时递减该字段值。如
+   果请求中没有包含 Max-Forwards 字段, 则在转发请求中也不得包含 Max-
+   Forwards 字段。
+
 
 9.3 GET
 
-   The GET method means retrieve whatever information (in the form of an
-   entity) is identified by the Request-URI. If the Request-URI refers
-   to a data-producing process, it is the produced data which shall be
-   returned as the entity in the response and not the source text of the
-   process, unless that text happens to be the output of the process.
+   GET 方法的意思是取回任何由请求URI (Request-URI) 所标识的信息。如果
+   Request-URI 指向了一个数据产生程序, 那么不应在响应实体中返回该程序的
+   源文本, 而应返回该程序所产的数据, 除非该文本就是该程序的输出。
 
-   The semantics of the GET method change to a "conditional GET" if the
-   request message includes an If-Modified-Since, If-Unmodified-Since,
-   If-Match, If-None-Match, or If-Range header field. A conditional GET
-   method requests that the entity be transferred only under the
-   circumstances described by the conditional header field(s). The
-   conditional GET method is intended to reduce unnecessary network
-   usage by allowing cached entities to be refreshed without requiring
-   multiple requests or transferring data already held by the client.
+   如果请求消息中包含 If-Modified-Since、If-Unmodified-Since、If-Match、
+   If-None-Match、或 If-Range header 头部字段, 则 GET 方法的语义变为 "条
+   件 GET" ("conditional GET")。一个方法为条件 GET 的请求, 仅在满足由条
+   件头部字段所描述的条件时, 才会传输实体。条件 GET 方法的目的是减少不必
+   要的网络使用, 这是通过: 允许刷新已由客户端缓存的实体, 而非要求发送多
+   个请求或再次传输数据。
 
-   The semantics of the GET method change to a "partial GET" if the
-   request message includes a Range header field. A partial GET requests
-   that only part of the entity be transferred, as described in section
-   14.35. The partial GET method is intended to reduce unnecessary
-   network usage by allowing partially-retrieved entities to be
-   completed without transferring data already held by the client.
+   如果请求消息中包含 Range 头部字段, 则 GET 方法的语义变为 "部分 GET"
+   ("partial GET")。一个方法为部分 GET 的请求, 仅传输实体的一部分, 见第
+   14.25 节的描述。部分 GET 的目的是减少不必要的网络使用, 这是通过: 允许
+   在部分取回实体的过程中, 不用传输客户端已经持有的数据。
 
-   The response to a GET request is cacheable if and only if it meets
-   the requirements for HTTP caching described in section 13.
+   对 GET 请求的响应是可缓存的, 当且仅当它满足在第 13 节中所描述的 HTTP
+   的缓存要求
 
-   See section 15.1.3 for security considerations when used for forms.
+   关于使用表单时的安全性考虑, 见第 15.1.3 节。
 
 
 
@@ -2500,52 +2482,39 @@ RFC 2616                        HTTP/1.1                       June 1999
 
 9.4 HEAD
 
-   The HEAD method is identical to GET except that the server MUST NOT
-   return a message-body in the response. The metainformation contained
-   in the HTTP headers in response to a HEAD request SHOULD be identical
-   to the information sent in response to a GET request. This method can
-   be used for obtaining metainformation about the entity implied by the
-   request without transferring the entity-body itself. This method is
-   often used for testing hypertext links for validity, accessibility,
-   and recent modification.
+   对于 HEAD 方法, 除了服务器不得在响应中返回消息主体外, HEAD 方法与 GET
+   方法相同。对 HEAD 请求的响应, 其 HTTP 头部所包含的元信息, 应当与 GET
+   请求的响应所发送的信息相同。这个方法可以被用于获取请求实体时的元信息,
+   而无需传输实体本身。这个方法经常被用于测试超文本链接的有效性、可访问
+   性、与最近的修改。
 
-   The response to a HEAD request MAY be cacheable in the sense that the
-   information contained in the response MAY be used to update a
-   previously cached entity from that resource. If the new field values
-   indicate that the cached entity differs from the current entity (as
-   would be indicated by a change in Content-Length, Content-MD5, ETag
-   or Last-Modified), then the cache MUST treat the cache entry as
-   stale.
+   对 HEAD 请求的响应, 其中的信息可能被用于更新之前的来自同一资源的缓存
+   实体, 在这种意义下, 对 HEAD 请求的响应该是可缓存的。如果新的字段值指
+   明了缓存实体和当前实体不同 (通过改变 Content-Length、Content-MD5、
+   ETag、Last-Modified 的字段值), 则缓存服务器必须将缓存项视为过期的。
 
 9.5 POST
 
-   The POST method is used to request that the origin server accept the
-   entity enclosed in the request as a new subordinate of the resource
-   identified by the Request-URI in the Request-Line. POST is designed
-   to allow a uniform method to cover the following functions:
+   POST 方法被用于: 请求源服务器将请求中的实体作为被请求资源的新下级, 被
+   请求资源由 Request-Line 中的 Request-URI 来标识。POST旨在采用统一的方
+   法涵盖以下功能:
 
-      - Annotation of existing resources;
+      - 对现有资源的标注;
 
-      - Posting a message to a bulletin board, newsgroup, mailing list,
-        or similar group of articles;
+      - 向公告栏、新闻组、邮件列表、或类似的文章组发布消息;
 
-      - Providing a block of data, such as the result of submitting a
-        form, to a data-handling process;
+      - 向数据处理过程提供数据块, 例如提交表单的结果;
 
-      - Extending a database through an append operation.
+      - 通过追加操作扩展数据库。
 
-   The actual function performed by the POST method is determined by the
-   server and is usually dependent on the Request-URI. The posted entity
-   is subordinate to that URI in the same way that a file is subordinate
-   to a directory containing it, a news article is subordinate to a
-   newsgroup to which it is posted, or a record is subordinate to a
-   database.
+   POST 方法的实际功能是由服务器决定的, 并且经常依赖于请求URI (Request-
+   URI)。POST 提交的实体是请求 URI 的从属物, 就好像一个文件从属于包含它
+   的目录、一篇新闻文章从属于发布它的新闻组、或者一条记录从属于一个数据
+   库。
 
-   The action performed by the POST method might not result in a
-   resource that can be identified by a URI. In this case, either 200
-   (OK) or 204 (No Content) is the appropriate response status,
-   depending on whether or not the response includes an entity that
-   describes the result.
+   POST 方法执行的动作可能不会对请求 URI 所标识的资源起作用。在这种情况
+   下, 200 (成功) 或者 204 (无内容) 将是适合的响应状态, 这依赖于响应是否
+   包含一个描述结果的实体。
 
 
 
@@ -2554,53 +2523,43 @@ Fielding, et al.            Standards Track                    [Page 54]
 RFC 2616                        HTTP/1.1                       June 1999
 
 
-   If a resource has been created on the origin server, the response
-   SHOULD be 201 (Created) and contain an entity which describes the
-   status of the request and refers to the new resource, and a Location
-   header (see section 14.30).
+   如果愿服务器创建了一个资源, 则响应应当具有状态码 201 (已创建) 且包含
+   一个描述请求状态并引用新资源的实体、及一个 Location 头部字段 (见第
+   14.30 节)。
 
-   Responses to this method are not cacheable, unless the response
-   includes appropriate Cache-Control or Expires header fields. However,
-   the 303 (See Other) response can be used to direct the user agent to
-   retrieve a cacheable resource.
+   对于 POST 方法的响应是不可缓存的, 除非响应中包含合适的 Cache-Control
+   头部字段或 Expires 头部字段。过不, 状态码为 303 (见其它) 的响应能够
+   被用于指导用户代理取回一个可缓存的资源。
 
-   POST requests MUST obey the message transmission requirements set out
-   in section 8.2.
+   POST 请求必须遵循在第 8.2 节中给出的消息传输需求。
 
-   See section 15.1.3 for security considerations.
+   关于安全性考虑, 见第 15.1.3 节。
 
 9.6 PUT
 
-   The PUT method requests that the enclosed entity be stored under the
-   supplied Request-URI. If the Request-URI refers to an already
-   existing resource, the enclosed entity SHOULD be considered as a
-   modified version of the one residing on the origin server. If the
-   Request-URI does not point to an existing resource, and that URI is
-   capable of being defined as a new resource by the requesting user
-   agent, the origin server can create the resource with that URI. If a
-   new resource is created, the origin server MUST inform the user agent
-   via the 201 (Created) response. If an existing resource is modified,
-   either the 200 (OK) or 204 (No Content) response codes SHOULD be sent
-   to indicate successful completion of the request. If the resource
-   could not be created or modified with the Request-URI, an appropriate
-   error response SHOULD be given that reflects the nature of the
-   problem. The recipient of the entity MUST NOT ignore any Content-*
-   (e.g. Content-Range) headers that it does not understand or implement
-   and MUST return a 501 (Not Implemented) response in such cases.
+   PUT 方法要求: 服务器将请求中的实体存储在请求 URI (Request-URI) 标识
+   下。如果请求 URI (Request-URI) 所标识的资源已经存在于源服务器上, 那么
+   请求中的实体应当被认为是的该资源修改版本。如果请求 URI (Request-URI)
+   所标识的资源不存在, 且此 URI 能够被用户代理定义为一个新资源, 则源服务
+   器可以根据该 URI 创建相应的资源。如果新的资源被创建了, 则源服务器必须
+   通过状态码为 201 (已创建) 的响应来通知用户代理。如果已存在的资源被改
+   变了, 则源服务器应该发送状态码为 200 (OK) 或 204 (无内容) 的响应, 以
+   表示成功完成请求。如果不能根据请求 URI (Request-URI) 创建或改变资源,
+   则服务器应当给出一个能够反应问题的本质的、合适的错误响应。如果实体的
+   接收者不理解或未实现形如 Content-* 的头部字段 (例如 Content-Range),
+   接收者不得忽略这些头部字段, 且必须返回状态码为 501 (未实现) 的响应。
 
-   If the request passes through a cache and the Request-URI identifies
-   one or more currently cached entities, those entries SHOULD be
-   treated as stale. Responses to this method are not cacheable.
+   如果请求穿过一个缓存服务器, 并且它的请求 URI (Request-URI) 标识了一个
+   或多个当前已被缓存的实体, 那么这些实体应该被认作是过期的。对这类方法
+   的响应是不可被缓存的。
 
-   The fundamental difference between the POST and PUT requests is
-   reflected in the different meaning of the Request-URI. The URI in a
-   POST request identifies the resource that will handle the enclosed
-   entity. That resource might be a data-accepting process, a gateway to
-   some other protocol, or a separate entity that accepts annotations.
-   In contrast, the URI in a PUT request identifies the entity enclosed
-   with the request -- the user agent knows what URI is intended and the
-   server MUST NOT attempt to apply the request to some other resource.
-   If the server desires that the request be applied to a different URI,
+   POST 方法和 PUT 方法的请求最根本的区别是: 请求 URI (Request-URI) 的含
+   义不同。POST 请求中的 URI 所标识的是: 请求中的实体应当被哪个资源处
+   理。该资源可能是一个数据接收程序、进行协议切换的网关、或这一个可以接
+   收标注的独立实体。相对的, PUT 请求中的 URI 所标识是: 请求中的实体是哪
+   个资源 -- 用户代理知道 URI 的意图, 服务器不得尝试将请求应用于其它资
+   源。如果服务器期望该请求被应用于一个不同的URI, 那么它必须发送一个状态
+   码为 301 (永久移动) 的响应; 用户代理可以自己决定是否重定向请求。
 
 
 
@@ -2610,53 +2569,43 @@ Fielding, et al.            Standards Track                    [Page 55]
 RFC 2616                        HTTP/1.1                       June 1999
 
 
-   it MUST send a 301 (Moved Permanently) response; the user agent MAY
-   then make its own decision regarding whether or not to redirect the
-   request.
 
-   A single resource MAY be identified by many different URIs. For
-   example, an article might have a URI for identifying "the current
-   version" which is separate from the URI identifying each particular
-   version. In this case, a PUT request on a general URI might result in
-   several other URIs being defined by the origin server.
+   一个独立的资源可能会被许多不同的 URI 所标识。例如: 一篇文章可能会有一
+   个 URI 来标识 "当前版本", 它不同于用于表示该文章其它特定版本的 URI。
+   这种情况下, 一个对通用 URI 的 PUT 请求可能会导致其它的 URI 被源服务器
+   定义。
 
-   HTTP/1.1 does not define how a PUT method affects the state of an
-   origin server.
+   HTTP/1.1 没有定义 PUT 方法应如何影响源服务器的状态。
 
-   PUT requests MUST obey the message transmission requirements set out
-   in section 8.2.
+   PUT 请求必须遵循在第 8.2 节中给出的消息传输需求
 
-   Unless otherwise specified for a particular entity-header, the
-   entity-headers in the PUT request SHOULD be applied to the resource
-   created or modified by the PUT.
+   除非对特定的实体头部字段有特别说明, PUT 请求中的实体头部字段应当被应
+   用于被 PUT 所创建或修改的资源。
 
 9.7 DELETE
 
-   The DELETE method requests that the origin server delete the resource
-   identified by the Request-URI. This method MAY be overridden by human
-   intervention (or other means) on the origin server. The client cannot
-   be guaranteed that the operation has been carried out, even if the
-   status code returned from the origin server indicates that the action
-   has been completed successfully. However, the server SHOULD NOT
-   indicate success unless, at the time the response is given, it
-   intends to delete the resource or move it to an inaccessible
-   location.
+   DELETE 方法要求: 源服务器删除请求 URI (Request-URI) 所标识的资源。在
+   源服务器上, 此方法可以被人为的干预 (或其它手段)。客户端不能被保证此操
+   作已被执行, 即使从源服务器返回的状态码表明行动被成功完成。但是, 服务
+   器不应在响应中表示操作成功, 除非服务器删除了资源或将资源移动到了一个
+   不可访问的位置。
 
-   A successful response SHOULD be 200 (OK) if the response includes an
-   entity describing the status, 202 (Accepted) if the action has not
-   yet been enacted, or 204 (No Content) if the action has been enacted
-   but the response does not include an entity.
 
-   If the request passes through a cache and the Request-URI identifies
-   one or more currently cached entities, those entries SHOULD be
-   treated as stale. Responses to this method are not cacheable.
+   如果响应中包含描述成功状态的实体, 则响应的状态码应该是 200 (Ok); 如果
+   动作还没有被执行, 则响应的状态码应该是 202 (已接受); 如果动作已经被执
+   行, 但响应中不包含实体, 则响应的状态码应该是 204 (无内容)。
+
+   如果请求穿过一个缓存服务器, 并且它的请求 URI (Request-URI) 标识了一个
+   或多个当前已被缓存的实体, 那么这些实体应该被认作是过期的。对这类方法
+   的响应是不可被缓存的。
 
 9.8 TRACE
 
-   The TRACE method is used to invoke a remote, application-layer loop-
-   back of the request message. The final recipient of the request
-   SHOULD reflect the message received back to the client as the
-   entity-body of a 200 (OK) response. The final recipient is either the
+   TRACE 方法被用于调用远程的、应用层的请求消息回路。消息的最终接收者应
+   当以状态码 200 (OK) 进行应答, 并将接收到请求消息作为响应的实体主体。
+   最后的接收者是: 收到的请求中的 Max-Forwards 头部字段 (见第 14.31 节)
+   值为零 (0) 的服务器, 可以是源服务器、代理、网关。TRACE请求不得包含一
+   个实体。
 
 
 
@@ -2666,51 +2615,40 @@ Fielding, et al.            Standards Track                    [Page 56]
 RFC 2616                        HTTP/1.1                       June 1999
 
 
-   origin server or the first proxy or gateway to receive a Max-Forwards
-   value of zero (0) in the request (see section 14.31). A TRACE request
-   MUST NOT include an entity.
 
-   TRACE allows the client to see what is being received at the other
-   end of the request chain and use that data for testing or diagnostic
-   information. The value of the Via header field (section 14.45) is of
-   particular interest, since it acts as a trace of the request chain.
-   Use of the Max-Forwards header field allows the client to limit the
-   length of the request chain, which is useful for testing a chain of
-   proxies forwarding messages in an infinite loop.
+   TRACE 允许客户机了解请求链另一端接收到的内容, 并将这些数据用于测试或
+   诊断信息。Via 头部字段 (第 14.45 节) 值有特殊用途, 因为它可以作为请求
+   链的跟踪信息。使用 Max-Forwards 头部字段允许客户端限制请求链的长度,
+   这对于测试在无限循环中转发消息的一连串代理非常有用。
 
-   If the request is valid, the response SHOULD contain the entire
-   request message in the entity-body, with a Content-Type of
-   "message/http". Responses to this method MUST NOT be cached.
+   如果请求是有效的, 则响应应该在其实体主体中包含完整的请求消息, 并将
+   Content-Type 头部字段设为 "message/http"。这个方法的响应不得被缓存。
 
 9.9 CONNECT
 
-   This specification reserves the method name CONNECT for use with a
-   proxy that can dynamically switch to being a tunnel (e.g. SSL
-   tunneling [44]).
+   本规范保留了名为 CONNECT 的方法, 此方法是为了使代理能够动态地切换成隧
+   道 (例如, SSL 隧道 [44])。
 
-10 Status Code Definitions
+10 状态码定义
 
-   Each Status-Code is described below, including a description of which
-   method(s) it can follow and any metainformation required in the
-   response.
+   下面给出了每个状态码的描述, 包括其可以在哪些方法中使用、及在响应中需
+   要哪些元信息。
 
-10.1 Informational 1xx
+10.1 信息 1xx
 
-   This class of status code indicates a provisional response,
-   consisting only of the Status-Line and optional headers, and is
-   terminated by an empty line. There are no required headers for this
-   class of status code. Since HTTP/1.0 did not define any 1xx status
-   codes, servers MUST NOT send a 1xx response to an HTTP/1.0 client
-   except under experimental conditions.
+   此类状态码表示响应是临时的, 其中仅包括状态行 (Status-Line) 和可选的头
+   部字段, 并以一个空行结束。此类状态码没有必须的头部字段。因为 HTTP/1.0
+   中没有定义任何的 1xx 状态码, 服务器不得向 HTTP/1.0 的客户端发送带有
+   状态码 1xx 的响应, 除非是在实验条件下。
 
-   A client MUST be prepared to accept one or more 1xx status responses
-   prior to a regular response, even if the client does not expect a 100
-   (Continue) status message. Unexpected 1xx status responses MAY be
-   ignored by a user agent.
+   客户端必须准备好: 在常规响应前, 接受一个或多个状态码为 1xx 的响应, 即
+   使客户端并不期待一个状态码为 100 (继续) 的消息。预期外的状态码为 1xx
+   的响应可能会被用户代理忽略。
 
-   Proxies MUST forward 1xx responses, unless the connection between the
-   proxy and its client has been closed, or unless the proxy itself
-   requested the generation of the 1xx response. (For example, if a
+   代理必须转发状态码为 1xx 的响应, 除非代理与客户端间的连接被关闭, 或除
+   非状态码为100 的响应是由代理自身请求而产生的。(例如, 一个代理在其转发
+   请求时, 添加了 "Expect: 100-continue" 头部字段, 则它不需要转发相应的
+   状态码为 100 (继续) 的响应)。
 
 
 
@@ -2722,53 +2660,39 @@ Fielding, et al.            Standards Track                    [Page 57]
 RFC 2616                        HTTP/1.1                       June 1999
 
 
-   proxy adds a "Expect: 100-continue" field when it forwards a request,
-   then it need not forward the corresponding 100 (Continue)
-   response(s).)
 
-10.1.1 100 Continue
+10.1.1 100 继续 (Continue)
 
-   The client SHOULD continue with its request. This interim response is
-   used to inform the client that the initial part of the request has
-   been received and has not yet been rejected by the server. The client
-   SHOULD continue by sending the remainder of the request or, if the
-   request has already been completed, ignore this response. The server
-   MUST send a final response after the request has been completed. See
-   section 8.2.3 for detailed discussion of the use and handling of this
-   status code.
+   客户端应当继续它的请求。这个临时响应被用于通知客户端: 请求的初始部分
+   已经收到, 且还没有被服务器拒绝。客户端应当继续发送请求的剩余部分; 或
+   者如果请求已经发送完毕, 则忽略该响应。服务器必须在完成请求后, 发送一
+   个最终响应。关于使用和处理这一状态码的更多细节讨论, 见第 8.2.3 节。
 
-10.1.2 101 Switching Protocols
+10.1.2 101 切换协议 (Switching Protocols)
 
-   The server understands and is willing to comply with the client's
-   request, via the Upgrade message header field (section 14.42), for a
-   change in the application protocol being used on this connection. The
-   server will switch protocols to those defined by the response's
-   Upgrade header field immediately after the empty line which
-   terminates the 101 response.
+   表示服务器理解且愿意遵循客户端的请求, 该请求要改变当前连接中使用的应
+   用层协议, 其信息通过 Upgrade 消息头部字段 (见第14.42 节) 提供。服务器
+   发送状态码为 101 的响应, 并在响应中设置 Upgrade 字段, 在发送完结束该
+   响应的最后一个空行后, 立即切换至由 Upgrade 字段所指定的协议。
 
-   The protocol SHOULD be switched only when it is advantageous to do
-   so. For example, switching to a newer version of HTTP is advantageous
-   over older versions, and switching to a real-time, synchronous
-   protocol might be advantageous when delivering resources that use
-   such features.
+   只有当协议切换能带来益处时, 才应该进行切换。例如, 切换至新版本的 HTTP
+   协议比使用旧版本的要好, 以及在传输资源时, 切换至实时、同步的协议可能
+   可能会带来益处。
 
-10.2 Successful 2xx
+10.2 成功 2xx
 
-   This class of status code indicates that the client's request was
-   successfully received, understood, and accepted.
+   此类状态码表示客户端的请求已经被成功地接收、理解、并接受。
 
 10.2.1 200 OK
 
-   The request has succeeded. The information returned with the response
-   is dependent on the method used in the request, for example:
+   表示请求已成功。响应返回信息依赖于请求中使用的方法, 例如:
 
-   GET    an entity corresponding to the requested resource is sent in
-          the response;
+   GET    与请求的资源相对应的实体在响应中被发送;
 
-   HEAD   the entity-header fields corresponding to the requested
-          resource are sent in the response without any message-body;
+   HEAD   与请求的资源相对应的实体头部 (entity-header) 字段在没有消息主
+          体 (message-body) 的响应中被发送;
 
-   POST   an entity describing or containing the result of the action;
+   POST   一个实体，其描述了或包含有所请求行为的结果；
 
 
 
@@ -2778,8 +2702,7 @@ Fielding, et al.            Standards Track                    [Page 58]
 RFC 2616                        HTTP/1.1                       June 1999
 
 
-   TRACE  an entity containing the request message as received by the
-          end server.
+   TRACE  一个实体，其包含有最后一个服务器所收到的请求消息。
 
 10.2.2 201 Created
 
