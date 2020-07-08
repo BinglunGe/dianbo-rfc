@@ -1,0 +1,171 @@
+
+
+
+
+
+
+Network Working Group                                         S. Bradner
+Request for Comments: 2119                            Harvard University
+BCP: 14                                                       March 1997
+Category: Best Current Practice
+
+
+             在 RFC 文档中, 用于指出规范的要求级别的关键字
+
+Status of this Memo
+
+   This document specifies an Internet Best Current Practices for the
+   Internet Community, and requests discussion and suggestions for
+   improvements.  Distribution of this memo is unlimited.
+
+摘要
+
+   在许多标准跟踪文档中 (standards track documents), 有一些词被用来表示
+   规范的要求。这些词通常以大写字母的形式出现。此文给出了这些词的定义,
+   即当这些词被用于 IETF 文档中时, 应当被解释为何种含义。遵循这些指南的
+   作者, 应当在他们的文档开头的附近, 加入以下短语:
+
+
+      在此文档中, 关于关键词 "MUST"、"MUST NOT"、"REQUIRED"、"SHALL"、
+      "SHALL NOT"、"SHOULD"、"SHOULD NOT"、"RECOMMENDED"、"MAY" 与
+      "OPTIONAL" 的解释, 见 RFC 2119 中的描述。
+
+
+   注意: 这些词的效力, 可以根据具体文档的要求级别, 而进行修改。
+
+
+1. 【必须】MUST   该词, 或者术语 "REQUIRED" 或 "SHALL", 意味着: 其所修饰
+   的定义是规范的绝对必要条件。
+
+2. 【禁止】MUST NOT   该短语, 或者短语 "SHALL NOT", 意味着: 其所修饰的定
+   义是规范的绝对禁止条件。
+
+3. 【应当】SHOULD   该词, 或者形容词 "RECOMMENDED", 意味着: 在特定的情况
+   下, 可能存在着正当的理由, 来忽略某一具体的条目; 但是, 在选择不同的方
+   案前, 必须理解并仔细权衡该行为背后的完整含义。
+
+
+4. 【不应】SHOULD NOT   该短语, 或者短语 "NOT RECOMMENDED", 意味着: 在特
+   定的情况下, 可能存在着正当的理由, 使得某一具体行为变得可接受, 甚至是
+   有用的; 但是, 在实现此标签所描述的任何行为前, 应当理解其背后的完整含
+   义, 并仔细权衡各个情况。
+
+
+
+
+
+
+Bradner                  Best Current Practice                  [Page 1]
+
+RFC 2119                     RFC Key Words                    March 1997
+
+
+5. 【可能】MAY   该词, 或者形容词 "OPTIONAL", 意味着: 一个条目是真正可选
+   的。某一供应商可能会出于: 特殊的市场需求的原因、或认为某一条目可以提
+   高产品的原因, 而选择实现该条目; 但是, 另一些供应商也可以选择省略该条
+   目。一个没有包含某一可选条目的实现【必须】做好准备, 来跟另一个包含了
+   该可选条目的实现进行交互操作, 尽管前者具有较少功能。同理, 一个包含了
+   某一可选条目的实现【必须】做好准备, 来跟另一个没有包含该可选条目的实
+   现进行交互操作 (当然, 除非该可选条目提供了与此相关的其他特性)。
+
+
+
+
+
+6. 这些命令的使用指南
+
+   在此备忘录中定义的这些命令, 必须被小心地、保守地使用。特别的, 这些命
+   令的使用【必须】是出于互操作性的实际需要、或是为了限制可能导致潜在危
+   害的行为 (例如, 限制重传)。例如, 它们不得被用于: 将特定方法强加给实
+   现者, 而该方法是互操作性所不需要的。
+
+
+
+
+7. 安全考虑
+
+   这些术语经常被用于说明具有安全含义的行为。如果没有实现某个【必须】或
+   【应当】的条目, 或者做了规范中提到【禁止】或【不应】做的事情, 将会对
+   安全产生非常微妙的影响。文档的作者应当花时间详细说明不遵循建议或要求
+   所带来的问题, 因为在大多数实现者不会从产生该规范的经验和讨论中收益。
+
+
+
+
+
+8. 致谢
+
+   这些术语定义综合了许多 RFC 文档中的相关定义。此外, 还采纳了许多其他人
+   的建议, 包括 Robert Ullmann、Thomas Narten、Neal McBurnett 与 Robert
+   Elz。
+
+
+
+
+
+
+
+
+
+
+
+
+
+Bradner                  Best Current Practice                  [Page 2]
+
+RFC 2119                     RFC Key Words                    March 1997
+
+
+9. 作者地址
+
+      Scott Bradner
+      Harvard University
+      1350 Mass. Ave.
+      Cambridge, MA 02138
+
+      phone - +1 617 495 3864
+
+      email - sob@harvard.edu
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Bradner                  Best Current Practice                  [Page 3]
+
