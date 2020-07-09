@@ -2,7 +2,7 @@
 
 [Key words for use in RFCs to Indicate Requirement Levels](./rfc2119.txt)
 
-[在 RFC 文档中, 用于指出规范的要求级别的关键字](./rfc2119_zh.txt)
+[在 RFC 文档中, 用于指出规范的要求级别的关键词](./rfc2119_zh.txt)
 
 ## 中英对照表
 
