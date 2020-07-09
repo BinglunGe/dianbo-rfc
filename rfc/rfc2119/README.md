@@ -4,16 +4,19 @@
 
 [在 RFC 文档中, 用于指出规范的要求级别的关键词](./rfc2119_zh.txt)
 
-## 中英对照表
+## 中英对照
 
 | 中文                 | 英文
 |:---------------------|:-------------------------------------
 | 标准跟踪文档         | standards track documents
 | 国际互联网工程任务组 | IETF, Internet Engineering Task Force
-| 【必须】             | MUST
-| 【禁止】             | MUST NOT
+| 【必须】             | MUST, SHALL
+| 【禁止】             | MUST NOT, SHALL NOT
+| 【必要的】           | REQUIRED
 | 【应当】             | SHOULD
 | 【不应】             | SHOULD NOT
+| 【推荐的】           | RECOMMENDED
+| 【不推荐的】         | NOT RECOMMENDED
 | 【可能】             | MAY
 | 【可选的】           | OPTIONAL
 
