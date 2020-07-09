@@ -1,0 +1,227 @@
+
+
+
+
+
+
+Internet Engineering Task Force (IETF)                          B. Leiba
+Request for Comments: 8174                           Huawei Technologies
+BCP: 14                                                         May 2017
+Updates: 2119
+Category: Best Current Practice
+ISSN: 2070-1721
+
+
+          关于 RFC 2119 中所定义的关键词, 其大小写形式的歧义性
+
+摘要
+
+   在 RFC 2119 中指定了一组用于协议规范的常用关键词。此文档的目的是减少
+   在使用这些关键词时的歧义性, 即明确说明: 只有使用这些关键词的大写形式
+   时, 它们才具有所定义的特殊含义。
+
+
+Status of This Memo
+
+   This memo documents an Internet Best Current Practice.
+
+   This document is a product of the Internet Engineering Task Force
+   (IETF).  It represents the consensus of the IETF community.  It has
+   received public review and has been approved for publication by the
+   Internet Engineering Steering Group (IESG).  Further information on
+   BCPs is available in Section 2 of RFC 7841.
+
+   Information about the current status of this document, any errata,
+   and how to provide feedback on it may be obtained at
+   http://www.rfc-editor.org/info/rfc8174.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Leiba                     Best Current Practice                 [Page 1]
+
+RFC 8174                 RFC 2119 Clarification                 May 2017
+
+
+Copyright Notice
+
+   Copyright (c) 2017 IETF Trust and the persons identified as the
+   document authors.  All rights reserved.
+
+   This document is subject to BCP 78 and the IETF Trust's Legal
+   Provisions Relating to IETF Documents
+   (http://trustee.ietf.org/license-info) in effect on the date of
+   publication of this document.  Please review these documents
+   carefully, as they describe your rights and restrictions with respect
+   to this document.  Code Components extracted from this document must
+   include Simplified BSD License text as described in Section 4.e of
+   the Trust Legal Provisions and are provided without warranty as
+   described in the Simplified BSD License.
+
+目录
+
+   1.  引言  . . . . . . . . . . . . . . . . . . . . . . . . . . . .   2
+   2.  关键词的大写形式表示的明确说明  . . . . . . . . . . . . . . .   3
+   3.  与 IANA 相关的考虑  . . . . . . . . . . . . . . . . . . . . .   4
+   4.  与安全性相关的考虑  . . . . . . . . . . . . . . . . . . . . .   4
+   5.  前提性引用  . . . . . . . . . . . . . . . . . . . . . . . . .   4
+   作者地址  . . . . . . . . . . . . . . . . . . . . . . . . . . . .   4
+
+1.  引言
+
+   在 RFC 2119 中指定了一组用于协议规范的常用关键词, 例如【必须】"MUST",
+   【应当】"SHOULD" 和【可能】"MAY" 等。其中提到这些关键词 "通常以大写字
+   母的形式出现", 这造成了一个困惑, 即该如何解释非大写字母形式的关键词,
+   例如 "must" 和 "should" 等。
+
+   此文档是对 RFC 2119 的更新, 明确说明了: 只有使用这些关键词的大写形式
+   时, 它们才具有所定义的特殊含义。此文档是 BCP 14 的一部分。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Leiba                     Best Current Practice                 [Page 2]
+
+RFC 8174                 RFC 2119 Clarification                 May 2017
+
+
+2.  关键词的大写形式表示的明确说明
+
+   对 [RFC2119] 进行如下修改:
+
+   === 修改前 ===
+   在许多标准跟踪文档中 (standards track documents), 有一些词被用来表示
+   规范的要求。这些词通常以大写字母的形式出现。此文给出了这些词的定义,
+   即当这些词被用于 IETF 文档中时, 应当被解释为何种含义。遵循这些指南的
+   作者, 应当在他们的文档开头的附近, 加入以下短语:
+
+
+      在此文档中, 关于关键词 "MUST"、"MUST NOT"、"REQUIRED"、"SHALL"、
+      "SHALL NOT"、"SHOULD"、"SHOULD NOT"、"RECOMMENDED"、"MAY" 与
+      "OPTIONAL" 的解释, 见 RFC 2119 中的描述。
+
+
+   === 修改后 ===
+   在许多 IETF 文档中, 当一些词采用如下所示的、全大写字母的形式时, 这些
+   词被用于说明规范的要求级别。这些大写的单词能使文档的清晰性和一致性得
+   到明显提高, 因为它们的含义得到了明确定义。此文档定义了: 在 IETF 文档
+   中, 当这些单词采用全大写字母形式时, 该如何解释它们。
+
+
+
+   o  可以按照在此文档中的定义来使用这些词, 但这不是必须的。特别的, 规范
+      性的文本本身就不需要使用这些词。当想要保证文档的清晰性和一致性时,
+      可以使用这些词, 但是许多的规范性的文本即使不使用这些词, 其表述内容
+      依旧是标准的、规范的。
+
+
+   o  仅当这些词采用全大写字母形式时, 才具有这里所规定的含义。
+
+
+   o  当这些词未采用大写字母形式时, 它们具有正常的英文含义, 不受此文档的
+      影响。
+
+   遵循这些指南的作者, 应当在他们的文档开头的附近, 加入以下短语:
+
+
+      在此文档中, 关于关键词 "MUST"、"MUST NOT"、"REQUIRED"、"SHALL"、
+      "SHALL NOT"、"SHOULD"、"SHOULD NOT"、"RECOMMENDED"、"MAY" 与
+      "OPTIONAL" 的解释, 当且仅当它们采用全大写形式时, 见 BCP 14 的文档
+      [RFC2119] 与 [RFC8174] 中的描述。
+
+
+   === 结束 ===
+
+
+
+
+
+Leiba                     Best Current Practice                 [Page 3]
+
+RFC 8174                 RFC 2119 Clarification                 May 2017
+
+
+3.  与 IANA 相关的考虑
+
+   此文档不需要任何 IANA 操作。
+
+4.  与安全性相关的考虑
+
+   此文档完全是程序性质的; 与安全性相关的考虑无关。
+
+
+5.  前提性引用
+
+   [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
+              Requirement Levels", BCP 14, RFC 2119,
+              DOI 10.17487/RFC2119, March 1997,
+              <http://www.rfc-editor.org/info/rfc2119>.
+
+作者地址
+
+   Barry Leiba
+   Huawei Technologies
+
+   Phone: +1 646 827 0648
+   Email: barryleiba@computer.org
+   URI:   http://internetmessagingtechnology.org/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Leiba                     Best Current Practice                 [Page 4]
+
