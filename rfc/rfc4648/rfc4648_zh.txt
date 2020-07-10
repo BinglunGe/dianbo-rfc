@@ -10,7 +10,7 @@ Obsoletes: 3548                                             October 2006
 Category: Standards Track
 
 
-             The Base16, Base32, and Base64 Data Encodings
+                   Base16、Base32 和 Base64 数据编码
 
 Status of This Memo
 
@@ -24,13 +24,12 @@ Copyright Notice
 
    Copyright (C) The Internet Society (2006).
 
-Abstract
+摘要
 
-   This document describes the commonly used base 64, base 32, and base
-   16 encoding schemes.  It also discusses the use of line-feeds in
-   encoded data, use of padding in encoded data, use of non-alphabet
-   characters in encoded data, use of different encoding alphabets, and
-   canonical encodings.
+   此文档描述了经常使用的 base 64、base 32 和 base 16 编码方案。此外, 它
+   还讨论了一下内容: 在编码数据中使用换行符、在编码数据中使用填充符、在
+   编码数据中使用非字母表中的字符、不同编码字母表的使用、及规范编码。
+
 
 
 
@@ -60,19 +59,19 @@ Josefsson                   Standards Track                     [Page 1]
 RFC 4648                    Base-N Encodings                October 2006
 
 
-Table of Contents
+目录
 
-   1. Introduction ....................................................3
-   2. Conventions Used in This Document ...............................3
-   3. Implementation Discrepancies ....................................3
-      3.1. Line Feeds in Encoded Data .................................3
-      3.2. Padding of Encoded Data ....................................4
-      3.3. Interpretation of Non-Alphabet Characters in Encoded Data ..4
-      3.4. Choosing the Alphabet ......................................4
-      3.5. Canonical Encoding .........................................5
-   4. Base 64 Encoding ................................................5
-   5. Base 64 Encoding with URL and Filename Safe Alphabet ............7
-   6. Base 32 Encoding ................................................8
+   1. 引言 ............................................................3
+   2. 此文档中使用的约定 ..............................................3
+   3. 各实现间的差异 ..................................................3
+      3.1. 编码数据中的换行符 .........................................3
+      3.2. 编码数据中的填充符 .........................................4
+      3.3. 编码数据中非字母表中字符的解释 .............................4
+      3.4. 字母表的选择 ...............................................4
+      3.5. 规范编码 (Canonical Encoding) ..............................5
+   4. Base 64 编码 ....................................................5
+   5. 具有 "对 URL 和文件名安全的字母表" 的 Base 64 编码 ..............7
+   6. Base 32 编码 ....................................................8
    7. Base 32 Encoding with Extended Hex Alphabet ....................10
    8. Base 16 Encoding ...............................................10
    9. Illustrations and Examples .....................................11
@@ -116,51 +115,44 @@ Josefsson                   Standards Track                     [Page 2]
 RFC 4648                    Base-N Encodings                October 2006
 
 
-1.  Introduction
+1.  引言
 
-   Base encoding of data is used in many situations to store or transfer
-   data in environments that, perhaps for legacy reasons, are restricted
-   to US-ASCII [1] data.  Base encoding can also be used in new
-   applications that do not have legacy restrictions, simply because it
-   makes it possible to manipulate objects with text editors.
+   由于历史遗留原因, 有些环境只能使用 US-ASCII [1] 表示的数据, 而数据的
+   Base 编码 (Base encoding) 经常被用在这种情况中。Base 编码也可以被用于
+   不受历史遗留原因所限制的新应用中, 仅仅是因为它使得 "通过文本编辑器来
+   操作对象" 成为可能。
 
-   In the past, different applications have had different requirements
-   and thus sometimes implemented base encodings in slightly different
-   ways.  Today, protocol specifications sometimes use base encodings in
-   general, and "base64" in particular, without a precise description or
-   reference.  Multipurpose Internet Mail Extensions (MIME) [4] is often
-   used as a reference for base64 without considering the consequences
-   for line-wrapping or non-alphabet characters.  The purpose of this
-   specification is to establish common alphabet and encoding
-   considerations.  This will hopefully reduce ambiguity in other
-   documents, leading to better interoperability.
+   过去, 不同的应用程序具有不同的需求, 因此它们有时会以略微不同的方式来
+   实现 Base 编码。如今, 有些协议规范有时会普遍地使用 Base 编码, 尤其是
+   "base64", 但是却没有该编码的准确描述或引用参考。多用途互联网邮件扩展
+   (MIME, Multipurpose Internet Mail Extensions) 经常被用作是 base64 的
+   引用参考, 但是它没有考虑到换行符 (line-wrapping) 或非字母表中字符所造
+   成的结果。此规范的目的是建立起通用的字母表及编码时的注意事项。这将有
+   望减少其它文档中的歧义性, 从而实现更好的互操作性。
 
-2.  Conventions Used in This Document
+2.  此文档中使用的约定
 
-   The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
-   "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
-   document are to be interpreted as described in [2].
+      在此文档中, 关于关键词【必须】、【禁止】、【必要的】、【应当】、
+      【不应】、【推荐的】、【可能】与【可选的】的解释, 见 [2] 中的描
+      述。
 
-3.  Implementation Discrepancies
+3.  各实现间的差异
 
-   Here we discuss the discrepancies between base encoding
-   implementations in the past and, where appropriate, mandate a
-   specific recommended behavior for the future.
+   这里, 我们将讨论过去的各 Base 编码实现之间的差异, 并在适当时, 规定了
+   用于将来的具体的推荐行为。
 
-3.1.  Line Feeds in Encoded Data
+3.1.  编码数据中的换行符
 
-   MIME [4] is often used as a reference for base 64 encoding.  However,
-   MIME does not define "base 64" per se, but rather a "base 64 Content-
-   Transfer-Encoding" for use within MIME.  As such, MIME enforces a
-   limit on line length of base 64-encoded data to 76 characters.  MIME
-   inherits the encoding from Privacy Enhanced Mail (PEM) [3], stating
-   that it is "virtually identical"; however, PEM uses a line length of
-   64 characters.  The MIME and PEM limits are both due to limits within
-   SMTP.
+   MIME [4] 经常被用作是 base 64 编码的引用参考。但是, MIME 并没有定义
+   "base 64" 本身, 而是定义了被用于 MIME 中的 "base 64 内容传输编码"
+   ("base 64 Content-Transfer-Encoding")。其中, MIME 强制性限制了: 使用
+   base 64 编码的数据, 其每行长度为 76 个字符。MIME 继承了隐私增强邮件
+   (PEM, Privacy Enhanced Mail) [3] 中的编码, 并指出它 "实际上是相同的";
+   但是, PEM 使用的每行长度为 64 个字符。MIME 和 PEM 的限制都是由于 SMTP
+   中存在的限制所造成的。
 
-   Implementations MUST NOT add line feeds to base-encoded data unless
-   the specification referring to this document explicitly directs base
-   encoders to add line feeds after a specific number of characters.
+   程序实现【禁止】向使用 base 编码的数据中添加换行符, 除非引用了此文档
+   的其它规范, 有明确地指示 base 编码器: 在特定数量的字符后添加换行符。
 
 
 
@@ -172,51 +164,40 @@ Josefsson                   Standards Track                     [Page 3]
 RFC 4648                    Base-N Encodings                October 2006
 
 
-3.2.  Padding of Encoded Data
+3.2.  编码数据中的填充符
 
-   In some circumstances, the use of padding ("=") in base-encoded data
-   is not required or used.  In the general case, when assumptions about
-   the size of transported data cannot be made, padding is required to
-   yield correct decoded data.
+   在某些情况下, 不需要或不用在 base 编码的数据中使用填充符 ("=")。在一
+   般情况下, 当无法假设传输数据的大小时, 需要使用填充符来产生正确的编码
+   数据。
 
-   Implementations MUST include appropriate pad characters at the end of
-   encoded data unless the specification referring to this document
-   explicitly states otherwise.
+   程序实现【必须】在编码数据的末尾包含适当的填充字符, 除非引用了此文档
+   的其它规范另有明确规定。
 
-   The base64 and base32 alphabets use padding, as described below in
-   sections 4 and 6, but the base16 alphabet does not need it; see
-   section 8.
+   base64 和 base32 编码中的字母表使用了填充符, 见下面第 4 节和第 6 节的
+   描述, 但是 base16 编码中的字母表不需要它, 见第 8 节。
 
-3.3.  Interpretation of Non-Alphabet Characters in Encoded Data
+3.3.  编码数据中非字母表中字符的解释
 
-   Base encodings use a specific, reduced alphabet to encode binary
-   data.  Non-alphabet characters could exist within base-encoded data,
-   caused by data corruption or by design.  Non-alphabet characters may
-   be exploited as a "covert channel", where non-protocol data can be
-   sent for nefarious purposes.  Non-alphabet characters might also be
-   sent in order to exploit implementation errors leading to, e.g.,
-   buffer overflow attacks.
+   Base 编码使用了一个特殊的、删减版的字母表来编码二进制数据。由于数据损
+   坏或设计原因, base 编码的数据中可能存在非字母表中的字符。非字母表中的
+   字符可能被用作 "隐蔽信道" ("covert channel"), 其中非协议的数据可能出
+   于恶意目的而被发送。此外, 为了探索实现中的错误 (例如, 可能导致内存溢
+   出攻击), 非字母表中的字符也可能会被发送。
 
-   Implementations MUST reject the encoded data if it contains
-   characters outside the base alphabet when interpreting base-encoded
-   data, unless the specification referring to this document explicitly
-   states otherwise.  Such specifications may instead state, as MIME
-   does, that characters outside the base encoding alphabet should
-   simply be ignored when interpreting data ("be liberal in what you
-   accept").  Note that this means that any adjacent carriage return/
-   line feed (CRLF) characters constitute "non-alphabet characters" and
-   are ignored.  Furthermore, such specifications MAY ignore the pad
-   character, "=", treating it as non-alphabet data, if it is present
-   before the end of the encoded data.  If more than the allowed number
-   of pad characters is found at the end of the string (e.g., a base 64
-   string terminated with "==="), the excess pad characters MAY also be
-   ignored.
+   当程序实现在解释 base 编码的数据时, 若发现数据中包含 base 字母表外的
+   字符, 程序实现【必须】拒绝编码数据, 除非引用了此文档的其它规范另有明
+   确规定。这些规范可能会同 MIME 一样规定: 在解释数据时, 应当简单地忽略
+   掉在 base 编码字母表以外的字符 ("在接受的内容上要放宽")。注意, 这意味
+   着: 任何相邻的回车/换行 (CRLF) 均构成 "非字母表中字符", 并被忽略掉。
+   此外, 这类规范【可能】会将出现在编码数据末尾的填充符 "=" 认作是非字母
+   表中的字符, 并将其忽略掉。如果在字符串的末尾发现了超出允许数量的填充
+   字符 (例如, 一个 base 64 字符串以 "===" 结束), 则超出的填充字符【可
+   能】会被忽略。
 
-3.4.  Choosing the Alphabet
+3.4.  字母表的选择
 
-   Different applications have different requirements on the characters
-   in the alphabet.  Here are a few requirements that determine which
-   alphabet should be used:
+   不同的应用对字母表中的字符有不同的需求。以下是一些需求, 用于确定应当
+   使用哪个字母表:
 
 
 
@@ -228,30 +209,26 @@ Josefsson                   Standards Track                     [Page 4]
 RFC 4648                    Base-N Encodings                October 2006
 
 
-   o  Handled by humans.  The characters "0" and "O" are easily
-      confused, as are "1", "l", and "I".  In the base32 alphabet below,
-      where 0 (zero) and 1 (one) are not present, a decoder may
-      interpret 0 as O, and 1 as I or L depending on case.  (However, by
-      default it should not; see previous section.)
+   o  由人类处理。字符 "0" 和 "O" 很容易混淆, 字符 "1"、"l" 和 "I" 也很
+      容易混淆。在下面的 base32 字母表中, 没有字符 "0" (零) 和 "1" (一),
+      根据情况, 一个解码器可能将 0 解释为 O, 并将 1 解释为 I 或 L 。(但
+      是, 在默认情况下, 不应如此; 见前面的章节。)
 
-   o  Encoded into structures that mandate other requirements.  For base
-      16 and base 32, this determines the use of upper- or lowercase
-      alphabets.  For base 64, the non-alphanumeric characters (in
-      particular, "/") may be problematic in file names and URLs.
+   o  编码后的数据, 其结构要满足其它要求。对于 base 16 和 base 32 编码,
+      这确定了使用大写或小写的字母表。对于 base 64 编码, 非字母表中的字
+      符 (特别是 "/") 可能会在文件名和 URL 中出现问题。
 
-   o  Used as identifiers.  Certain characters, notably "+" and "/" in
-      the base 64 alphabet, are treated as word-breaks by legacy text
-      search/index tools.
+   o  用作标识符。一些字符, 特别是 base 64 字母表中的 "+" 和 "/", 会被传
+      统的文本搜索/索引工具视为分词符。
 
-   There is no universally accepted alphabet that fulfills all the
-   requirements.  For an example of a highly specialized variant, see
-   IMAP [8].  In this document, we document and name some currently used
-   alphabets.
+   没有能够满足所有的需求、被普遍接受的字母表。一个关于高度专业化变体的
+   示例, 见 IMAP [8]。在此文档中, 我们记录并命名了一些当前正在被使用的字
+   母表。
 
-3.5.  Canonical Encoding
+3.5.  规范编码 (Canonical Encoding)
 
-   The padding step in base 64 and base 32 encoding can, if improperly
-   implemented, lead to non-significant alterations of the encoded data.
+   base 64 和 base 32 编码中的填充步骤, 如果没有被正确地实现, 将会导致编
+   码数据出现不易察觉的改变。
    For example, if the input is only one octet for a base 64 encoding,
    then all six bits of the first symbol are used, but only the first
    two bits of the next symbol are used.  These pad bits MUST be set to
@@ -267,14 +244,13 @@ RFC 4648                    Base-N Encodings                October 2006
    been set to zero.  The specification referring to this may mandate a
    specific behaviour.
 
-4.  Base 64 Encoding
+4.  Base 64 编码
 
-   The following description of base 64 is derived from [3], [4], [5],
-   and [6].  This encoding may be referred to as "base64".
+   下文中对 base 64 编码的描述来自于 [3], [4], [5] 与 [6]。可以使用
+   "base64" 来代称此编码方案。
 
-   The Base 64 encoding is designed to represent arbitrary sequences of
-   octets in a form that allows the use of both upper- and lowercase
-   letters but that need not be human readable.
+   Base 64 编码被设计成: 在允许使用区分大小写的表示形式时, 它能够表示任
+   意的八字节序列, 但是并不需要被人类可读。
 
 
 
@@ -284,24 +260,21 @@ Josefsson                   Standards Track                     [Page 5]
 RFC 4648                    Base-N Encodings                October 2006
 
 
-   A 65-character subset of US-ASCII is used, enabling 6 bits to be
-   represented per printable character.  (The extra 65th character, "=",
-   is used to signify a special processing function.)
+   编码使用了一个包含 US-ASCII 中的 65 个字符的字符子集, 其中的每个可打
+   印字符能够表示 6 比特的数据。(额外的第 65 个字符是 "=", 其被用于表示
+   需要特殊的处理)。
 
-   The encoding process represents 24-bit groups of input bits as output
-   strings of 4 encoded characters.  Proceeding from left to right, a
-   24-bit input group is formed by concatenating 3 8-bit input groups.
-   These 24 bits are then treated as 4 concatenated 6-bit groups, each
-   of which is translated into a single character in the base 64
-   alphabet.
+   编码的过程是将 "24 位组" 的多组输入比特, 表示为多个 "由 4 个编码字符
+   构成" 的多个字符串。按照从左至右的处理顺序, 每 3 个 "8 位组" 的原始输
+   入构成一个 "24 位组" 的编码输入。这些 "24 位组" 的输入将被视作由 4 个
+   "6 位组" 的数据构成, 每一组都会被编码为 base 64 字母表中的单个字符。
 
-   Each 6-bit group is used as an index into an array of 64 printable
-   characters.  The character referenced by the index is placed in the
-   output string.
+   每个 6 位组的数据被用作 "64 个可打印字符的数组" 的索引。被索引所引用
+   的字符置于输出字符串中。
 
-                      Table 1: The Base 64 Alphabet
+                       表 1: Base 64 编码的字母表
 
-     Value Encoding  Value Encoding  Value Encoding  Value Encoding
+        值 编码         值 编码         值 编码         值 编码
          0 A            17 R            34 i            51 z
          1 B            18 S            35 j            52 0
          2 C            19 T            36 k            53 1
@@ -316,22 +289,18 @@ RFC 4648                    Base-N Encodings                October 2006
         11 L            28 c            45 t            62 +
         12 M            29 d            46 u            63 /
         13 N            30 e            47 v
-        14 O            31 f            48 w         (pad) =
+        14 O            31 f            48 w      (填充符) =
         15 P            32 g            49 x
         16 Q            33 h            50 y
 
-   Special processing is performed if fewer than 24 bits are available
-   at the end of the data being encoded.  A full encoding quantum is
-   always completed at the end of a quantity.  When fewer than 24 input
-   bits are available in an input group, bits with value zero are added
-   (on the right) to form an integral number of 6-bit groups.  Padding
-   at the end of the data is performed using the '=' character.  Since
-   all base 64 input is an integral number of octets, only the following
-   cases can arise:
+   如果在数据的末尾, 可用于编码的数据少于 24 比特, 则需进行特殊的处理。
+   使得在对数据的末尾编码时, 总是能够以完整的 "24 位组" 的编码方式结束。
+   当输入比特组中的位数少于 24 比特时, 会在输入的右侧添加值为 0 的比特,
+   以构成一个完整的 "6 位组"。接着使用字符 "=" 对数据的末尾进行填充。因
+   为, 所有 base 64 编码的输入都是整数个八位字节, 所以只会出现一下情况:
 
-   (1) The final quantum of encoding input is an integral multiple of 24
-       bits; here, the final unit of encoded output will be an integral
-       multiple of 4 characters with no "=" padding.
+   (1) 如果编码输入的最后部分的比特位数是 24 的整数倍; 则编码输出的最后
+       部分的字符个数是 4 的整数倍, 且没有用字符 "=" 填充。
 
 
 
@@ -340,37 +309,31 @@ Josefsson                   Standards Track                     [Page 6]
 RFC 4648                    Base-N Encodings                October 2006
 
 
-   (2) The final quantum of encoding input is exactly 8 bits; here, the
-       final unit of encoded output will be two characters followed by
-       two "=" padding characters.
+   (2) 如果编码输入的最后部分的比特位数刚好是 8 位; 则编码输出的最后部分
+       将会是: 2 个编码字符, 再后跟 2 个 "=" 填充符。
 
-   (3) The final quantum of encoding input is exactly 16 bits; here, the
-       final unit of encoded output will be three characters followed by
-       one "=" padding character.
+   (3) 如果编码输入的最后部分的比特位数刚好是 16 位; 则编码输出的最后部
+       分将会是: 3 个编码字符, 再后跟 1 个 "=" 填充符。
 
-5.  Base 64 Encoding with URL and Filename Safe Alphabet
+5.  具有 "对 URL 和文件名安全的字母表" 的 Base 64 编码
 
-   The Base 64 encoding with an URL and filename safe alphabet has been
-   used in [12].
+   具有 "对 URL 和文件名安全的字母表" 的 Base 64 编码, 已经被用于 [12]。
 
-   An alternative alphabet has been suggested that would use "~" as the
-   63rd character.  Since the "~" character has special meaning in some
-   file system environments, the encoding described in this section is
-   recommended instead.  The remaining unreserved URI character is ".",
-   but some file system environments do not permit multiple "." in a
-   filename, thus making the "." character unattractive as well.
+   有些替换用的字母表, 建议使用 "~" 作为第 63 个字符。因为, 在一些文件系
+   统的环境中, 字符 "~" 具有特殊的含义, 所以建议还是使用本节所描述的编码
+   方案。剩余的未被 URI 所保留的字符是 ".", 但是在一些文件系统的环境中,
+   不允许在一个文件名中使用多个 ".", 因此使得字符 "." 也没有吸引力。
 
-   The pad character "=" is typically percent-encoded when used in an
-   URI [9], but if the data length is known implicitly, this can be
-   avoided by skipping the padding; see section 3.2.
+   当在 URI [9] 中使用时, 填充字符 "=" 通常是被百分号编码的 (percent-
+   encoded), 但是如果隐士地知道数据的长度, 则可以通过跳过填充符来避免这
+   一情况; 见第 3.2 节。
 
-   This encoding may be referred to as "base64url".  This encoding
-   should not be regarded as the same as the "base64" encoding and
-   should not be referred to as only "base64".  Unless clarified
-   otherwise, "base64" refers to the base 64 in the previous section.
+   这里给出的编码方案可用 "base64url" 来代称。不应认为此编码与 "base64"
+   编码相同, 且不应仅用 "base64" 来指代此编码。除非另有说明, 否则
+   "base64" 指代的是前面章节中的 base 64 编码。
 
-   This encoding is technically identical to the previous one, except
-   for the 62:nd and 63:rd alphabet character, as indicated in Table 2.
+   这里给出的编码方案, 从技术上而言与之前的相同, 除了在第 62 个和第 63
+   个字符上有所区别, 如表 2 所示。
 
 
 
@@ -396,9 +359,9 @@ Josefsson                   Standards Track                     [Page 7]
 RFC 4648                    Base-N Encodings                October 2006
 
 
-         Table 2: The "URL and Filename safe" Base 64 Alphabet
+           表 2: "对 URL 和文件名安全的" Base 64 编码的字母表
 
-     Value Encoding  Value Encoding  Value Encoding  Value Encoding
+        值 编码         值 编码         值 编码         值 编码
          0 A            17 R            34 i            51 z
          1 B            18 S            35 j            52 0
          2 C            19 T            36 k            53 1
@@ -410,36 +373,32 @@ RFC 4648                    Base-N Encodings                October 2006
          8 I            25 Z            42 q            59 7
          9 J            26 a            43 r            60 8
         10 K            27 b            44 s            61 9
-        11 L            28 c            45 t            62 - (minus)
-        12 M            29 d            46 u            63 _
-        13 N            30 e            47 v           (underline)
+        11 L            28 c            45 t            62 - (减号)
+        12 M            29 d            46 u            63 _ (下划线)
+        13 N            30 e            47 v
         14 O            31 f            48 w
         15 P            32 g            49 x
-        16 Q            33 h            50 y         (pad) =
+        16 Q            33 h            50 y      (填充符) =
 
-6.  Base 32 Encoding
+6.  Base 32 编码
 
-   The following description of base 32 is derived from [11] (with
-   corrections).  This encoding may be referred to as "base32".
+   下文中对 base 32 编码的描述来自于 (更正后的) [11]。可以使用 "base32"
+   来代称此编码方案。
 
-   The Base 32 encoding is designed to represent arbitrary sequences of
-   octets in a form that needs to be case insensitive but that need not
-   be human readable.
+   Base 32 编码被设计成: 在需要使用不区分大小写的表示形式时, 它能够表示
+   任意的八字节序列, 但是并不需要被人类可读。
 
-   A 33-character subset of US-ASCII is used, enabling 5 bits to be
-   represented per printable character.  (The extra 33rd character, "=",
-   is used to signify a special processing function.)
+   编码使用了一个包含 US-ASCII 中的 33 个字符的字符子集, 其中的每个可打
+   印字符能够表示 5 比特的数据。(额外的第 33 个字符是 "=", 其被用于表示
+   需要特殊的处理)。
 
-   The encoding process represents 40-bit groups of input bits as output
-   strings of 8 encoded characters.  Proceeding from left to right, a
-   40-bit input group is formed by concatenating 5 8bit input groups.
-   These 40 bits are then treated as 8 concatenated 5-bit groups, each
-   of which is translated into a single character in the base 32
-   alphabet.  When a bit stream is encoded via the base 32 encoding, the
-   bit stream must be presumed to be ordered with the most-significant-
-   bit first.  That is, the first bit in the stream will be the high-
-   order bit in the first 8bit byte, the eighth bit will be the low-
-   order bit in the first 8bit byte, and so on.
+   编码的过程是将 "40 位组" 的多组输入比特, 表示为多个 "由 8 个编码字符
+   构成" 的多个字符串。按照从左至右的处理顺序, 每 5 个 "8 位组" 的原始输
+   入构成一个 "40 位组" 的编码输入。这些 "40 位组" 的输入将被视作由 8 个
+   "5 位组" 的数据构成, 每一组都会被编码为 base 32 字母表中的单个字符。
+   当一个比特流通过 base 32 编码方式进行编码时, 必须假定该比特流的位序满
+   足最高位优先。因此, 在比特流的第一个 8 位字节中, 第一个比特是最高位,
+   第八个比特是最低位, 依此类推。
 
 
 
@@ -452,52 +411,44 @@ Josefsson                   Standards Track                     [Page 8]
 RFC 4648                    Base-N Encodings                October 2006
 
 
-   Each 5-bit group is used as an index into an array of 32 printable
-   characters.  The character referenced by the index is placed in the
-   output string.  These characters, identified in Table 3, below, are
-   selected from US-ASCII digits and uppercase letters.
+   每个 5 位组的数据被用作 "32 个可打印字符的数组" 的索引。被索引所引用
+   的字符置于输出字符串中。这些字符是从 US-ASCII 的数字和大写字母中选出,
+   如下表 3 所示:
 
-                     Table 3: The Base 32 Alphabet
 
-     Value Encoding  Value Encoding  Value Encoding  Value Encoding
+                       表 3: Base 32 编码的字母表
+
+        值 编码         值 编码         值 编码         值 编码
          0 A             9 J            18 S            27 3
          1 B            10 K            19 T            28 4
          2 C            11 L            20 U            29 5
          3 D            12 M            21 V            30 6
          4 E            13 N            22 W            31 7
          5 F            14 O            23 X
-         6 G            15 P            24 Y         (pad) =
+         6 G            15 P            24 Y      (填充符) =
          7 H            16 Q            25 Z
          8 I            17 R            26 2
 
-   Special processing is performed if fewer than 40 bits are available
-   at the end of the data being encoded.  A full encoding quantum is
-   always completed at the end of a body.  When fewer than 40 input bits
-   are available in an input group, bits with value zero are added (on
-   the right) to form an integral number of 5-bit groups.  Padding at
-   the end of the data is performed using the "=" character.  Since all
-   base 32 input is an integral number of octets, only the following
-   cases can arise:
+   如果在数据的末尾, 可用于编码的数据少于 40 比特, 则需进行特殊的处理。
+   使得在对数据的末尾编码时, 总是能够以完整的 "40 位组" 的编码方式结束。
+   当输入比特组中的位数少于 40 比特时, 会在输入的右侧添加值为 0 的比特,
+   以构成一个完整的 "5 位组"。接着使用字符 "=" 对数据的末尾进行填充。因
+   为, 所有 base 32 编码的输入都是整数个八位字节, 所以只会出现一下情况:
 
-   (1) The final quantum of encoding input is an integral multiple of 40
-       bits; here, the final unit of encoded output will be an integral
-       multiple of 8 characters with no "=" padding.
+   (1) 如果编码输入的最后部分的比特位数是 40 的整数倍; 则编码输出的最后
+       部分的字符个数是 8 的整数倍, 且没有用字符 "=" 填充。
 
-   (2) The final quantum of encoding input is exactly 8 bits; here, the
-       final unit of encoded output will be two characters followed by
-       six "=" padding characters.
+   (2) 如果编码输入的最后部分的比特位数刚好是 8 位; 则编码输出的最后部分
+       将会是: 2 个编码字符, 再后跟 6 个 "=" 填充符。
 
-   (3) The final quantum of encoding input is exactly 16 bits; here, the
-       final unit of encoded output will be four characters followed by
-       four "=" padding characters.
+   (3) 如果编码输入的最后部分的比特位数刚好是 16 位; 则编码输出的最后部
+       分将会是: 4 个编码字符, 再后跟 4 个 "=" 填充符。
 
-   (4) The final quantum of encoding input is exactly 24 bits; here, the
-       final unit of encoded output will be five characters followed by
-       three "=" padding characters.
+   (4) 如果编码输入的最后部分的比特位数刚好是 24 位; 则编码输出的最后部
+       分将会是: 5 个编码字符, 再后跟 3 个 "=" 填充符。
 
-   (5) The final quantum of encoding input is exactly 32 bits; here, the
-       final unit of encoded output will be seven characters followed by
-       one "=" padding character.
+   (5) 如果编码输入的最后部分的比特位数刚好是 32 位; 则编码输出的最后部
+       分将会是: 7 个编码字符, 再后跟 1 个 "=" 填充符。
 
 
 
