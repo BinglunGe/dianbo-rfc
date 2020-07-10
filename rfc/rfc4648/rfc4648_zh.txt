@@ -54,6 +54,7 @@ Copyright Notice
 
 
 
+
 Josefsson                   Standards Track                     [Page 1]
 
 RFC 4648                    Base-N Encodings                October 2006
@@ -72,18 +73,18 @@ RFC 4648                    Base-N Encodings                October 2006
    4. Base 64 编码 ....................................................5
    5. 具有 "对 URL 和文件名安全的字母表" 的 Base 64 编码 ..............7
    6. Base 32 编码 ....................................................8
-   7. Base 32 Encoding with Extended Hex Alphabet ....................10
-   8. Base 16 Encoding ...............................................10
-   9. Illustrations and Examples .....................................11
-   10. Test Vectors ..................................................12
-   11. ISO C99 Implementation of Base64 ..............................14
-   12. Security Considerations .......................................14
-   13. Changes Since RFC 3548 ........................................15
-   14. Acknowledgements ..............................................15
+   7. 具有 "扩展十六进制的字母表" 的 Base 32 编码 ....................10
+   8. Base 16 编码 ...................................................10
+   9. 图解和示例 .....................................................11
+   10. 测试样例 ......................................................12
+   11. ISO C99 中的 Base64 编码的实现 ................................14
+   12. 与安全性相关的考虑 ............................................14
+   13. 自 RFC 3548 以来的修改 ........................................15
+   14. 致谢 ..........................................................15
    15. Copying Conditions ............................................15
-   16. References ....................................................16
-      16.1. Normative References .....................................16
-      16.2. Informative References ...................................16
+   16. 引用 ..........................................................16
+      16.1. 前提性引用 ...............................................16
+      16.2. 信息性引用 ...............................................16
 
 
 
@@ -122,6 +123,7 @@ RFC 4648                    Base-N Encodings                October 2006
    不受历史遗留原因所限制的新应用中, 仅仅是因为它使得 "通过文本编辑器来
    操作对象" 成为可能。
 
+
    过去, 不同的应用程序具有不同的需求, 因此它们有时会以略微不同的方式来
    实现 Base 编码。如今, 有些协议规范有时会普遍地使用 Base 编码, 尤其是
    "base64", 但是却没有该编码的准确描述或引用参考。多用途互联网邮件扩展
@@ -129,6 +131,9 @@ RFC 4648                    Base-N Encodings                October 2006
    引用参考, 但是它没有考虑到换行符 (line-wrapping) 或非字母表中字符所造
    成的结果。此规范的目的是建立起通用的字母表及编码时的注意事项。这将有
    望减少其它文档中的歧义性, 从而实现更好的互操作性。
+
+
+
 
 2.  此文档中使用的约定
 
@@ -141,6 +146,7 @@ RFC 4648                    Base-N Encodings                October 2006
    这里, 我们将讨论过去的各 Base 编码实现之间的差异, 并在适当时, 规定了
    用于将来的具体的推荐行为。
 
+
 3.1.  编码数据中的换行符
 
    MIME [4] 经常被用作是 base 64 编码的引用参考。但是, MIME 并没有定义
@@ -151,8 +157,10 @@ RFC 4648                    Base-N Encodings                October 2006
    但是, PEM 使用的每行长度为 64 个字符。MIME 和 PEM 的限制都是由于 SMTP
    中存在的限制所造成的。
 
+
    程序实现【禁止】向使用 base 编码的数据中添加换行符, 除非引用了此文档
    的其它规范, 有明确地指示 base 编码器: 在特定数量的字符后添加换行符。
+
 
 
 
@@ -170,11 +178,14 @@ RFC 4648                    Base-N Encodings                October 2006
    般情况下, 当无法假设传输数据的大小时, 需要使用填充符来产生正确的编码
    数据。
 
+
    程序实现【必须】在编码数据的末尾包含适当的填充字符, 除非引用了此文档
    的其它规范另有明确规定。
 
+
    base64 和 base32 编码中的字母表使用了填充符, 见下面第 4 节和第 6 节的
    描述, 但是 base16 编码中的字母表不需要它, 见第 8 节。
+
 
 3.3.  编码数据中非字母表中字符的解释
 
@@ -183,6 +194,8 @@ RFC 4648                    Base-N Encodings                October 2006
    字符可能被用作 "隐蔽信道" ("covert channel"), 其中非协议的数据可能出
    于恶意目的而被发送。此外, 为了探索实现中的错误 (例如, 可能导致内存溢
    出攻击), 非字母表中的字符也可能会被发送。
+
+
 
    当程序实现在解释 base 编码的数据时, 若发现数据中包含 base 字母表外的
    字符, 程序实现【必须】拒绝编码数据, 除非引用了此文档的其它规范另有明
@@ -194,10 +207,16 @@ RFC 4648                    Base-N Encodings                October 2006
    字符 (例如, 一个 base 64 字符串以 "===" 结束), 则超出的填充字符【可
    能】会被忽略。
 
+
+
+
+
+
 3.4.  字母表的选择
 
    不同的应用对字母表中的字符有不同的需求。以下是一些需求, 用于确定应当
    使用哪个字母表:
+
 
 
 
@@ -214,35 +233,39 @@ RFC 4648                    Base-N Encodings                October 2006
       根据情况, 一个解码器可能将 0 解释为 O, 并将 1 解释为 I 或 L 。(但
       是, 在默认情况下, 不应如此; 见前面的章节。)
 
+
    o  编码后的数据, 其结构要满足其它要求。对于 base 16 和 base 32 编码,
       这确定了使用大写或小写的字母表。对于 base 64 编码, 非字母表中的字
       符 (特别是 "/") 可能会在文件名和 URL 中出现问题。
 
+
    o  用作标识符。一些字符, 特别是 base 64 字母表中的 "+" 和 "/", 会被传
       统的文本搜索/索引工具视为分词符。
+
 
    没有能够满足所有的需求、被普遍接受的字母表。一个关于高度专业化变体的
    示例, 见 IMAP [8]。在此文档中, 我们记录并命名了一些当前正在被使用的字
    母表。
 
+
 3.5.  规范编码 (Canonical Encoding)
 
    base 64 和 base 32 编码中的填充步骤, 如果没有被正确地实现, 将会导致编
-   码数据出现不易察觉的改变。
-   For example, if the input is only one octet for a base 64 encoding,
-   then all six bits of the first symbol are used, but only the first
-   two bits of the next symbol are used.  These pad bits MUST be set to
-   zero by conforming encoders, which is described in the descriptions
-   on padding below.  If this property do not hold, there is no
-   canonical representation of base-encoded data, and multiple base-
-   encoded strings can be decoded to the same binary data.  If this
-   property (and others discussed in this document) holds, a canonical
-   encoding is guaranteed.
+   码后的数据出现不易察觉的改变。例如, 对于 base 64 编码, 如果它的输入仅
+   为一个八位字节, 则使用到了第一个符号中所有 6 个比特位, 但是只使用了下
+   一个符号中前 2 个比特位。遵循协议的编码器【必须】将扩充的比特位置零,
+   这将在下文描述填充符时进步一说明。如果不保留这一特性, 则不存在对 base
+   编码的规范表示, 且会出现: 多个 base 编码字符串被解码为相同的二进制数
+   据。如果保留这一特性, 则能够保证规范编码。
+   
 
-   In some environments, the alteration is critical and therefore
-   decoders MAY chose to reject an encoding if the pad bits have not
-   been set to zero.  The specification referring to this may mandate a
-   specific behaviour.
+
+
+
+   在一些环境中, 对于数据中的变动非常严格, 因此: 如果未将填充比特位置为
+   零, 则编码器【可能】选择拒绝编码数据。与此相关的规范可能规定一个特殊
+   的行为。
+
 
 4.  Base 64 编码
 
@@ -251,6 +274,7 @@ RFC 4648                    Base-N Encodings                October 2006
 
    Base 64 编码被设计成: 在允许使用区分大小写的表示形式时, 它能够表示任
    意的八字节序列, 但是并不需要被人类可读。
+
 
 
 
@@ -269,8 +293,11 @@ RFC 4648                    Base-N Encodings                October 2006
    入构成一个 "24 位组" 的编码输入。这些 "24 位组" 的输入将被视作由 4 个
    "6 位组" 的数据构成, 每一组都会被编码为 base 64 字母表中的单个字符。
 
+
+
    每个 6 位组的数据被用作 "64 个可打印字符的数组" 的索引。被索引所引用
    的字符置于输出字符串中。
+
 
                        表 1: Base 64 编码的字母表
 
@@ -299,8 +326,12 @@ RFC 4648                    Base-N Encodings                October 2006
    以构成一个完整的 "6 位组"。接着使用字符 "=" 对数据的末尾进行填充。因
    为, 所有 base 64 编码的输入都是整数个八位字节, 所以只会出现一下情况:
 
+
+
+
    (1) 如果编码输入的最后部分的比特位数是 24 的整数倍; 则编码输出的最后
        部分的字符个数是 4 的整数倍, 且没有用字符 "=" 填充。
+
 
 
 
@@ -312,17 +343,22 @@ RFC 4648                    Base-N Encodings                October 2006
    (2) 如果编码输入的最后部分的比特位数刚好是 8 位; 则编码输出的最后部分
        将会是: 2 个编码字符, 再后跟 2 个 "=" 填充符。
 
+
    (3) 如果编码输入的最后部分的比特位数刚好是 16 位; 则编码输出的最后部
        分将会是: 3 个编码字符, 再后跟 1 个 "=" 填充符。
+
 
 5.  具有 "对 URL 和文件名安全的字母表" 的 Base 64 编码
 
    具有 "对 URL 和文件名安全的字母表" 的 Base 64 编码, 已经被用于 [12]。
 
+
    有些替换用的字母表, 建议使用 "~" 作为第 63 个字符。因为, 在一些文件系
    统的环境中, 字符 "~" 具有特殊的含义, 所以建议还是使用本节所描述的编码
    方案。剩余的未被 URI 所保留的字符是 ".", 但是在一些文件系统的环境中,
    不允许在一个文件名中使用多个 ".", 因此使得字符 "." 也没有吸引力。
+
+
 
    当在 URI [9] 中使用时, 填充字符 "=" 通常是被百分号编码的 (percent-
    encoded), 但是如果隐士地知道数据的长度, 则可以通过跳过填充符来避免这
@@ -332,8 +368,9 @@ RFC 4648                    Base-N Encodings                October 2006
    编码相同, 且不应仅用 "base64" 来指代此编码。除非另有说明, 否则
    "base64" 指代的是前面章节中的 base 64 编码。
 
-   这里给出的编码方案, 从技术上而言与之前的相同, 除了在第 62 个和第 63
-   个字符上有所区别, 如表 2 所示。
+
+   此编码方案, 除了在第 62 个和第 63 个字符上有所区别, 从技术上而言与之
+   前的相同, 如表 2 所示。
 
 
 
@@ -388,6 +425,7 @@ RFC 4648                    Base-N Encodings                October 2006
    Base 32 编码被设计成: 在需要使用不区分大小写的表示形式时, 它能够表示
    任意的八字节序列, 但是并不需要被人类可读。
 
+
    编码使用了一个包含 US-ASCII 中的 33 个字符的字符子集, 其中的每个可打
    印字符能够表示 5 比特的数据。(额外的第 33 个字符是 "=", 其被用于表示
    需要特殊的处理)。
@@ -399,6 +437,9 @@ RFC 4648                    Base-N Encodings                October 2006
    当一个比特流通过 base 32 编码方式进行编码时, 必须假定该比特流的位序满
    足最高位优先。因此, 在比特流的第一个 8 位字节中, 第一个比特是最高位,
    第八个比特是最低位, 依此类推。
+
+
+
 
 
 
@@ -435,20 +476,28 @@ RFC 4648                    Base-N Encodings                October 2006
    以构成一个完整的 "5 位组"。接着使用字符 "=" 对数据的末尾进行填充。因
    为, 所有 base 32 编码的输入都是整数个八位字节, 所以只会出现一下情况:
 
+
+
+
    (1) 如果编码输入的最后部分的比特位数是 40 的整数倍; 则编码输出的最后
        部分的字符个数是 8 的整数倍, 且没有用字符 "=" 填充。
+
 
    (2) 如果编码输入的最后部分的比特位数刚好是 8 位; 则编码输出的最后部分
        将会是: 2 个编码字符, 再后跟 6 个 "=" 填充符。
 
+
    (3) 如果编码输入的最后部分的比特位数刚好是 16 位; 则编码输出的最后部
        分将会是: 4 个编码字符, 再后跟 4 个 "=" 填充符。
+
 
    (4) 如果编码输入的最后部分的比特位数刚好是 24 位; 则编码输出的最后部
        分将会是: 5 个编码字符, 再后跟 3 个 "=" 填充符。
 
+
    (5) 如果编码输入的最后部分的比特位数刚好是 32 位; 则编码输出的最后部
        分将会是: 7 个编码字符, 再后跟 1 个 "=" 填充符。
+
 
 
 
@@ -459,52 +508,52 @@ Josefsson                   Standards Track                     [Page 9]
 RFC 4648                    Base-N Encodings                October 2006
 
 
-7.  Base 32 Encoding with Extended Hex Alphabet
+7.  具有 "扩展十六进制的字母表" 的 Base 32 编码
 
-   The following description of base 32 is derived from [7].  This
-   encoding may be referred to as "base32hex".  This encoding should not
-   be regarded as the same as the "base32" encoding and should not be
-   referred to as only "base32".  This encoding is used by, e.g.,
-   NextSECure3 (NSEC3) [10].
+   下文中对 base 32 编码的描述来自于 [7]。可以使用 "base32hex" 来代称此
+   编码方案。不应认为此编码与 "base32" 编码相同, 且不应仅用 "base32" 来
+   指代此编码。此编码有被用于 NextSECure3 (NSEC3) [10]。
 
-   One property with this alphabet, which the base64 and base32
-   alphabets lack, is that encoded data maintains its sort order when
-   the encoded data is compared bit-wise.
 
-   This encoding is identical to the previous one, except for the
-   alphabet.  The new alphabet is found in Table 4.
 
-                 Table 4: The "Extended Hex" Base 32 Alphabet
+   此字母表具有一个 base64 和 base32 的字母表所缺少的特性, 即: 当对数据
+   通过按位比较的方式进行排序时, 该字母表能保证编码后的数据具有同原始数
+   据相同的排序顺序。
 
-         Value Encoding  Value Encoding  Value Encoding  Value Encoding
+   此编码方案, 除了在字母表上有所区别, 其它方面与之前的相同。新的字母表
+   如表 4 所示。
+
+              表 4: "扩展十六进制的"  Base 32 编码的字母表
+
+            值 编码         值 编码         值 编码         值 编码
              0 0             9 9            18 I            27 R
              1 1            10 A            19 J            28 S
              2 2            11 B            20 K            29 T
              3 3            12 C            21 L            30 U
              4 4            13 D            22 M            31 V
              5 5            14 E            23 N
-             6 6            15 F            24 O         (pad) =
+             6 6            15 F            24 O      (填充符) =
              7 7            16 G            25 P
              8 8            17 H            26 Q
 
-8.  Base 16 Encoding
+8.  Base 16 编码
 
-   The following description is original but analogous to previous
-   descriptions.  Essentially, Base 16 encoding is the standard case-
-   insensitive hex encoding and may be referred to as "base16" or "hex".
+   下文中的描述是原始的, 但是与先前的描述类似。本质上, Base 16 编码是标
+   准的不区分大小写的十六进制编码, 且可以使用 "base16" 或 "hex" 来代称此
+   编码方案。
 
-   A 16-character subset of US-ASCII is used, enabling 4 bits to be
-   represented per printable character.
+   编码使用了一个包含 US-ASCII 中的 16 个字符的字符子集, 其中的每个可打
+   印字符能够表示 4 比特的数据。
 
-   The encoding process represents 8-bit groups (octets) of input bits
-   as output strings of 2 encoded characters.  Proceeding from left to
-   right, an 8-bit input is taken from the input data.  These 8 bits are
-   then treated as 2 concatenated 4-bit groups, each of which is
-   translated into a single character in the base 16 alphabet.
+   编码的过程是将 "8 位组" (即八位字节) 的多组输入比特, 表示为多个 "由 2
+   个编码字符构成" 的多个字符串。按照从左至右的处理顺序, 从原始输入中取
+   出 "8 位组" 作为编码输入。这些 "8 位组" 的输入将被视作由 2 个 "4 位
+   组" 的数据构成, 每一组都会被编码为 base 16 字母表中的单个字符。
 
-   Each 4-bit group is used as an index into an array of 16 printable
-   characters.  The character referenced by the index is placed in the
-   output string.
+
+   每个 4 位组的数据被用作 "16 个可打印字符的数组" 的索引。被索引所引用
+   的字符置于输出字符串中。
+
 
 
 
@@ -515,22 +564,22 @@ Josefsson                   Standards Track                    [Page 10]
 RFC 4648                    Base-N Encodings                October 2006
 
 
-                         Table 5: The Base 16 Alphabet
+                       表 5: Base 16 编码的字母表
 
-         Value Encoding  Value Encoding  Value Encoding  Value Encoding
+            值 编码         值 编码         值 编码         值 编码
              0 0             4 4             8 8            12 C
              1 1             5 5             9 9            13 D
              2 2             6 6            10 A            14 E
              3 3             7 7            11 B            15 F
 
-   Unlike base 32 and base 64, no special padding is necessary since a
-   full code word is always available.
+   不同于 base 32 和 base 64 编码, 这里不需要特殊的填充符; 因为 base 16
+   编码的最小单元是八位字节, 这在所有的数据中都能得到保证。
 
-9.  Illustrations and Examples
+9.  图解和示例
 
-   To translate between binary and a base encoding, the input is stored
-   in a structure, and the output is extracted.  The case for base 64 is
-   displayed in the following figure, borrowed from [5].
+   为了在二进制和 base 编码之间进行转换, 需要将输入存储在某一结构中, 并
+   从中提取所需的输出。下图中所展示的 base 64 编码的例子, 来自于 [5]。
+
 
             +--first octet--+-second octet--+--third octet--+
             |7 6 5 4 3 2 1 0|7 6 5 4 3 2 1 0|7 6 5 4 3 2 1 0|
@@ -538,10 +587,10 @@ RFC 4648                    Base-N Encodings                October 2006
             |5 4 3 2 1 0|5 4 3 2 1 0|5 4 3 2 1 0|5 4 3 2 1 0|
             +--1.index--+--2.index--+--3.index--+--4.index--+
 
-   The case for base 32 is shown in the following figure, borrowed from
-   [7].  Each successive character in a base-32 value represents 5
-   successive bits of the underlying octet sequence.  Thus, each group
-   of 8 characters represents a sequence of 5 octets (40 bits).
+   下图所展示的 base 32 编码的例子, 来自于 [7]。在 base-32 编码后的值中,
+   每个连续的字符都表示: 原始的八位字节序列中的 5 个连续比特。因此, 每组
+   "由 8 个编码字符构成" 字符串表示一个 "由 5 个八位字节构成" (40 比特)
+   的序列。
 
                         1          2          3
              01234567 89012345 67890123 45678901 23456789
@@ -571,7 +620,7 @@ Josefsson                   Standards Track                    [Page 11]
 RFC 4648                    Base-N Encodings                October 2006
 
 
-   The following example of Base64 data is from [5], with corrections.
+   下面有关 Base64 数据编码的示例来自于 [5] (已更正)。
 
       Input data:  0x14fb9c03d97e
       Hex:     1   4    f   b    9   c     | 0   3    d   9    7   e
@@ -598,7 +647,7 @@ RFC 4648                    Base-N Encodings                October 2006
                                                   pad with =      =
       Output:  F      P      u      c        A      w      =      =
 
-10.  Test Vectors
+10.  测试样例
 
    BASE64("") = ""
 
@@ -683,53 +732,53 @@ Josefsson                   Standards Track                    [Page 13]
 RFC 4648                    Base-N Encodings                October 2006
 
 
-11.  ISO C99 Implementation of Base64
+11.  ISO C99 中的 Base64 编码的实现
 
-   An ISO C99 implementation of Base64 encoding and decoding that is
-   believed to follow all recommendations in this RFC is available from:
+   在 ISO C99 中有 Base64 编码与解码的实现, 该实现被认为是遵循了此 RFC
+   中的所有建议, 可以从这里获取:
 
       http://josefsson.org/base-encoding/
 
-   This code is not normative.
+   其中给出的代码不是必须的。
 
-   The code could not be included in this RFC for procedural reasons
-   (RFC 3978 section 5.4).
+   由于工作流程相关的原因, 不能在此 RFC 中包含该代码 (见 RFC 3978 中第
+   5.4 节)。
 
-12.  Security Considerations
+12.  与安全性相关的考虑
 
-   When base encoding and decoding is implemented, care should be taken
-   not to introduce vulnerabilities to buffer overflow attacks, or other
-   attacks on the implementation.  A decoder should not break on invalid
-   input including, e.g., embedded NUL characters (ASCII 0).
+   在实现 base 编码与解码时, 需要注意: 不要引入会造成内存溢出攻击、或其
+   它攻击的漏洞。解码器不应因无效输入而崩溃, 例如遇到了嵌入在数据中的字
+   符 NUL (ASCII 0).
 
-   If non-alphabet characters are ignored, instead of causing rejection
-   of the entire encoding (as recommended), a covert channel that can be
-   used to "leak" information is made possible.  The ignored characters
-   could also be used for other nefarious purposes, such as to avoid a
-   string equality comparison or to trigger implementation bugs.  The
-   implications of ignoring non-alphabet characters should be understood
-   in applications that do not follow the recommended practice.
-   Similarly, when the base 16 and base 32 alphabets are handled case
-   insensitively, alteration of case can be used to leak information or
-   make string equality comparisons fail.
 
-   When padding is used, there are some non-significant bits that
-   warrant security concerns, as they may be abused to leak information
-   or used to bypass string equality comparisons or to trigger
-   implementation problems.
+   在解码过程中, 如果选择忽略掉非字母表中的字符, 且没有 (按照建议) 拒绝
+   掉整个编码数据, 则可能产生成一个导致信息 "泄露" 的隐蔽信道 (covert
+   channel)。被忽略的字符也可以被用于其它的恶意目的, 例如: 规避字符串的
+   判等、或出发实现中的 bug。未遵循推荐做法的应用, 应当弄清: 忽略非字母
+   表中的字符, 这一行为背后的含义。类似的, 当以不区分大小写的方式来处理
+   base 16 和 base 32 的字母表时, 字母大小写的变化可能被用于泄露信息、或
+   导致字符串的判等失败。
 
-   Base encoding visually hides otherwise easily recognized information,
-   such as passwords, but does not provide any computational
-   confidentiality.  This has been known to cause security incidents
-   when, e.g., a user reports details of a network protocol exchange
-   (perhaps to illustrate some other problem) and accidentally reveals
-   the password because she is unaware that the base encoding does not
-   protect the password.
 
-   Base encoding adds no entropy to the plaintext, but it does increase
-   the amount of plaintext available and provide a signature for
-   cryptanalysis in the form of a characteristic probability
-   distribution.
+
+
+   当使用填充符时, 需要考虑一些非有效比特位的安全性, 因为它们可能被滥用
+   来泄露信息、或绕过字符串的判等、或触发实现中存在的问题。
+
+
+
+   Base 编码从视觉上隐藏了那些的易被识别的信息, 例如密码, 但是它实际上并
+   未提供任何的计算保密性。而这有可能会导致安全事故, 例如: 当用户在报告
+   网络协议所交换的详细信息时 (可能是为了说明其它问题), 会意外地将密码泄
+   露, 因为她并没有意识到 base 编码不能保护密码。
+
+
+
+
+   Base 编码不会使文本熵增, 但是它确实增加了文本的长度, 并以特征概率分布
+   (characteristic probability distribution) 的形式为密码分析过程
+   (cryptanalysis) 提供了签名。
+
 
 
 
@@ -739,23 +788,23 @@ Josefsson                   Standards Track                    [Page 14]
 RFC 4648                    Base-N Encodings                October 2006
 
 
-13.  Changes Since RFC 3548
+13.  自 RFC 3548 以来的修改
 
-   Added the "base32 extended hex alphabet", needed to preserve sort
-   order of encoded data.
+   添加了 "使用扩展十六进制字母表的 base32" 的内容, 该编码被用于保留编码
+   数据的排序顺序。
 
-   Referenced IMAP for the special Base64 encoding used there.
+   引用了 IMAP, 以说明其中用到的特殊的 Base64 编码。
 
-   Fixed the example copied from RFC 2440.
+   修复了从 RFC 2440 复制过来的示例。
 
-   Added security consideration about providing a signature for
-   cryptoanalysis.
+   添加了有关 "提供密码分析签名" 的安全性相关的考虑。
 
-   Added test vectors.
 
-   Fixed typos.
+   添加了测试样例。
 
-14.  Acknowledgements
+   修复了笔误。
+
+14.  致谢
 
    Several people offered comments and/or suggestions, including John E.
    Hadstate, Tony Hansen, Gordon Mohr, John Myers, Chris Newman, and
@@ -795,9 +844,9 @@ Josefsson                   Standards Track                    [Page 15]
 RFC 4648                    Base-N Encodings                October 2006
 
 
-16.  References
+16.  引用
 
-16.1.  Normative References
+16.1.  前提性引用
 
    [1]   Cerf, V., "ASCII format for network interchange", RFC 20,
          October 1969.
@@ -805,7 +854,7 @@ RFC 4648                    Base-N Encodings                October 2006
    [2]   Bradner, S., "Key words for use in RFCs to Indicate Requirement
          Levels", BCP 14, RFC 2119, March 1997.
 
-16.2.  Informative References
+16.2.  信息性引用
 
    [3]   Linn, J., "Privacy Enhancement for Internet Electronic Mail:
          Part I: Message Encryption and Authentication Procedures", RFC
@@ -851,7 +900,7 @@ Josefsson                   Standards Track                    [Page 16]
 RFC 4648                    Base-N Encodings                October 2006
 
 
-Author's Address
+作者地址
 
    Simon Josefsson
    SJD
