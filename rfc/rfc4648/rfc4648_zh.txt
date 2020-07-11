@@ -83,8 +83,8 @@ RFC 4648                    Base-N Encodings                October 2006
    14. 致谢 ..........................................................15
    15. Copying Conditions ............................................15
    16. 引用 ..........................................................16
-      16.1. 前提性引用 ...............................................16
-      16.2. 信息性引用 ...............................................16
+      16.1. 前提类引用 ...............................................16
+      16.2. 信息类引用 ...............................................16
 
 
 
@@ -846,7 +846,7 @@ RFC 4648                    Base-N Encodings                October 2006
 
 16.  引用
 
-16.1.  前提性引用
+16.1.  前提类引用
 
    [1]   Cerf, V., "ASCII format for network interchange", RFC 20,
          October 1969.
@@ -854,7 +854,7 @@ RFC 4648                    Base-N Encodings                October 2006
    [2]   Bradner, S., "Key words for use in RFCs to Indicate Requirement
          Levels", BCP 14, RFC 2119, March 1997.
 
-16.2.  信息性引用
+16.2.  信息类引用
 
    [3]   Linn, J., "Privacy Enhancement for Internet Electronic Mail:
          Part I: Message Encryption and Authentication Procedures", RFC

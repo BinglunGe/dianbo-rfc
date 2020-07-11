@@ -26,8 +26,8 @@
 | 【可能】             | MAY
 | 【可选的】           | OPTIONAL
 |                      |
-| 信息性引用           | Informative References
-| 前提性引用           | Normative References
+| 信息类引用           | Informative References
+| 前提类引用           | Normative References
 | 标准跟踪文档         | Standards track documents
 |                      |
 | Base 编码            | Base encoding
@@ -44,4 +44,4 @@
 
 + [翻译过程中所遵循的一些原则](./rfc/rfc2616/README.md)
 + [关于 "MUST"、"MUST NOT" 等一系列关键词的准确翻译](./rfc/rfc2119/README.md)
-+ [为何将 "Normative References" 译为 "前提性引用"](./rfc/rfc8174/README.md)
++ [为何将 "Normative References" 译为 "前提类引用"](./rfc/rfc8174/README.md)
