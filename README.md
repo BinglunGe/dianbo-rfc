@@ -26,6 +26,9 @@
 | 【可能】             | MAY
 | 【可选的】           | OPTIONAL
 |                      |
+| 摘要                 | Abstract
+| 目录                 | Table of Contents
+| 引言                 | Introduction
 | 信息类引用           | Informative References
 | 前提类引用           | Normative References
 | 标准跟踪文档         | Standards track documents
