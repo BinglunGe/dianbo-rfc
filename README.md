@@ -10,6 +10,10 @@
 
 ## 正在翻译
 
++ [RFC 7322](./rfc/rfc7322/README.md)
+
+## 放弃翻译
+
 + [RFC 2616](./rfc/rfc2616/README.md)
 
 ## 中英对照
