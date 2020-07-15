@@ -60,7 +60,7 @@ RFC 7322                     RFC Style Guide              September 2014
 
 目录
 
-   1. 引言 ............................................................3
+   1. 导言 ............................................................3
    2. RFC Editor 的理念 ...............................................4
    3. RFC 样式约定 ....................................................5
       3.1. 语言 .......................................................5
@@ -69,20 +69,20 @@ RFC 7322                     RFC Style Guide              September 2014
       3.4. 大写形式 ...................................................6
       3.5. 引用 .......................................................6
       3.6. 缩写规则 ...................................................7
-   4. Structure of an RFC .............................................8
-      4.1. First-Page Header ..........................................9
-           4.1.1. Author/Editor .......................................9
-           4.1.2. Organization ........................................9
+   4. RFC 的结构 ......................................................8
+      4.1. 首页页头 ...................................................9
+           4.1.1. 作者/编辑者 .........................................9
+           4.1.2. 组织 ................................................9
            4.1.3. "ISSN: 2070-1721" ..................................10
-           4.1.4. Updates and Obsoletes ..............................10
-      4.2. Full Title ................................................10
-      4.3. Abstract Section ..........................................11
+           4.1.4. 更新 (Updates) 和废除 (Obsoletes) ..................10
+      4.2. 全文标题 ..................................................10
+      4.3. 摘要 (Abstract) 章节 ......................................11
       4.4. RFC Editor or Stream Notes Section ........................11
       4.5. Status of This Memo Section ...............................11
-      4.6. Copyright, Licenses, and IPR Boilerplate Section ..........11
-      4.7. Table of Contents Section .................................11
-      4.8. Body of the Memo  .........................................12
-           4.8.1. Introduction Section ...............................12
+      4.6. 版权, 许可证, 及知识产权样板章节 ..........................11
+      4.7. 目录章节 ..................................................11
+      4.8. 备忘录正文  ...............................................12
+           4.8.1. 导言 (Introduction) 章节 ...........................12
            4.8.2. Requirement Language Section .......................12
            4.8.3. IANA Considerations Section ........................13
            4.8.4. Internationalization Considerations Section ........13
@@ -123,7 +123,7 @@ RFC 7322                     RFC Style Guide              September 2014
    Contributors ......................................................24
    Authors' Addresses ................................................24
 
-1.  引言
+1.  导言
 
    RFC 发布流程的最终目标是: 产生可读的、清晰的、一致的、且合理统一的文
    档。20 世纪 70 年代, 最早的 RFC 编辑者, Jon Postel, 建立了基本的 RFC
@@ -316,25 +316,19 @@ RFC 7322                     RFC Style Guide              September 2014
 
 3.6.  缩写规则
 
-   当缩写出现在标题中、或在文档中第一次使用时，缩写应当被展开。
+   当缩写出现在标题中、或在文档中第一次使用时, 缩写应当被展开。文本的缩
+   写形式应该用括号包裹, 并跟在其完整展开形式的后面。存在例外, 即一缩写
+   非常常见, 以至于 RFC 读者可以立即认出该缩写; 例如 (但不限于) TCP, IP
+   SNMP, 和 HTTP。在线的缩写列表 [ABBR] 提供了相关指南。存在一些少见的样
+   例, RFC Editor 会在权衡了模糊性和复杂性后, 作出最终的判断。
 
-   The full expansion of the text should be
-   followed by the abbreviation itself in parentheses.  The exception is
-   an abbreviation that is so common that the readership of RFCs can be
-   expected to recognize it immediately; examples include (but are not
-   limited to) TCP, IP, SNMP, and HTTP.  The online list of
-   abbreviations [ABBR] provides guidance.  Some cases are marginal, and
-   the RFC Editor will make the final judgment, weighing obscurity
-   against complexity.
+      注意: 在线的缩写列表并非是事无巨细的、完全明确的。它仅仅是出现在
+      RFC 中的缩写的列表, 有时反映了与作者、工作组主席 (Working Group
+      Chairs)、和/或区域主管 (AD, Area Director) 的讨论结果。注意, 有一
+      些缩写具有多个展开形式。此外, 该列表还包含一些看起来像缩写的术语,
+      但实际上它们是事物的固定名称, 因此不能够也不应当被展开。这些术语被
+      记作 "No Expansion"。
 
-      Note: The online list of abbreviations is not exhaustive or
-      definitive.  It is a list of abbreviations appearing in RFCs and
-      sometimes reflects discussions with authors, Working Group Chairs,
-      and/or Area Directors (ADs).  Note that some abbreviations have
-      multiple expansions.  Additionally, this list includes some terms
-      that look like abbreviations but that are actually fixed names for
-      things and hence cannot and should not be expanded.  These are
-      noted as "No Expansion".
 
 
 
@@ -371,51 +365,46 @@ Flanagan & Ginoza             Informational                     [Page 7]
 RFC 7322                     RFC Style Guide              September 2014
 
 
-4.  Structure of an RFC
+4.  RFC 的结构
 
-   A published RFC will largely contain the elements in the following
-   list.  Some of these sections are required, as noted.  Those sections
-   marked with "*" will be supplied by the RFC Editor during the
-   editorial process when necessary.  Sections are allowed to contain
-   nothing but subsections.  The rules for each of these elements are
-   described in more detail below.
+   一个已发布的 RFC 将主要包含以下列表中的元素。如上所述, 其中的一些章节
+   是必需的。在文档的编辑流程中, 如有必要, RFC Editor 将会提供那些用 "*"
+   标出的章节。在各个章节中, 只能包含子章节。关于这些文档元素的规则, 将
+   在下面详细介绍。
 
-      First-page header                      * [Required]
-      Title                                    [Required]
-      Abstract                                 [Required]
-      RFC Editor or Stream Note              * [Upon request]
-      Status of This Memo                    * [Required]
-      Copyright Notice                       * [Required]
-      Table of Contents                      * [Required]
-      Body of the Memo                         [Required]
-        1.  Introduction                       [Required]
+      First-page header            首页页头          * [Required]
+      Title                        标题                [Required]
+      Abstract                     摘要                [Required]
+      RFC Editor or Stream Note                      * [Upon request]
+      Status of This Memo          此备忘录的状态    * [Required]
+      Copyright Notice             版权声明          * [Required]
+      Table of Contents            目录              * [Required]               
+      Body of the Memo             备忘录正文          [Required]               
+        1.  Introduction              导言             [Required]               
         2.  Requirements Language (RFC 2119)
-        3.  ...
-            MAIN BODY OF THE TEXT
-        6.  ...
-        7.  IANA Considerations                [Required in I-D]
+        3.  ...                       ...
+            MAIN BODY OF THE TEXT     文本的主体
+        6.  ...                       ...
+        7.  IANA Considerations       关于 IANA 的考虑 [Required in I-D]
         8.  Internationalization Considerations
-        9.  Security Considerations            [Required]
-        10.  References
-        10.1.  Normative References
-        10.2.  Informative References
-        Appendix A.
-        Appendix B.
-      Acknowledgements
-      Contributors
-      Author's Address                         [Required]
+        9.  Security Considerations   关于安全性的考虑 [Required]
+        10.  References               参考文献
+        10.1.  Normative References   前提类参考文献
+        10.2.  Informative References 信息类参考文献
+        Appendix A.                   附录 A.
+        Appendix B.                   附录 B.
+      Acknowledgements             致谢
+      Contributors                 贡献者
+      Author's Address             作者地址            [Required]
 
-   Within the body of the memo, the order shown above is strongly
-   recommended.  Exceptions may be questioned.  Outside the body of the
-   memo, the order above is required.  The section numbers above are for
-   illustrative purposes; they are not intended to correspond to
-   required numbering in an RFC.
+   强烈建议: 在备忘录的正文 (body of the memo) 中, 使用上面所示的顺序。
+   对于那些未采用该顺序的例外情况, 可能会受到问询。在备忘录的正文外, 上
+   面所示的顺序是必须的。上面所示的章节编号仅用于说明目的; 它们并不与实
+   际的 RFC 中所需的编号相对应。
 
-   The elements preceding the body of the memo should not be numbered.
-   Typically, the body of the memo will have numbered sections and the
-   appendices will be labeled with letters.  Any sections that appear
-   after the appendices should not be numbered or labeled (e.g., see
-   "Contributors" above).
+   不应对备忘录正文 (body of the memo) 前面的元素进行编号。通常, 在备忘
+   录正文中的, 章节使用数字进行编号, 附录使用字母进行标记。出现在附录后
+   面的章节, 不应当被编号或标记 (例, 上面所示的 "Contributors")。
 
 
 
@@ -427,51 +416,39 @@ Flanagan & Ginoza             Informational                     [Page 8]
 RFC 7322                     RFC Style Guide              September 2014
 
 
-4.1.  First-Page Header
+4.1.  首页页头 (First-Page Header)
 
-   Headers will follow the format described in "RFC Streams, Headers,
-   and Boilerplates" [RFC5741] and its successors.  In addition, the
-   following conventions will apply.
+   页头 (Headers) 将遵循在 "RFC Streams, Headers, and Boilerplates"
+   [RFC5741] 及其后续文档中所描述的格式。此外, 将会应用下述的约定。
 
-4.1.1.  Author/Editor
+4.1.1.  作者/编辑者
 
-   The determination of who should be listed as an author or editor on
-   an RFC is made by the stream.
+   由发布流来确定: 在 RFC 中, 哪些人应当被列为作者或编辑者。
 
-   The author's name (initial followed by family name) appears on the
-   first line of the heading.  Some variation, such as additional
-   initials or capitalization of family name, is acceptable.  Once the
-   author has selected how their name should appear, they should use
-   that display consistently in all of their documents.
+   作者的姓名应出现在页头的第一行。允许在姓名中添加额外的姓氏的缩写或大
+   写。一旦作者选择了姓名的显示方式, 他们应当在其所有的文档中使用一致的
+   显示方式。
 
-   The total number of authors or editors on the first page is generally
-   limited to five individuals and their affiliations.  If there is a
-   request for more than five authors, the stream-approving body needs
-   to consider if one or two editors should have primary responsibility
-   for this document, with the other individuals listed in the
-   Contributors or Acknowledgements section.  There must be a direct
-   correlation of authors and editors in the document header and the
-   Authors' Addresses section.  These are the individuals that must sign
-   off on the document during the AUTH48 process and respond to
-   inquiries, such as errata.
+   在首页中, 作者或编辑者的总数通常限制在五个, 包括个人及其所属机构。如
+   果要求列出五名以上的作者, 则发布流审批机构需要考虑: 这些人中是否有一
+   到两人对此文档负有主要责任, 并将其他人列在贡献者 (Contributors) 或致
+   谢 (Acknowledgements) 章节中。出现在文档页头中、及作者地址 (Authors'
+   Addresses) 章节中的作者和编辑者, 必须有着直接关联。这些人要负责: 在
+   AUTH48 流程中, 在文档上签字; 以及回应各类询问, 例如勘误。
 
-4.1.2.  Organization
+4.1.2.  组织
 
-   The author's organization is indicated on the line following the
-   author's name.
+   作者所属的组织应在作者姓名的下一行指出。
 
-   For multiple authors, each author name appears on its own line,
-   followed by that author's organization.  When more than one author is
-   affiliated with the same organization, the organization can be
-   "factored out," appearing only once following the corresponding
-   Author lines.  However, such factoring is inappropriate when it would
-   force an unacceptable reordering of author names.
+   对于多名作者的情形, 每名作者的姓名出现在单独一行中, 并后跟作者所属的
+   组织。当有多名作者从属于同一组织时, 可以将组织名称 "提取" 出来, 并跟
+   随在这些作者姓名行的后面, 仅显示一次。但是, 当这种 "提取" 会改变作者
+   姓名的顺序, 且这种顺序的改变是不可接受的时候, "提取" 行为是不合适的。
 
-   If an author cannot or will not provide an affiliation for any
-   reason, "Independent", "Individual Contributor", "Retired", or some
-   other term that appropriately describes the author's affiliation may
-   be used.  Alternatively, a blank line may be included in the document
-   header when no affiliation is provided.
+   如果一名作者因为某些原因, 不能或不愿提供所属机构时, 可以使用 "独立的"
+   ("Independent")、"个人贡献者" ("Individual Contributor")、"已退休"
+   ("Retired")、或其他合适的术语, 来描述作者从属情况。或者, 当没有提供
+   任何从属信息时, 可以在文档页头中包含一空行。
 
 
 
@@ -485,45 +462,40 @@ RFC 7322                     RFC Style Guide              September 2014
 
 4.1.3.  "ISSN: 2070-1721"
 
-   The RFC Series has been assigned an International Standard Serial
-   Number of 2070-1721 [ISO3297].  It will be included by the
-   RFC Editor.
+   RFC 系列文档已经被赋予了一个国际标准期刊编号 (International Standard
+   Serial Number), 为 2070-1721 [ISO3297]。该编号将会被包含在 RFC Editor
+   中。
 
-4.1.4.  Updates and Obsoletes
+4.1.4.  更新 (Updates) 和废除 (Obsoletes)
 
-   When an RFC obsoletes or updates a previously published RFC or RFCs,
-   this information is included in the document header.  For example:
+   当一个 RFC 要废除或更新之前的一个或多个已发布的 RFC 时, 应当在文档的
+   页头中包含如下信息。例如:
 
       "Updates: nnnn" or "Updates: nnnn, ..., nnnn"
 
       "Obsoletes: nnnn" or "Obsoletes: nnnn, ... , nnnn"
 
-   If the document updates or obsoletes more than one document, numbers
-   will be listed in ascending order.
+   如果当前文档更新或废除了多个文档, 则文档编号将按照升序列出。
 
-4.2.  Full Title
+4.2.  全文标题 (Full Title)
 
-   The title must be centered below the rest of the heading, preceded by
-   two blank lines and followed by one blank line.
+   标题必须位于页头的下方, 居中对齐, 并前后各添加一空行。
 
-   Choosing a good title for an RFC can be a challenge.  A good title
-   should fairly represent the scope and purpose of the document without
-   being either too general or too specific and lengthy.
+   为 RFC 选择一个好的标题是一个挑战。一个好的标题应当能够中肯地表明文档
+   涉及的领域及其目的, 且不会过于笼统、或过于具体和冗长。
 
-   Abbreviations in a title must generally be expanded when first
-   encountered (see Section 3.6 for additional guidance on
-   abbreviations).
+   标题中的缩写, 若是第一次遇到, 一般必须要被展开 (关于缩写的额外指南见
+   第 3.6 节)。
 
-   It is often helpful to follow the expansion with the parenthesized
-   abbreviation, as in the following example:
+   通常, 很有帮助的做法是: 在缩写的展开形式的后面, 跟随被括号包裹的该缩
+   写。如下面的例子所示:
 
                           Encoding Rules for the
           Common Routing Encapsulation Extension Protocol (CREEP)
 
-   The RFC Editor recommends that documents describing a particular
-   company's private protocol should bear a title of the form "Foo's ...
-   Protocol" (where Foo is a company name), to clearly differentiate it
-   from a protocol of more general applicability.
+   RFC Editor 建议: 一个用于描述某个特定的公司私有协议的文档, 应当采用形
+   如 "Foo's ... Protocol" (其中 Foo 是公司名称) 的标题, 以使其明确区别
+   于其它更加普遍适用的协议。
 
 
 
@@ -539,27 +511,20 @@ Flanagan & Ginoza             Informational                    [Page 10]
 RFC 7322                     RFC Style Guide              September 2014
 
 
-4.3.  Abstract Section
+4.3.  摘要 (Abstract) 章节
 
-   Every RFC must have an Abstract that provides a concise and
-   comprehensive overview of the purpose and contents of the entire
-   document, to give a technically knowledgeable reader a general
-   overview of the function of the document.
+   每个 RFC 必须具有一个摘要, 来对整个文档的目的和内容进行简明和全面的概
+   述, 以便技术相关的读者能够对该文档的功能有个大致的概览。
 
-   Composing a useful Abstract generally requires thought and care.
-   Usually, an Abstract should begin with a phrase like "This memo ..."
-   or "This document ..."  A satisfactory Abstract can often be
-   constructed in part from material within the Introduction section,
-   but an effective Abstract may be shorter, less detailed, and perhaps
-   broader in scope than the Introduction.  Simply copying and pasting
-   the first few paragraphs of the Introduction is allowed, but it may
-   result in an Abstract that is both incomplete and redundant.  Note
-   also that an Abstract is not a substitute for an Introduction; the
-   RFC should be self-contained as if there were no Abstract.
+   撰写一篇有用的摘要一般需要深思熟虑。通常, 摘要应当以类似 "This memo
+   ..." 或 "This document ..." 这样的短语作为开头。一篇令人满意摘要经常
+   是根据导言 (Introduction) 章节的部分材料来构建的, 但是一篇有效的摘要
+   应当比导言更加简短、粗略、且可能范围更广。允许简单地复制粘贴导言的前
+   几个段落, 但是这可能使摘要变得既不完整又多余。注意: 摘要不能代替导言;
+   RFC 应当是字包含的, 就像没有摘要一样。
 
-   Similarly, the Abstract should be complete in itself.  It will appear
-   in isolation in publication announcements and in the online index of
-   RFCs.  Therefore, the Abstract must not contain citations.
+   同样, 摘要本身应当是完整的。摘要将会单独出现在 RFC 的发布公告及在线索
+   引中。因此, 摘要中禁止包含引用。
 
 4.4.  RFC Editor or Stream Notes Section
 
@@ -578,15 +543,15 @@ RFC 7322                     RFC Style Guide              September 2014
    defined in RFC 5741 [RFC5741] and "Format for RFCs in the IAB Stream"
    [IAB-FORM].
 
-4.6.  Copyright, Licenses, and IPR Boilerplate Section
+4.6.  版权, 许可证, 及知识产权样板章节
 
-   The full copyright and license notices are available on the IETF
-   Trust Legal Provisions documents website [IETF-TRUST].
+   完整的版权和许可证的声明, 可以从 IETF Trust Legal Provisions 文档页面
+   [IETF-TRUST] 获取。
 
-4.7.  Table of Contents Section
+4.7.  目录章节
 
-   A Table of Contents (TOC) is required in all RFCs.  It must be
-   positioned after the Copyright Notice and before the Introduction.
+   所有的 RFC 都需要有目录 (TOC, Table of Contents)。目录必须位于版权声
+   明之后、导言之前。
 
 
 
@@ -595,54 +560,44 @@ Flanagan & Ginoza             Informational                    [Page 11]
 RFC 7322                     RFC Style Guide              September 2014
 
 
-4.8.  Body of the Memo
+4.8.  备忘录正文
 
-   Following the TOC is the body of the memo.
+   跟随在目录后的是备忘录的正文。
 
-   Each RFC must include an Introduction section that (among other
-   things) explains the motivation for the RFC and (if appropriate)
-   describes the applicability of the document, e.g., whether it
-   specifies a protocol, provides a discussion of some problem, is
-   simply of interest to the Internet community, or provides a status
-   report on some activity.  The body of the memo and the Abstract must
-   be self-contained and separable.  This may result in some duplication
-   of text between the Abstract and the Introduction; this is
-   acceptable.
+   每个 RFC 必须包含一个导言 (Introduction) 章节, 以解释该 RFC 的动机,
+   以及 (如果合适) 描述文档的适用性, 例如: 它是否能说明了某个协议、提供
+   了关于某些问题的讨论、仅是对互联网社区的兴趣、又或者提供了某些活动的
+   状态报告。备忘录的正文和摘要 (Abstract) 都必须是独立的、可分离的。这
+   可能会导致在摘要和导言间出现一些重复文本; 这是可以接受的。
 
-4.8.1.  Introduction Section
+4.8.1.  导言 (Introduction) 章节
 
-   The Introduction section should always be the first section following
-   the TOC (except in the case of MIB module documents).  While
-   "Introduction" is recommended, authors may choose alternate titles
-   such as "Overview" or "Background".  These alternates are acceptable.
+   导言章节应当总是目录后的第一个章节 (MIB 模块文档除外)。虽然建议使用
+   "导言" ("Introduction") 一词, 但是作者可能选择其它标题, 例如 "概述"
+   ("Overview") 或 "背景" ("Background")。这些替代方式是可接受的。
 
-   For MIB module documents, common practice has been for "The
-   Internet-Standard Management Framework" [MIB-BOILER] text to appear
-   as Section 1.
+   对于 MIB 模块文档, 通常的做法见 "The Internet-Standard Management
+   Framework" [MIB-BOILER], 即文本作为第 1 节出现。
 
 4.8.2.  Requirements Language Section
 
-   Some documents use certain capitalized words ("MUST", "SHOULD", etc.)
-   to specify precise requirement levels for technical features.
-   RFC 2119 [BCP14] defines a default interpretation of these
-   capitalized words in IETF documents.  If this interpretation is used,
-   RFC 2119 must be cited (as specified in RFC 2119) and included as a
-   normative reference.  Otherwise, the correct interpretation must be
-   specified in the document.
+   一些文档使用了特定的大写单词 ("MUST"、"SHOULD" 等, 译文中为【必须】、
+   【应当】等), 来指出对某一技术特性的明确的要求级别。RFC 2119 [BCP14]
+   定义了: 当这些大写单词出现在 IETF 文档中时的默认解释。如果使用此解释,
+   则必须引用 RFC 2119 (如 RFC 2119 中指定的那样), 并将其作为前提类参考
+   文献。否则, 必须在文档中说明用词的正确释义。
 
-   This section must appear as part of the body of the memo (as defined
-   by this document).  It must appear as part of, or subsequent to, the
-   Introduction section.
+   这一章节必须作为备忘录正文的一部分出现 (如此文档中定义的那样)。它必须
+   作为导言章节的一部分、或作为导言的后续章节。
 
-   These words are considered part of the technical content of the
-   document and are intended to provide guidance to implementers about
-   specific technical features, generally governed by considerations of
-   interoperability.  RFC 2119 says:
+   这些单词被认为是文档的技术内容的一部分，这些单词的使用通常以技术特性
+   的互操作性作为考虑，旨在为实现者提供关于一些具体的技术特性的指导。在
+   RFC 2119 中，有说：
 
-      Imperatives of the type defined in this memo must be used with
-      care and sparingly.  In particular, they MUST only be used where
-      it is actually required for interoperation or to limit behavior
-      which has potential for causing harm (e.g., limiting
+      在此备忘录中定义的这些祈使词, 必须被小心地、保守地使用。特别的, 这
+      些祈使词的使用【必须】是出于互操作性的实际需要、或是为了限制可能导
+      致潜在危害的行为 (例如, 限制重传)。例如, 它们不得被用于: 将特定方
+      法强加给实现者, 而该方法是互操作性所不需要的。
 
 
 
@@ -651,9 +606,6 @@ Flanagan & Ginoza             Informational                    [Page 12]
 RFC 7322                     RFC Style Guide              September 2014
 
 
-      retransmisssions)  For example, they must not be used to try to
-      impose a particular method on implementers where the method is not
-      required for interoperability.
 
 4.8.3.  IANA Considerations Section
 

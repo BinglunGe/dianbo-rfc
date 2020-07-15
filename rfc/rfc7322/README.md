@@ -20,6 +20,8 @@
 | 引述                 | quote
 | 引用                 | citation
 | 参考文献             | reference
+| 国际标准期刊编号     | International Standard Serial Number
+| 目录                 | TOC, Table of Contents
 
 ## 补充说明
 
