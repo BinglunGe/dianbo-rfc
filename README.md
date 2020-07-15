@@ -26,9 +26,11 @@
 | 【可能】             | MAY
 | 【可选的】           | OPTIONAL
 |                      |
+| 更新                 | update
+| 废除                 | obsolete
 | 摘要                 | Abstract
-| 目录                 | Table of Contents
-| 引言                 | Introduction
+| 目录                 | TOC, Table of Contents
+| 导言                 | Introduction
 | 引述                 | Quote
 | 引用                 | Citations
 | 参考文献             | References
