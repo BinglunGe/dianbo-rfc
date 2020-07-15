@@ -16,6 +16,10 @@
 | 发布流               | stream
 | 发布流审批机构       | stream-approving body
 | 编辑平衡             | editorial balance
+| 芝加哥样式手册       | CMOS, Chicago Manual of Style
+| 引述                 | quote
+| 引用                 | citation
+| 参考文献             | reference
 
 ## 补充说明
 

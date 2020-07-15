@@ -61,14 +61,14 @@ RFC 7322                     RFC Style Guide              September 2014
 目录
 
    1. 引言 ............................................................3
-   2. RFC Editor's Philosophy .........................................4
-   3. RFC Style Conventions ...........................................5
-      3.1. Language ...................................................5
-      3.2. Punctuation ................................................5
-      3.3. DNS Names and URIs .........................................6
-      3.4. Capitalization .............................................6
-      3.5. Citations ..................................................6
-      3.6. Abbreviation Rules .........................................7
+   2. RFC Editor 的理念 ...............................................4
+   3. RFC 样式约定 ....................................................5
+      3.1. 语言 .......................................................5
+      3.2. 标点符号 ...................................................5
+      3.3. DNS 名称和 URI .............................................6
+      3.4. 大写形式 ...................................................6
+      3.5. 引用 .......................................................6
+      3.6. 缩写规则 ...................................................7
    4. Structure of an RFC .............................................8
       4.1. First-Page Header ..........................................9
            4.1.1. Author/Editor .......................................9
@@ -138,11 +138,11 @@ RFC 7322                     RFC Style Guide              September 2014
    南的一部分。
 
    技术出版界对语法、标点符号、大写字母、及句子的长度、复杂度、并行度等
-   都有公认的规则。RFC Editor 大体上遵循了在 Chicago Manual of Style
-   (CMOS) [CMOS] 中所定义的这些公认的规则, 除了一些重要的例外情况: 为了
-   避免复杂的技术文章中的歧义性、为了处理普通文本与计算机语言的混用、或
-   为了保留历史遗留的格式规则。此文档展示了那些被 RFC Editor 所应用或推
-   荐的例外情况。
+   都有公认的规则。RFC Editor 大体上遵循了在 "芝加哥样式手册" (Chicago
+   Manual of Style, CMOS) [CMOS] 中所定义的这些公认的规则, 除了一些重要
+   的例外情况: 为了避免复杂的技术文章中的歧义性、为了处理普通文本与计算
+   机语言的混用、或为了保留历史遗留的格式规则。此文档展示了那些被 RFC
+   Editor 所应用或推荐的例外情况。
 
    所有的 RFC 都是以互联网草案 (Internet-Drafts, 又称 I-Ds) 开始的, 而一
    个编写良好、结构合理的互联网草案 [ID-GUIDE] 为一个优秀的 RFC 提供了坚
@@ -196,9 +196,8 @@ RFC 7322                     RFC Style Guide              September 2014
    保持这种平衡是 RFC Editor 所持续关注的问题。这里有一个凌驾于语法约定
    的基本要求, 即: 不要改变文本的本来含义。
 
-   If the RFC Editor cannot edit a document without serious risk of
-   altering the meaning, it may be returned to the stream-approving body
-   for review.  See Appendix A.2 for more information.
+   如果 RFC Editor 不冒着改变文本含义的高风险, 就无法编辑文档, 则该文档
+   应当退还给发布流审批机构进行再审。更多信息见附录第 A.2 节。
 
 
 
@@ -209,50 +208,45 @@ Flanagan & Ginoza             Informational                     [Page 4]
 RFC 7322                     RFC Style Guide              September 2014
 
 
-3.  RFC Style Conventions
+3.  RFC 样式约定
 
-   This Style Guide does not use terminology as defined in RFC 2119
-   [BCP14].  In this document, lowercase use of "must" and "should"
-   indicates changes the RFC Editor will make automatically to conform
-   with this Style Guide versus those that may be questioned if not
-   applied.  The lowercase "must" indicates those changes that will be
-   applied automatically and are not at the discretion of the authors.
-   The lowercase "should" indicates the RFC Editor's recommended use,
-   but conformance with the recommendations is not required; the RFC
-   Editor may question whether the guidance may be applied.
+   此样式指南 (Style Guide) 没有使用 RFC 2119 [BCP14] 中定义的术语。此文
+   档中, 对 "must" 和 "should" 的小写形式的使用 (译者, 译文中未加方括号
+   【】进行强调的 "必须" 和 "应该" 等词), 表示 RFC Editor 将会自动地对文
+   档进行修改, 以遵循此样式指南; 与之相对, 如果没有应用此修改, 则将受到
+   质疑。小写形式的 "must" (译者, 译文中未加方括号【】的 "必须"), 表示将
+   会自动地应用这些修改, 而非由作者决定。小写形式的 "should" (译者, 译文
+   中未加方括号【】的 "应该"), 表示是 RFC Editor 所建议的用法, 但遵循该
+   建议并不是必须的; RFC Editor 可能会询问是否要应用该条指南。
 
-3.1.  Language
+3.1.  语言
 
-   The RFC publication language is English.  Spelling may be either
-   American or British, as long as an individual document is internally
-   consistent.  Where both American and British English spelling are
-   used within a document or cluster of documents, the text will be
-   modified to be consistent with American English spelling.
+   RFC 的发布语言为英语。单词拼写可能是美式的、或英式的, 只要其在单个文
+   件内部保持一致即可。如果在一个文件内部、或一 "簇" 文件内部同时使用了
+   英式拼写和美式拼写, 则文本将会被修改为与美式拼写相一致。
 
-3.2.  Punctuation
+3.2.  标点符号
 
-   *  No overstriking (or underlining) is allowed.
+   *  不允许对文本加粗 (或添加下划线)。
 
-   *  When a sentence ended by a period is immediately followed by
-      another sentence, there must be two blank spaces after the period.
+   *  如果一个句子以句点结束, 且其后紧跟另一个句子, 则句点后必须有两个空
+      格。
 
-   *  A comma is used before the last item of a series, e.g.,
+   *  在一序列中的最后一项前添加逗号, 例如:
 
          "TCP service is reliable, ordered, and full duplex"
 
-   *  When quoting literal text, punctuation is placed outside quotation
-      marks, e.g.,
+   *  当引述纯单词的文本时, 标点符号放在引号外部, 例如:
 
          Search for the string "Error Found".
 
-      When quoting general text, such as general text from another RFC,
-      punctuation may be included within the quotation marks, e.g.,
+      当引述一般的文本时, 例如来自另一个 RFC 的一般文本, 标点符号可以被
+      包含到引号内部, 例如:
 
          RFC 4844 indicates that "RFCs are available free of charge to
          anyone via the Internet."
 
-      Quotation marks are not necessary when text is formatted as a
-      block quotation.
+      当文本采用块引述的形式时, 不需要使用引号。
 
 
 
@@ -265,50 +259,49 @@ Flanagan & Ginoza             Informational                     [Page 5]
 RFC 7322                     RFC Style Guide              September 2014
 
 
-3.3.  DNS Names and URIs
+3.3.  DNS 名称和 URI
 
-   DNS names, whether or not in URIs, that are used as generic examples
-   in RFCs should use the particular examples defined in "Reserved Top
-   Level DNS Names" [BCP32], to avoid accidental conflicts.
+   在 RFC 中用作一般示例的 DNS 名称 (无论其是否在 URI 中), 都应当使用在
+   "Reserved Top Level DNS Names" [BCP32] 所定义的特定示例, 以避免意外的
+   冲突。
 
-   Angle brackets are strongly recommended around URIs [STD66], e.g.,
+   强烈建议在 URI 周围使用尖括号 [STD66], 例如:
 
       <http://example.com/>
 
-3.4.  Capitalization
+3.4.  大写形式
 
-   *  Capitalization must be consistent within the document and ideally
-      should be consistent with related RFCs.  Refer to the online table
-      of decisions on consistent usage of terms in RFCs [TERMS].
+   *  大写形式必须在文本内保持一致, 且在理想情况下, 应与相关的 RFC 保持
+      一致。请参考在线表格 [TERMS], 了解关于 RFC 中术语的一致性使用的决
+      定。
 
-   *  Per CMOS guidelines, the major words in RFC titles and section
-      titles should be capitalized (this is sometimes called "title
-      case").  Typically, all words in a title will be capitalized,
-      except for internal articles, prepositions, and conjunctions.
+   *  根据 CMOS (Chicago Manual of Style) 中的准则, 在 RFC 的主标题和章
+      节标题中的主要单词应当被大写 (这有时被称为 "title case")。通常, 标
+      题中的所有单词都应被大写, 但其中的冠词、介词、和连词除外。(译者,
+      这里的大写是指首字母大写)。
 
-   *  Section titles that are in sentence form will follow typical
-      sentence capitalization.
+   *  句子形式的章节标题, 将遵循典型的句首单词首字母大写的形式。
 
-   *  Titles of figures may be in sentence form or use title case.
+   *  图片的标题可以采用句子或标题的大写形式。
 
-3.5.  Citations
+3.5.  引用
 
-   *  References and citations must match.  That is, there must be a
-      reference for each citation used, and vice versa.
+   *  参考文献和引用必须要匹配。因此, 对于每一个引用都必须有相应的参考文
+      献, 反之亦然。
 
-   *  Citations must be enclosed in square brackets (e.g., "[CITE1]").
+   *  引用必须被包裹在方括号中 (例如 "[CITE1]")。
 
-   *  A citation/reference tag must not contain spaces.
+   *  在引用/参考文献的标签中禁止包含空格。
 
-         Example: "[RFC2119]" rather than "[RFC 2119]"
+         示例: "[RFC2119]" rather than "[RFC 2119]"
 
-      However, the proper textual naming of an RFC contains a space.
+      但是, 正确的 RFC 文本命名中包含有一个空格。
 
-         Example: "See RFC 2119 [BCP14] for more information."
+         示例: "See RFC 2119 [BCP14] for more information."
 
-   *  Cross-references within the body of the memo and to other RFCs
-      must use section numbers rather than page numbers, as pagination
-      may change per format and device.
+   *  位于备忘录 (译者, 实际上就是指文档) 正文中的、 指向其它 RFC 的交叉
+      引用 (Cross-references), 应当使用章节号, 而非页号; 因为页号可能会
+      因格式或设备的不同而改变。
 
 
 
@@ -321,10 +314,11 @@ Flanagan & Ginoza             Informational                     [Page 6]
 RFC 7322                     RFC Style Guide              September 2014
 
 
-3.6.  Abbreviation Rules
+3.6.  缩写规则
 
-   Abbreviations should be expanded in document titles and upon first
-   use in the document.  The full expansion of the text should be
+   当缩写出现在标题中、或在文档中第一次使用时，缩写应当被展开。
+
+   The full expansion of the text should be
    followed by the abbreviation itself in parentheses.  The exception is
    an abbreviation that is so common that the readership of RFCs can be
    expected to recognize it immediately; examples include (but are not
