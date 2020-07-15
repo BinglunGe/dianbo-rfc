@@ -29,9 +29,15 @@
 | 摘要                 | Abstract
 | 目录                 | Table of Contents
 | 引言                 | Introduction
-| 信息类引用           | Informative References
-| 前提类引用           | Normative References
+| 引述                 | Quote
+| 引用                 | Citations
+| 参考文献             | References
+| 信息类参考文献       | Informative References
+| 前提类参考文献       | Normative References
 | 标准跟踪文档         | Standards track documents
+|                      |
+| 第 1.1 节            | Section 1.1
+| 附录第 A.1 节        | Appendix A.1
 |                      |
 | Base 编码            | Base encoding
 | 隐蔽信道             | Covert channel
@@ -47,4 +53,4 @@
 
 + [翻译过程中所遵循的一些原则](./rfc/rfc2616/README.md)
 + [关于 "MUST"、"MUST NOT" 等一系列关键词的准确翻译](./rfc/rfc2119/README.md)
-+ [为何将 "Normative References" 译为 "前提类引用"](./rfc/rfc8174/README.md)
++ [为何将 "Normative References" 译为 "前提类参考文献"](./rfc/rfc8174/README.md)

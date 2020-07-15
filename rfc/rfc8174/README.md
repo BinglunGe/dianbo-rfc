@@ -8,12 +8,12 @@
 
 | 中文                 | 英文
 |:---------------------|:-------------------------------------
-| 前提类引用           | Normative References
+| 前提类参考文献       | Normative References
 | 互联网数字分配机构   | IANA, Internet Assigned Numbers Authority
 
 ## 补充说明
 
-+ 关于 "Normative References" 一词的翻译，相比于 “规范性引用”，译作 “前提类引用” 更为合适。根据 IESG 在[此文](https://www.ietf.org/about/groups/iesg/statements/normative-informative-references/)中的陈述，在 "Normative References" 中所列出的引用文档（或标准），是当前文档（或标准）在进行应用时的基础或前提；在所列文档（或标准）没有被正式发布前，不允许当前文档（或标准）被提前发布。
++ 关于 "Normative References" 一词的翻译，相比于 “规范性参考文献”，译作 “前提类参考文献” 更为合适。根据 IESG 在[此文](https://www.ietf.org/about/groups/iesg/statements/normative-informative-references/)中的陈述，在 "Normative References" 中所列出的参考文档（或标准），是当前文档（或标准）在进行应用时的基础或前提；在所列文档（或标准）没有被正式发布前，不允许当前文档（或标准）被提前发布。
 
 ## 译者
 
