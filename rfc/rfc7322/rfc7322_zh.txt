@@ -74,20 +74,20 @@ RFC 7322                     RFC Style Guide              September 2014
            4.1.1. 作者/编辑者 .........................................9
            4.1.2. 组织 ................................................9
            4.1.3. "ISSN: 2070-1721" ..................................10
-           4.1.4. 更新 (Updates) 和废除 (Obsoletes) ..................10
+           4.1.4. 更新和废除 .........................................10
       4.2. 全文标题 ..................................................10
-      4.3. 摘要 (Abstract) 章节 ......................................11
+      4.3. "摘要" 章节 ...............................................11
       4.4. RFC Editor or Stream Notes Section ........................11
-      4.5. Status of This Memo Section ...............................11
+      4.5. "此备忘录的状态" 章节 .....................................11
       4.6. 版权, 许可证, 及知识产权样板章节 ..........................11
-      4.7. 目录章节 ..................................................11
+      4.7. "目录" 章节 ...............................................11
       4.8. 备忘录正文  ...............................................12
-           4.8.1. 导言 (Introduction) 章节 ...........................12
-           4.8.2. Requirement Language Section .......................12
-           4.8.3. IANA Considerations Section ........................13
-           4.8.4. Internationalization Considerations Section ........13
-           4.8.5. Security Considerations Section ....................13
-           4.8.6. References Section .................................14
+           4.8.1. "导言" 章节 ........................................12
+           4.8.2. "文档要求的用语" 章节 ..............................12
+           4.8.3. "关于 IANA 的考量" 章节 ............................13
+           4.8.4. "关于国际化的考量" 章节 ............................13
+           4.8.5. "关于安全性的考量" 章节 ............................13
+           4.8.6. "参考文献" 章节 ....................................14
                   4.8.6.1. URIs in RFCs ..............................15
                   4.8.6.2. Referencing RFCs ..........................15
                   4.8.6.3. Referencing STDs and BCPs .................16
@@ -378,16 +378,16 @@ RFC 7322                     RFC Style Guide              September 2014
       RFC Editor or Stream Note                      * [Upon request]
       Status of This Memo          此备忘录的状态    * [Required]
       Copyright Notice             版权声明          * [Required]
-      Table of Contents            目录              * [Required]               
-      Body of the Memo             备忘录正文          [Required]               
-        1.  Introduction              导言             [Required]               
+      Table of Contents            目录              * [Required]
+      Body of the Memo             备忘录正文          [Required]
+        1.  Introduction              导言             [Required]
         2.  Requirements Language (RFC 2119)
         3.  ...                       ...
             MAIN BODY OF THE TEXT     文本的主体
         6.  ...                       ...
-        7.  IANA Considerations       关于 IANA 的考虑 [Required in I-D]
+        7.  IANA Considerations       关于 IANA 的考量 [Required in I-D]
         8.  Internationalization Considerations
-        9.  Security Considerations   关于安全性的考虑 [Required]
+        9.  Security Considerations   关于安全性的考量 [Required]
         10.  References               参考文献
         10.1.  Normative References   前提类参考文献
         10.2.  Informative References 信息类参考文献
@@ -511,7 +511,7 @@ Flanagan & Ginoza             Informational                    [Page 10]
 RFC 7322                     RFC Style Guide              September 2014
 
 
-4.3.  摘要 (Abstract) 章节
+4.3. "摘要" (Abstract) 章节
 
    每个 RFC 必须具有一个摘要, 来对整个文档的目的和内容进行简明和全面的概
    述, 以便技术相关的读者能够对该文档的功能有个大致的概览。
@@ -537,18 +537,18 @@ RFC 7322                     RFC Style Guide              September 2014
    by the RFC Editor to highlight special circumstances surrounding
    an RFC.
 
-4.5.  Status of This Memo Section
+4.5. "此备忘录的状态" 章节
 
-   The RFC Editor will supply an appropriate "Status of This Memo" as
-   defined in RFC 5741 [RFC5741] and "Format for RFCs in the IAB Stream"
-   [IAB-FORM].
+   RFC Editor 将会提供合适的 "此备忘录的状态" ("Status of This Memo") 信
+   息, 其定义在 RFC 5741 [RFC5741] 与 "IAB 发布流中的 RFC 格式" ("Format
+   for RFCs in the IAB Stream") [IAB-FORM] 中。
 
 4.6.  版权, 许可证, 及知识产权样板章节
 
    完整的版权和许可证的声明, 可以从 IETF Trust Legal Provisions 文档页面
    [IETF-TRUST] 获取。
 
-4.7.  目录章节
+4.7. "目录" 章节
 
    所有的 RFC 都需要有目录 (TOC, Table of Contents)。目录必须位于版权声
    明之后、导言之前。
@@ -570,7 +570,7 @@ RFC 7322                     RFC Style Guide              September 2014
    状态报告。备忘录的正文和摘要 (Abstract) 都必须是独立的、可分离的。这
    可能会导致在摘要和导言间出现一些重复文本; 这是可以接受的。
 
-4.8.1.  导言 (Introduction) 章节
+4.8.1. "导言" (Introduction) 章节
 
    导言章节应当总是目录后的第一个章节 (MIB 模块文档除外)。虽然建议使用
    "导言" ("Introduction") 一词, 但是作者可能选择其它标题, 例如 "概述"
@@ -579,7 +579,7 @@ RFC 7322                     RFC Style Guide              September 2014
    对于 MIB 模块文档, 通常的做法见 "The Internet-Standard Management
    Framework" [MIB-BOILER], 即文本作为第 1 节出现。
 
-4.8.2.  Requirements Language Section
+4.8.2. "文档要求的用语" 章节
 
    一些文档使用了特定的大写单词 ("MUST"、"SHOULD" 等, 译文中为【必须】、
    【应当】等), 来指出对某一技术特性的明确的要求级别。RFC 2119 [BCP14]
@@ -590,9 +590,9 @@ RFC 7322                     RFC Style Guide              September 2014
    这一章节必须作为备忘录正文的一部分出现 (如此文档中定义的那样)。它必须
    作为导言章节的一部分、或作为导言的后续章节。
 
-   这些单词被认为是文档的技术内容的一部分，这些单词的使用通常以技术特性
-   的互操作性作为考虑，旨在为实现者提供关于一些具体的技术特性的指导。在
-   RFC 2119 中，有说：
+   这些单词被认为是文档的技术内容的一部分, 这些单词的使用通常以技术特性
+   的互操作性作为考量, 旨在为实现者提供关于一些具体的技术特性的指导。在
+   RFC 2119 中, 有说:
 
       在此备忘录中定义的这些祈使词, 必须被小心地、保守地使用。特别的, 这
       些祈使词的使用【必须】是出于互操作性的实际需要、或是为了限制可能导
@@ -607,49 +607,41 @@ RFC 7322                     RFC Style Guide              September 2014
 
 
 
-4.8.3.  IANA Considerations Section
+4.8.3. "关于 IANA 的考量" 章节
 
-   For guidance on how to register IANA-related values or create new
-   registries to be managed by IANA, see "Guidelines for Writing an IANA
-   Considerations Section in RFCs" [BCP26].
+   关于如何注册与 IANA 相关的值, 或如何创建新的由 IANA 管理的注册表, 见
+   "Guidelines for Writing an IANA Considerations Section in RFCs"
+   [BCP26]。
 
-   The RFC Editor will update text accordingly after the IANA
-   assignments have been made.  It is helpful for authors to clearly
-   identify where text should be updated to reflect the newly assigned
-   values.  For example, the use of "TBD1", "TBD2", etc., is recommended
-   in the IANA Considerations section and in the body of the memo.
+   在完成 IANA 分配后, RFC Editor 将会相应地对文本进行更新。建议作者清楚
+   地标出应当更新哪些文本, 以反映新分配的值。例如, 推荐在 "关于 IANA 的
+   考量" 章节、及备忘录正文中, 使用 "TBD1", "TBD2" 等。
 
-   If the authors have provided values to be assigned by IANA, the
-   RFC Editor will verify that the values inserted by the authors match
-   those that have actually been registered on the IANA site.  When
-   writing a given value, consistent use of decimal or hexadecimal is
-   recommended.
+   如果作者已经提供了由 IANA 分配的值, 则 RFC Editor 将会验证: 作者插入
+   到文档中的值是否与在 IANA 站点上实际注册的值匹配。当书写给定的值时,
+   建议使用一致的十进制或十六进制形式。
 
-   If any of the IANA-related information is not clear, the RFC Editor
-   will work with IANA to send queries to the authors to ensure that
-   assignments and values are properly inserted.
+   如果有任何与 IANA 相关的信息不明确, 则 RFC Editor 会同 IANA 一起向作
+   者发出问询, 以确保该分配流程及分配的值被正确插入到文档中。
 
-   The RFC Editor will remove an IANA Considerations section that says
-   there are no IANA considerations (although such a section is required
-   in the Internet-Draft preceding the RFC).
+   如果一个 "关于 IANA 的考量" 章节表示其没有关于 IANA 的考量, 则 RFC
+   Editor 将会删除该章节 (尽管, 在 RFC 发布前的互联网草案 Internet-Draft
+   阶段确实需要这一章节)。
 
-4.8.4.  Internationalization Considerations Section
+4.8.4. "关于国际化的考量" 章节
 
-   All RFCs that deal with internationalization issues should have a
-   section describing those issues; see "IETF Policy on Character Sets
-   and Languages" [BCP18], Section 6, for more information.
+   所有处理国际化问题的 RFC 都应当包含这一章节来描述这些问题; 更多信息见
+   "IETF Policy on Character Sets and Languages" [BCP18] 中的第 6 节。
 
-4.8.5.  Security Considerations Section
+4.8.5. "关于安全性的考量" 章节
 
-   All RFCs must contain a section that discusses the security
-   considerations relevant to the specification; see "Guidelines for
-   Writing RFC Text on Security Considerations" [BCP72] for more
-   information.
+   所有的 RFC 都应当包含这一章节, 来讨论与该规范相关的安全注意事项。更多
+   信息见 "Guidelines for Writing RFC Text on Security Considerations"
+   [BCP72]。
 
-   Note that additional boilerplate material for RFCs containing MIB and
-   YANG modules also exists.  See "Security Guidelines for IETF MIB
-   Modules" [MIB-SEC] and "yang module security considerations"
-   [YANG-SEC] for details.
+   注意, 存在其它的样文, 用于那些包含有 MIB 和 YANG 模块的 RFC。详细信
+   息, 见 "Security Guidelines for IETF MIB Modules" [MIB-SEC] 和 "yang
+   module security considerations" [YANG-SEC]。
 
 
 
@@ -659,7 +651,7 @@ Flanagan & Ginoza             Informational                    [Page 13]
 RFC 7322                     RFC Style Guide              September 2014
 
 
-4.8.6.  References Section
+4.8.6.  "参考文献" 章节
 
    The reference list is solely for recording reference entries.
    Introductory text is not allowed.

@@ -20,6 +20,8 @@
 | 导言                 | Introduction
 | 引述                 | Quote
 | 引用                 | Citations
+| 考量（或注意事项）   | Considerations
+| 关于安全性的考量     | Security Considerations
 | 参考文献             | References
 | 前提类参考文献       | Normative References
 | 信息类参考文献       | Informative References
