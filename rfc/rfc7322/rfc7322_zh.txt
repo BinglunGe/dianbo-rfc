@@ -88,21 +88,20 @@ RFC 7322                     RFC Style Guide              September 2014
            4.8.4. "关于国际化的考量" 章节 ............................13
            4.8.5. "关于安全性的考量" 章节 ............................13
            4.8.6. "参考文献" 章节 ....................................14
-                  4.8.6.1. URIs in RFCs ..............................15
-                  4.8.6.2. Referencing RFCs ..........................15
-                  4.8.6.3. Referencing STDs and BCPs .................16
-                  4.8.6.4. Referencing Internet-Drafts ...............17
-                  4.8.6.5. Referencing Errata ........................18
-                  4.8.6.6. Referencing Other Standards Development
-                           Organizations (SDOs) ......................18
-      4.9. Appendices Section ........................................19
-      4.10. Acknowledgements Section .................................19
-      4.11. Contributors Section .....................................19
-      4.12. "Author's Address" or "Authors' Addresses" Section .......20
-   5. Security Considerations ........................................20
-   6. References .....................................................20
-      6.1. Normative References ......................................20
-      6.2. Informative References ....................................20
+                  4.8.6.1. RFC 中的 URI ..............................15
+                  4.8.6.2. 引用 RFC ..................................15
+                  4.8.6.3. 引用 STD 和 BCP ...........................16
+                  4.8.6.4. 引用互联网草案 ............................17
+                  4.8.6.5. 引用勘误 ..................................18
+                  4.8.6.6. 引用其它标准开发组织 ......................18
+      4.9. "附录" 章节 ...............................................19
+      4.10. "致谢" 章节 ..............................................19
+      4.11. "贡献者" 章节 ............................................19
+      4.12. "作者地址" 章节 ..........................................20
+   5. 关于安全性的考量 ...............................................20
+   6. 参考文献 .......................................................20
+      6.1. 前提类参考文献 ............................................20
+      6.2. 信息类参考文献 ............................................20
 
 
 
@@ -114,14 +113,14 @@ Flanagan & Ginoza             Informational                     [Page 2]
 RFC 7322                     RFC Style Guide              September 2014
 
 
-   Appendix A. Related Procedures ....................................23
+   附录 A. Related Procedures ........................................23
      A.1. Dispute Resolution .........................................23
      A.2. Returning an I-D to the Document Stream ....................23
      A.3. Revising This Document and Associated Web Pages ............23
    IAB Members at the Time of Approval ...............................24
-   Acknowledgements ..................................................24
-   Contributors ......................................................24
-   Authors' Addresses ................................................24
+   致谢 ..............................................................24
+   贡献者 ............................................................24
+   作者地址 ..........................................................24
 
 1.  导言
 
@@ -147,7 +146,7 @@ RFC 7322                     RFC Style Guide              September 2014
    所有的 RFC 都是以互联网草案 (Internet-Drafts, 又称 I-Ds) 开始的, 而一
    个编写良好、结构合理的互联网草案 [ID-GUIDE] 为一个优秀的 RFC 提供了坚
    实的基础。RFC Editor 接受来自一些特定的发布流 (stream) 的互联网草案,
-   来进行发布 [RFC4844], 并在编辑过程中应用 RFC 系列文档 (RFC Series) 的
+   来进行发布 [RFC4844], 并在编辑流程中应用 RFC 系列文档 (RFC Series) 的
    规则和指南。
 
 
@@ -607,7 +606,7 @@ RFC 7322                     RFC Style Guide              September 2014
 
 
 
-4.8.3. "关于 IANA 的考量" 章节
+4.8.3. "关于 IANA 的考量" (IANA Considerations) 章节
 
    关于如何注册与 IANA 相关的值, 或如何创建新的由 IANA 管理的注册表, 见
    "Guidelines for Writing an IANA Considerations Section in RFCs"
@@ -628,12 +627,12 @@ RFC 7322                     RFC Style Guide              September 2014
    Editor 将会删除该章节 (尽管, 在 RFC 发布前的互联网草案 Internet-Draft
    阶段确实需要这一章节)。
 
-4.8.4. "关于国际化的考量" 章节
+4.8.4. "关于国际化的考量" (Internationalization Considerations) 章节
 
    所有处理国际化问题的 RFC 都应当包含这一章节来描述这些问题; 更多信息见
    "IETF Policy on Character Sets and Languages" [BCP18] 中的第 6 节。
 
-4.8.5. "关于安全性的考量" 章节
+4.8.5. "关于安全性的考量" (Security Considerations) 章节
 
    所有的 RFC 都应当包含这一章节, 来讨论与该规范相关的安全注意事项。更多
    信息见 "Guidelines for Writing RFC Text on Security Considerations"
@@ -651,50 +650,44 @@ Flanagan & Ginoza             Informational                    [Page 13]
 RFC 7322                     RFC Style Guide              September 2014
 
 
-4.8.6.  "参考文献" 章节
+4.8.6.  "参考文献" (References) 章节
 
-   The reference list is solely for recording reference entries.
-   Introductory text is not allowed.
+   参考文献列表仅仅用于记录参考项。不允许加入介绍性文本。
 
-   The RFC style allows the use of any of a variety of reference styles,
-   as long as they are used consistently within a document.  However,
-   where necessary, some reference styles have been described for use
-   within the Series.  See the examples in this document.
+   RFC 样式允许使用任何种类的引用样式, 只要它们的使用在同一文档中保持一
+   致。但是, 在此 RFC 系列文档的范围内, 有一些已被描述过的引用样式的使用
+   是必要的。具体示例参见此文档。
 
-   The RFC Editor ensures that references to other RFCs refer to the
-   most current RFC available on that topic (unless provided with a
-   reason not to do so).  When referring to an obsoleted document, it is
-   common practice to also refer to the most recent version.
+   RFC Editor 会确保: 引用其它 RFC 的参考文献, 会引用相关主题的最新版的
+   RFC (除非提供了不这样做的理由)。当引用一个被废除的文档时, 通常也会引
+   用其最新版本的文档。
 
-   A reference to an RFC that has been assigned an STD [RFC1311], BCP
-   [RFC1818], or FYI [FYI90] sub-series number must include the
-   sub-series number of the document.  Note that the FYI series was
-   ended by RFC 6360.  RFCs that were published with an FYI sub-series
-   number and still maintain the FYI number must include the sub-series
-   number in the reference.
+   如果一 RFC 被分配了一个 STD [RFC1311]、BCP [RFC1818]、或 FYI [FYI90]
+   子系列编号 (sub-series number), 则参考文献在引用它时, 必须包含该文档
+   的子系列编号。注意, FYI 系列的文档已由 RFC 6360 终止。那些含有 FYI 子
+   系列编号发布的、或依旧在维护 FYI 编号的 RFC, 必须在其参考文献中包含该
+   子系列编号。
 
-   Reference lists must indicate whether each reference is normative or
-   informative, where normative references are essential to implementing
-   or understanding the content of the RFC and informative references
-   provide additional information.  More information about normative and
-   informative references may be found in the IESG's statement
-   "Normative and Informative References" [REFS].  When both normative
-   and informative references exist, the references section should be
-   split into two subsections:
+   参考文献列表必须要指明: 每一个参考文献是前提类的 (normative) 还是信息
+   类的 (informative), 其中前提类的参考文献对实现或理解 RFC 的内容至关重
+   要, 而信息类的参考文献则提供了附加信息。关于前提类和信息类参考文献的
+   更多信息, 可以在 IESG 的声明 "Normative and Informative References"
+   [REFS] 中找到。当同时存在前提类和信息类的参考文献时, 参考文献章节应当
+   被划分为两个子章节:
 
-      s.  References
+      s.  References                             s. 参考文献
 
-      s.1.  Normative References
+      s.1.  Normative References                 s.1. 前提类参考文献
 
-               xxx
-               ...
-               xxx
+               xxx                                       xxx
+               ...                                       ...
+               xxx                                       xxx
 
-      s.2.  Informative References
+      s.2.  Informative References               s.2. 信息类参考文献
 
-               xxx
-               ...
-               xxx
+               xxx                                       xxx
+               ...                                       ...
+               xxx                                       xxx
 
 
 
@@ -707,44 +700,39 @@ Flanagan & Ginoza             Informational                    [Page 14]
 RFC 7322                     RFC Style Guide              September 2014
 
 
-   References will generally appear in alphanumeric order by citation
-   tag.  Where there are only normative or informative references, no
-   subsection is required; the top-level section should say "Normative
-   References" or "Informative References".
+   参考文献通常按照引用标签的字母数字的顺序显示。当只有前提类或信息类其
+   中一种参考文献时, 不需要划分子章节; 其顶级章节标题为 "前提类参考文献"
+   ("Normative References") 或 "信息类参考文献" ("Informative
+   References")。
 
-   Normative references to Internet-Drafts will cause publication of the
-   RFC to be suspended until the referenced draft is also ready for
-   publication; the RFC Editor will then update the entry to refer to
-   the RFC and publish both documents simultaneously.
+   如果前提类参考文献引用了互联网草案, 则将会造成该 RFC 的发布被暂停, 直
+   到被引用的草案也准备好发布为止; 然后, RFC Editor 将会更新相应条目, 以
+   引用要发布的 RFC, 并同时发布两个文档。
 
-4.8.6.1.  URIs in RFCs
+4.8.6.1.  RFC 中的 URI
 
-   The use of URIs in references is acceptable, as long as the URI is
-   the most stable (i.e., unlikely to change and expected to be
-   continuously available) and direct reference possible.  The URI will
-   be verified as valid during the RFC editorial process.
+   允许在参考文献中使用 URI, 只要该 URI 是非常稳定的 (例, 不太可能更改,
+   且预期持续可用), 且可以直接引用。在 RFC 编辑流程中, 将会验证 URI 的
+   有效性。
 
-   If a dated URI (one that includes a timestamp for the page) is
-   available for a referenced web page, its use is required.
+   如果对某网页的引用, 有一可用的、且含有日期的 URI (包含有该页面的时间
+   戳), 则应当使用这种 URI。
 
-   Note that URIs may not be the sole information provided for a
-   reference entry.
+   注意, URI 不应是为引用条目所提供的唯一信息。
 
-4.8.6.2.  Referencing RFCs
+4.8.6.2.  引用 RFC
 
-   The following format is required for referencing RFCs.  Note the
-   ordering for multiple authors: the format of the name of the last
-   author listed is different than that of all previous authors in the
-   list.
+   要引用 RFC, 需要使用下面给出的格式。注意, 当对多名作者排序时: 列表中,
+   列出的最后一名作者的姓名格式, 不同于所有在他前面列出的其他作者。
 
-   For one author or editor:
+   对于一名作者或编辑者:
 
       [RFCXXXX] Last name, First initial., Ed. (if applicable),
                 "RFC Title", Sub-series number (if applicable),
                 RFC number, Date of publication,
                 <http://www.rfc-editor.org/info/rfc#>.
 
-     Example:
+     示例:
 
       [RFC3080] Rose, M., "The Blocks Extensible Exchange
                 Protocol Core", RFC 3080, March 2001,
@@ -763,7 +751,7 @@ Flanagan & Ginoza             Informational                    [Page 15]
 RFC 7322                     RFC Style Guide              September 2014
 
 
-   For two authors or editors:
+   对于两名作者或编辑者:
 
       [RFCXXXX] Last name, First initial., Ed. (if applicable)
                 and First initial. Last name, Ed. (if applicable),
@@ -771,14 +759,14 @@ RFC 7322                     RFC Style Guide              September 2014
                 RFC number, Date of publication,
                 <http://www.rfc-editor.org/info/rfc#>.
 
-     Example:
+     示例:
 
       [RFC6323] Renker, G. and G. Fairhurst, "Sender RTT
                 Estimate Option for the Datagram Congestion
                 Control Protocol (DCCP)", RFC 6323, July 2011,
                 <http://www.rfc-editor.org/info/rfc6323>.
 
-   For three or more authors or editors:
+   对于三名或更多的作者或编辑者:
 
       [RFCXXXX] Last name, First initial., Ed. (if applicable),
                 Last name, First initial., Ed. (if applicable),
@@ -787,23 +775,21 @@ RFC 7322                     RFC Style Guide              September 2014
                 RFC number, Date of publication,
                 <http://www.rfc-editor.org/info/rfc#>.
 
-     Example:
+     示例:
 
       [RFC6429] Bashyam, M., Jethanandani, M., and A. Ramaiah,
                 "TCP Sender Clarification for Persist
                 Condition", RFC 6429, December 2011,
                 <http://www.rfc-editor.org/info/rfc6429>.
 
-4.8.6.3.  Referencing STDs and BCPs
+4.8.6.3.  引用 STD 和 BCP
 
-   Internet Standards (STDs) and Best Current Practices (BCPs) may
-   consist of a single RFC or multiple RFCs.  When an STD or BCP that
-   contains multiple RFCs is referenced, the reference entry should
-   include ALL of the RFCs comprising that sub-series.  The authors
-   should refer to specific RFC numbers as part of the text (not as
-   citations) and cite the sub-series number.  Inclusion of the URI to
-   the STD or BCP info page (see Section 3.2.3 of [RFC5741]) is
-   recommended.  The text should appear as follows:
+   互联网标准 (Internet Standards, STDs) 和当前最佳实践 (Best Current
+   Practices, BCPs) 可能由一个或多个 RFC 组成。当引用包含多个 RFC 的 STD
+   或 BCP 时, 该引用条目应当包括: 组成该子系列 (STD 或 BCP) 的所有 RFC。
+   作者应当在文本中指出具体的 RFC 编号 (非引用形式), 并引用相应的子系列
+   编号。推荐在参考文献章节的引用中包含指向相应 STD 或 BCP 信息页的 URI
+   (见 [RFC5741] 中的第 3.2.3 节)。文本中的引用应如下所示。
 
       See RFC 1034 [STD13].
 
@@ -819,19 +805,19 @@ Flanagan & Ginoza             Informational                    [Page 16]
 RFC 7322                     RFC Style Guide              September 2014
 
 
-   For an STD or BCP that contains one RFC:
+   对于包含有一个 RFC 的 STD 或 BCP:
 
       [STDXXX]  Last name, First initial., Ed. (if applicable),
                 "RFC Title", Sub-series number, RFC number, Date of
                 publication, <http://www.rfc-editor.org/info/std#>.
 
-     Example:
+     示例:
 
       [STD72]   Gellens, R. and J. Klensin, "Message Submission
                 for Mail", STD 72, RFC 6409, November 2011,
                 <http://www.rfc-editor.org/info/std72>.
 
-   For an STD or BCP that contains two or more RFCs:
+   对于包含有两个或更多 RFC 的 STD 或 BCP:
 
       [STDXXX]  Last name, First initial., Ed. (if applicable),
                 "RFC Title", Sub-series number, RFC number, Date of
@@ -844,7 +830,7 @@ RFC 7322                     RFC Style Guide              September 2014
 
                 <http://www.rfc-editor.org/info/std#>
 
-     Example:
+     示例:
 
       [STD13]    Mockapetris, P., "Domain names - concepts and
                  facilities", STD 13, RFC 1034, November 1987.
@@ -854,15 +840,13 @@ RFC 7322                     RFC Style Guide              September 2014
 
                  <http://www.rfc-editor.org/info/std13>
 
-4.8.6.4.  Referencing Internet-Drafts
+4.8.6.4.  引用互联网草案 (Internet-Drafts)
 
-   References to Internet-Drafts may only appear as informative
-   references.  Given that several revisions of an I-D may be produced
-   in a short time frame, references must include the posting date
-   (month and year), the full Internet-Draft file name (including the
-   version number), and the phrase "Work in Progress".  Authors may
-   reference multiple versions of an I-D.  If the referenced I-D was
-   also later published as an RFC, then that RFC must also be listed.
+   对互联网草案 (Internet-Draft) 的引用只能作为信息类参考文献出现。鉴于
+   可能会在短时间内对一个 I-D 进行多次修订, 对其的引用必须包括: 发布日期
+   (月和年)、完整的互联网草案文件名 (包括版本号)、及短语 "Work in
+   Progress"。作者可以引用一个 I-D 的多个版本。如果被引用的 I-D 后来作为
+   RFC 被发布, 则该 RFC 也必须被列出。
 
 
 
@@ -880,25 +864,24 @@ RFC 7322                     RFC Style Guide              September 2014
                       applicable), "I-D Title", Work in Progress,
                       draft-string-NN, Month Year.
 
-     Example:
+     示例:
 
       [RFC-STYLE] Flanagan, H. and S. Ginoza, "RFC Style Guide",
                   Work in Progress, draft-flanagan-style-01,
                   June 2013.
 
-4.8.6.5.  Referencing Errata
+4.8.6.5.  引用勘误 (Errata)
 
-   The following format is required when a reference to an erratum
-   report is necessary:
+   当需要引用一个勘误报告时, 要求使用下面的格式:
 
       [ErrNumber]  RFC Errata, Erratum ID number, RFC number.
 
       [Err1912]  RFC Errata, Erratum ID 1912, RFC 2978.
 
-4.8.6.6.  Referencing Other Standards Development Organizations (SDOs)
+4.8.6.6.  引用其它标准开发组织
 
-   The following format is suggested when referencing a document or
-   standard from another SDO in which authors are listed:
+   当引用来自其它标准开发组织 (Standards Development Organization, SDO)
+   的文档或标准时, 在参考文献的作者列表处, 应当使用下面的格式:
 
       [SYMBOLIC-TAG]
               Last name, First initial. and First initial. Last name,
@@ -912,9 +895,8 @@ RFC 7322                     RFC Style Guide              September 2014
               REC-xml11-20060816, August 2006,
               <http://www.w3.org/TR/2006/REC-xml11-20060816>.
 
-   Note that the order of authors in the list is the same as the order
-   shown on the actual document and that the common, abbreviated form of
-   the SDO is used.
+   注意, 列表中的作者的顺序, 应与真实文档中显示的顺序相同, 并使用与 SDO
+   相同的缩写形式。
 
 
 
@@ -931,14 +913,13 @@ Flanagan & Ginoza             Informational                    [Page 18]
 RFC 7322                     RFC Style Guide              September 2014
 
 
-   Alternatively, when no list of authors is available, the following
-   format is recommended:
+   或者, 当没有作者列表时, 推荐使用下面的格式:
 
       [SYMBOLIC-TAG]  Organization, "Document Title", Document
                       reference number, Date of publication,
                       <URI if available>.
 
-     Example:
+     示例:
 
       [IEEE802.1Q]  IEEE, "Local and Metropolitan Area
                     Networks -- Media Access Control (MAC)
@@ -947,37 +928,30 @@ RFC 7322                     RFC Style Guide              September 2014
                     <http://standards.ieee.org/findstds/standard/
                     802.1Q-2011.html>.
 
-4.9.  Appendices Section
+4.9. "附录" (Appendices) 章节
 
-   The RFC Editor recommends placing references before the Appendices.
-   Appendices should be labeled as "Appendix A.  Title", "A.1.  Title",
-   "Appendix B.  Title", etc.
+   RFC Editor 建议将 "参考文献" 章节放在 "附录" 章节之前。"附录" 章节应
+   当被标记为 "Appendix A.  Title"、"A.1.  Title"、"Appendix B.  Title"
+   等形式。
 
-4.10.  Acknowledgements Section
+4.10. "致谢" (Acknowledgements) 章节
 
-   This optional section may be used instead of, or in addition to, a
-   Contributors section.  It is often used by authors to publicly thank
-   those who have provided feedback regarding a document and to note any
-   documents from which text was borrowed.
+   此可选章节可以用来代替、或补充 "贡献者" (Contributors) 章节。作者经常
+   使用它来: 公开感谢那些对文档提供反馈的人员、及注明在文本中所借鉴过的
+   任何文档。
 
-4.11.  Contributors Section
+4.11. "贡献者" (Contributors) 章节
 
-   This optional section acknowledges those who have made significant
-   contributions to the document.
+   此可选章节用于感谢那些对文档作出重要贡献的人员。
 
-   In a similar fashion to the Author's Address section, the RFC Editor
-   does not make the determination as to who should be listed as a
-   contributor to an RFC.  The determination of who should be listed as
-   a contributor is made by the stream.
+   与 "作者地址" (Author's Address) 章节类似, RFC Editor 不会决定谁应当
+   被列为 RFC 的贡献者。谁应当被列为贡献者, 是由发布流决定的。
 
-   The Contributors section may include brief statements about the
-   nature of particular contributions ("Sam contributed Section 3"), and
-   it may also include affiliations of listed contributors.  At the
-   discretion of the author(s), contact addresses may also be included
-   in the Contributors section, for those contributors whose knowledge
-   makes them useful future contacts for information about the RFC.  The
-   format of any contact information should be similar to the format of
-   information in the Author's Address section.
+   "贡献者" 章节可以包含关于特定的贡献内容的简短陈述 ("Sam contributed
+   Section 3")、及可以包含所列出的贡献者的所属机构。根据作者的判断, "贡
+   献者" 章节中也可以包含贡献者的通讯地址; 因为在将来获取 RFC 相关的信息
+   时, 他们的学识可能会很有用。任何通讯信息的格式应当与 "作者地址" 章节
+   的信息格式类似。
 
 
 
@@ -987,40 +961,34 @@ Flanagan & Ginoza             Informational                    [Page 19]
 RFC 7322                     RFC Style Guide              September 2014
 
 
-4.12.  "Author's Address" or "Authors' Addresses" Section
+4.12. "作者地址" ("Author's Address" 或 "Authors' Addresses") 章节
 
-   This required section gives contact information for the author(s)
-   listed in the first-page header.
+   此必须章节给出了在首页页头中列出的作者的通讯信息。
 
-   Contact information must include a long-lived email address and
-   optionally may include a postal address and/or telephone number.  If
-   the postal address is included, it should include the country name,
-   using the English short name listed by the ISO 3166 Maintenance
-   Agency [ISO_OBP].  The purpose of this section is to
-   (1) unambiguously define author identity (e.g., the John Smith who
-   works for FooBar Systems) and (2) provide contact information for
-   future readers who have questions or comments.
+   通讯信息中包括一个必须的长期有效的电子邮件地址, 及可选的邮政地址和/或
+   电话号码。如果包括了一个邮政地址, 地址中应当包含国家名称, 该名称采用
+   由 ISO 3166 Maintenance Agency [ISO_OBP] 所列出的英文缩写。此章节的目
+   的是: (1) 明确定义作者身份 (例如, the John Smith who works for FooBar
+   Systems); (2) 为将来有疑问或意见的读者提供通讯信息。
 
-   The practice of munged email addresses (i.e., altering an email
-   address to make it less readable to bots and web crawlers to avoid
-   spam) is not appropriate in an archival document series.  Author
-   contact information is provided so that readers can easily contact
-   the author with questions and/or comments.  Address munging is not
-   allowed in RFCs.
+   伪装邮件地址的做法 (即, 更改电子邮件地址以降低机器人和网络爬虫程序的
+   可读性, 从而避免垃圾邮件) 在归档的文档系列中是不合适的。提供作者的通
+   讯信息, 为的是读者能够方便地联系到作者, 并提出疑问和/或意见。在 RFC
+   中不允许伪装邮件地址。
 
-5.  Security Considerations
+5.  关于安全性的考量
 
-   This document has no security considerations.
+   此文档没有关于安全性的考量。
 
-6.  References
+6.  参考文献
 
-6.1.  Normative References
+6.1.  前提类参考文献
 
    [STYLE-WEB]
               RFC Editor, "Web Portion of the Style Guide",
               <http://www.rfc-editor.org/rfc-style-guide/part2.html>.
 
-6.2.  Informative References
+6.2.  信息类参考文献
 
    [ABBR]     RFC Editor Abbreviations List,
               <http://www.rfc-editor.org/rfc-style-guide/
@@ -1155,7 +1123,7 @@ Flanagan & Ginoza             Informational                    [Page 22]
 RFC 7322                     RFC Style Guide              September 2014
 
 
-Appendix A.  Related Procedures
+附录 A.  Related Procedures
 
    The following procedures are related to the application and updating
    of the RFC Style Guide.
@@ -1227,7 +1195,7 @@ IAB Members at the Time of Approval
    Dave Thaler
    Brian Trammell
 
-Acknowledgements
+致谢
 
    This document refers heavily to RFC 2223 [RFC2223] and
    [RFC2223bis]; as such, we are grateful to the authors of those
@@ -1240,12 +1208,12 @@ Acknowledgements
 
    Jon Postel
 
-Contributors
+贡献者
 
    Alice Russo
    RFC Production Center
 
-Authors' Addresses
+作者地址
 
    Heather Flanagan
    RFC Series Editor

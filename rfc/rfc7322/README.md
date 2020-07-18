@@ -19,9 +19,17 @@
 | 芝加哥样式手册       | CMOS, Chicago Manual of Style
 | 引述                 | quote
 | 引用                 | citation
-| 参考文献             | reference
+| 参考文献（引用）     | reference
+| 引用样式             | reference styles
 | 国际标准期刊编号     | International Standard Serial Number
 | 目录                 | TOC, Table of Contents
+| 更新                 | Updates
+| 废除                 | Obsoletes
+| 子系列编号           | sub-series number
+| 互联网标准           | Internet Standards, STDs
+| 当前最佳实践         | Best Current   Practices, BCPs
+| 勘误                 | Errata
+| 标准开发组织         | Standards Development Organizations (SDOs)
 
 ## 补充说明
 
