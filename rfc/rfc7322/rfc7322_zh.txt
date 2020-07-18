@@ -21,6 +21,8 @@ ISSN: 2070-1721
    并准备将其纳入到未来的 'RFC 样式指南' 中。此文档废除了 RFC2223,
    "Instructions to RFC Authors"。
 
+
+
 Status of This Memo
 
    This document is not an Internet Standards Track specification; it is
@@ -108,6 +110,7 @@ RFC 7322                     RFC Style Guide              September 2014
 
 
 
+
 Flanagan & Ginoza             Informational                     [Page 2]
 
 RFC 7322                     RFC Style Guide              September 2014
@@ -130,11 +133,15 @@ RFC 7322                     RFC Style Guide              September 2014
    本的、独有的样式约定和编辑方针。其目的是作为一个稳定的、不常更新的指
    南, 以供作者、编辑者、和评审员参考。
 
+
+
+
    RFC Editor 还维护了样式指南 (Style Guide) 的网页部分 (见附录第 A.3
    节), 其中描述了出现的问题, 并指出了 RFC Editor 打算如何处理这些问题。
    当出现新的样式相关的问题时, RFC Editor 首先会在样式指南的网页部分中
    [STYLE-WEB] 处理这些问题。当这些主题得到修订后, 可能会成为 RFC 样式指
    南的一部分。
+
 
    技术出版界对语法、标点符号、大写字母、及句子的长度、复杂度、并行度等
    都有公认的规则。RFC Editor 大体上遵循了在 "芝加哥样式手册" (Chicago
@@ -143,11 +150,14 @@ RFC 7322                     RFC Style Guide              September 2014
    机语言的混用、或为了保留历史遗留的格式规则。此文档展示了那些被 RFC
    Editor 所应用或推荐的例外情况。
 
+
+
    所有的 RFC 都是以互联网草案 (Internet-Drafts, 又称 I-Ds) 开始的, 而一
    个编写良好、结构合理的互联网草案 [ID-GUIDE] 为一个优秀的 RFC 提供了坚
    实的基础。RFC Editor 接受来自一些特定的发布流 (stream) 的互联网草案,
    来进行发布 [RFC4844], 并在编辑流程中应用 RFC 系列文档 (RFC Series) 的
    规则和指南。
+
 
 
 
@@ -166,15 +176,18 @@ RFC 7322                     RFC Style Guide              September 2014
 
    理解 RFC Editor 在发布流程中的目标, 可能会对作者有所帮助, 即:
 
+
       - 根据 RFC 的样式和格式准备文档。
 
       - 使文档尽可能清晰、一致、且可读。
+
 
       - 更正较严重的文本内容/表述清晰相关的问题; 标记任何不清楚的段落以
         供作者审阅。
 
       - 解决不一致问题 (例如, 同一术语采用了多种不同的表述形式、同一文本
         出现多次、或大小写不一致)。
+
 
    我们力求在以下范围内保持一致性:
 
@@ -189,14 +202,22 @@ RFC 7322                     RFC Style Guide              September 2014
    是由作者、工作组、或发布流审批机构来决定。如果原始的措辞可以更加准确
    地描述文档中的技术内容, 则其优先于文档的编辑约定。
 
+
+
+
+
    对文档的编辑活动有时会造成作者和编辑者之间的紧张关系。RFC Editor 试图
    将文档发布过程中的这一冲突最小化, 同时力求产生大量优秀的系列文档。RFC
    Editor 将这种基本的紧张关系称为 "编辑平衡" ("editorial balance"), 而
    保持这种平衡是 RFC Editor 所持续关注的问题。这里有一个凌驾于语法约定
    的基本要求, 即: 不要改变文本的本来含义。
 
+
+
+
    如果 RFC Editor 不冒着改变文本含义的高风险, 就无法编辑文档, 则该文档
    应当退还给发布流审批机构进行再审。更多信息见附录第 A.2 节。
+
 
 
 
@@ -218,11 +239,14 @@ RFC 7322                     RFC Style Guide              September 2014
    中未加方括号【】的 "应该"), 表示是 RFC Editor 所建议的用法, 但遵循该
    建议并不是必须的; RFC Editor 可能会询问是否要应用该条指南。
 
+
 3.1.  语言
 
    RFC 的发布语言为英语。单词拼写可能是美式的、或英式的, 只要其在单个文
    件内部保持一致即可。如果在一个文件内部、或一 "簇" 文件内部同时使用了
    英式拼写和美式拼写, 则文本将会被修改为与美式拼写相一致。
+
+
 
 3.2.  标点符号
 
@@ -237,6 +261,7 @@ RFC 7322                     RFC Style Guide              September 2014
 
    *  当引述纯单词的文本时, 标点符号放在引号外部, 例如:
 
+
          Search for the string "Error Found".
 
       当引述一般的文本时, 例如来自另一个 RFC 的一般文本, 标点符号可以被
@@ -246,6 +271,7 @@ RFC 7322                     RFC Style Guide              September 2014
          anyone via the Internet."
 
       当文本采用块引述的形式时, 不需要使用引号。
+
 
 
 
@@ -280,6 +306,7 @@ RFC 7322                     RFC Style Guide              September 2014
       这里的大写是指首字母大写)。
 
    *  句子形式的章节标题, 将遵循典型的句首单词首字母大写的形式。
+
 
    *  图片的标题可以采用句子或标题的大写形式。
 
@@ -321,12 +348,17 @@ RFC 7322                     RFC Style Guide              September 2014
    SNMP, 和 HTTP。在线的缩写列表 [ABBR] 提供了相关指南。存在一些少见的样
    例, RFC Editor 会在权衡了模糊性和复杂性后, 作出最终的判断。
 
+
+
+
+
       注意: 在线的缩写列表并非是事无巨细的、完全明确的。它仅仅是出现在
       RFC 中的缩写的列表, 有时反映了与作者、工作组主席 (Working Group
       Chairs)、和/或区域主管 (AD, Area Director) 的讨论结果。注意, 有一
       些缩写具有多个展开形式。此外, 该列表还包含一些看起来像缩写的术语,
       但实际上它们是事物的固定名称, 因此不能够也不应当被展开。这些术语被
       记作 "No Expansion"。
+
 
 
 
@@ -371,6 +403,8 @@ RFC 7322                     RFC Style Guide              September 2014
    标出的章节。在各个章节中, 只能包含子章节。关于这些文档元素的规则, 将
    在下面详细介绍。
 
+
+
       First-page header            首页页头          * [Required]
       Title                        标题                [Required]
       Abstract                     摘要                [Required]
@@ -401,9 +435,12 @@ RFC 7322                     RFC Style Guide              September 2014
    面所示的顺序是必须的。上面所示的章节编号仅用于说明目的; 它们并不与实
    际的 RFC 中所需的编号相对应。
 
+
    不应对备忘录正文 (body of the memo) 前面的元素进行编号。通常, 在备忘
    录正文中的, 章节使用数字进行编号, 附录使用字母进行标记。出现在附录后
    面的章节, 不应当被编号或标记 (例, 上面所示的 "Contributors")。
+
+
 
 
 
@@ -420,13 +457,17 @@ RFC 7322                     RFC Style Guide              September 2014
    页头 (Headers) 将遵循在 "RFC Streams, Headers, and Boilerplates"
    [RFC5741] 及其后续文档中所描述的格式。此外, 将会应用下述的约定。
 
+
 4.1.1.  作者/编辑者
 
    由发布流来确定: 在 RFC 中, 哪些人应当被列为作者或编辑者。
 
+
    作者的姓名应出现在页头的第一行。允许在姓名中添加额外的姓氏的缩写或大
    写。一旦作者选择了姓名的显示方式, 他们应当在其所有的文档中使用一致的
    显示方式。
+
+
 
    在首页中, 作者或编辑者的总数通常限制在五个, 包括个人及其所属机构。如
    果要求列出五名以上的作者, 则发布流审批机构需要考虑: 这些人中是否有一
@@ -435,19 +476,27 @@ RFC 7322                     RFC Style Guide              September 2014
    Addresses) 章节中的作者和编辑者, 必须有着直接关联。这些人要负责: 在
    AUTH48 流程中, 在文档上签字; 以及回应各类询问, 例如勘误。
 
+
+
+
+
 4.1.2.  组织
 
    作者所属的组织应在作者姓名的下一行指出。
+
 
    对于多名作者的情形, 每名作者的姓名出现在单独一行中, 并后跟作者所属的
    组织。当有多名作者从属于同一组织时, 可以将组织名称 "提取" 出来, 并跟
    随在这些作者姓名行的后面, 仅显示一次。但是, 当这种 "提取" 会改变作者
    姓名的顺序, 且这种顺序的改变是不可接受的时候, "提取" 行为是不合适的。
 
+
+
    如果一名作者因为某些原因, 不能或不愿提供所属机构时, 可以使用 "独立的"
    ("Independent")、"个人贡献者" ("Individual Contributor")、"已退休"
    ("Retired")、或其他合适的术语, 来描述作者从属情况。或者, 当没有提供
    任何从属信息时, 可以在文档页头中包含一空行。
+
 
 
 
@@ -476,15 +525,19 @@ RFC 7322                     RFC Style Guide              September 2014
 
    如果当前文档更新或废除了多个文档, 则文档编号将按照升序列出。
 
+
 4.2.  全文标题 (Full Title)
 
    标题必须位于页头的下方, 居中对齐, 并前后各添加一空行。
 
+
    为 RFC 选择一个好的标题是一个挑战。一个好的标题应当能够中肯地表明文档
    涉及的领域及其目的, 且不会过于笼统、或过于具体和冗长。
 
+
    标题中的缩写, 若是第一次遇到, 一般必须要被展开 (关于缩写的额外指南见
    第 3.6 节)。
+
 
    通常, 很有帮助的做法是: 在缩写的展开形式的后面, 跟随被括号包裹的该缩
    写。如下面的例子所示:
@@ -505,6 +558,7 @@ RFC 7322                     RFC Style Guide              September 2014
 
 
 
+
 Flanagan & Ginoza             Informational                    [Page 10]
 
 RFC 7322                     RFC Style Guide              September 2014
@@ -515,6 +569,8 @@ RFC 7322                     RFC Style Guide              September 2014
    每个 RFC 必须具有一个摘要, 来对整个文档的目的和内容进行简明和全面的概
    述, 以便技术相关的读者能够对该文档的功能有个大致的概览。
 
+
+
    撰写一篇有用的摘要一般需要深思熟虑。通常, 摘要应当以类似 "This memo
    ..." 或 "This document ..." 这样的短语作为开头。一篇令人满意摘要经常
    是根据导言 (Introduction) 章节的部分材料来构建的, 但是一篇有效的摘要
@@ -522,8 +578,13 @@ RFC 7322                     RFC Style Guide              September 2014
    几个段落, 但是这可能使摘要变得既不完整又多余。注意: 摘要不能代替导言;
    RFC 应当是字包含的, 就像没有摘要一样。
 
+
+
+
+
    同样, 摘要本身应当是完整的。摘要将会单独出现在 RFC 的发布公告及在线索
    引中。因此, 摘要中禁止包含引用。
+
 
 4.4.  RFC Editor or Stream Notes Section
 
@@ -569,14 +630,20 @@ RFC 7322                     RFC Style Guide              September 2014
    状态报告。备忘录的正文和摘要 (Abstract) 都必须是独立的、可分离的。这
    可能会导致在摘要和导言间出现一些重复文本; 这是可以接受的。
 
+
+
+
+
 4.8.1. "导言" (Introduction) 章节
 
    导言章节应当总是目录后的第一个章节 (MIB 模块文档除外)。虽然建议使用
    "导言" ("Introduction") 一词, 但是作者可能选择其它标题, 例如 "概述"
    ("Overview") 或 "背景" ("Background")。这些替代方式是可接受的。
 
+
    对于 MIB 模块文档, 通常的做法见 "The Internet-Standard Management
    Framework" [MIB-BOILER], 即文本作为第 1 节出现。
+
 
 4.8.2. "文档要求的用语" 章节
 
@@ -586,12 +653,16 @@ RFC 7322                     RFC Style Guide              September 2014
    则必须引用 RFC 2119 (如 RFC 2119 中指定的那样), 并将其作为前提类参考
    文献。否则, 必须在文档中说明用词的正确释义。
 
+
+
    这一章节必须作为备忘录正文的一部分出现 (如此文档中定义的那样)。它必须
    作为导言章节的一部分、或作为导言的后续章节。
+
 
    这些单词被认为是文档的技术内容的一部分, 这些单词的使用通常以技术特性
    的互操作性作为考量, 旨在为实现者提供关于一些具体的技术特性的指导。在
    RFC 2119 中, 有说:
+
 
       在此备忘录中定义的这些祈使词, 必须被小心地、保守地使用。特别的, 这
       些祈使词的使用【必须】是出于互操作性的实际需要、或是为了限制可能导
@@ -606,6 +677,9 @@ RFC 7322                     RFC Style Guide              September 2014
 
 
 
+
+
+
 4.8.3. "关于 IANA 的考量" (IANA Considerations) 章节
 
    关于如何注册与 IANA 相关的值, 或如何创建新的由 IANA 管理的注册表, 见
@@ -616,12 +690,17 @@ RFC 7322                     RFC Style Guide              September 2014
    地标出应当更新哪些文本, 以反映新分配的值。例如, 推荐在 "关于 IANA 的
    考量" 章节、及备忘录正文中, 使用 "TBD1", "TBD2" 等。
 
+
+
    如果作者已经提供了由 IANA 分配的值, 则 RFC Editor 将会验证: 作者插入
    到文档中的值是否与在 IANA 站点上实际注册的值匹配。当书写给定的值时,
    建议使用一致的十进制或十六进制形式。
 
+
+
    如果有任何与 IANA 相关的信息不明确, 则 RFC Editor 会同 IANA 一起向作
    者发出问询, 以确保该分配流程及分配的值被正确插入到文档中。
+
 
    如果一个 "关于 IANA 的考量" 章节表示其没有关于 IANA 的考量, 则 RFC
    Editor 将会删除该章节 (尽管, 在 RFC 发布前的互联网草案 Internet-Draft
@@ -632,15 +711,18 @@ RFC 7322                     RFC Style Guide              September 2014
    所有处理国际化问题的 RFC 都应当包含这一章节来描述这些问题; 更多信息见
    "IETF Policy on Character Sets and Languages" [BCP18] 中的第 6 节。
 
+
 4.8.5. "关于安全性的考量" (Security Considerations) 章节
 
    所有的 RFC 都应当包含这一章节, 来讨论与该规范相关的安全注意事项。更多
    信息见 "Guidelines for Writing RFC Text on Security Considerations"
    [BCP72]。
 
+
    注意, 存在其它的样文, 用于那些包含有 MIB 和 YANG 模块的 RFC。详细信
    息, 见 "Security Guidelines for IETF MIB Modules" [MIB-SEC] 和 "yang
    module security considerations" [YANG-SEC]。
+
 
 
 
@@ -654,13 +736,16 @@ RFC 7322                     RFC Style Guide              September 2014
 
    参考文献列表仅仅用于记录参考项。不允许加入介绍性文本。
 
+
    RFC 样式允许使用任何种类的引用样式, 只要它们的使用在同一文档中保持一
    致。但是, 在此 RFC 系列文档的范围内, 有一些已被描述过的引用样式的使用
    是必要的。具体示例参见此文档。
 
+
    RFC Editor 会确保: 引用其它 RFC 的参考文献, 会引用相关主题的最新版的
    RFC (除非提供了不这样做的理由)。当引用一个被废除的文档时, 通常也会引
    用其最新版本的文档。
+
 
    如果一 RFC 被分配了一个 STD [RFC1311]、BCP [RFC1818]、或 FYI [FYI90]
    子系列编号 (sub-series number), 则参考文献在引用它时, 必须包含该文档
@@ -668,12 +753,15 @@ RFC 7322                     RFC Style Guide              September 2014
    系列编号发布的、或依旧在维护 FYI 编号的 RFC, 必须在其参考文献中包含该
    子系列编号。
 
+
    参考文献列表必须要指明: 每一个参考文献是前提类的 (normative) 还是信息
    类的 (informative), 其中前提类的参考文献对实现或理解 RFC 的内容至关重
    要, 而信息类的参考文献则提供了附加信息。关于前提类和信息类参考文献的
    更多信息, 可以在 IESG 的声明 "Normative and Informative References"
    [REFS] 中找到。当同时存在前提类和信息类的参考文献时, 参考文献章节应当
    被划分为两个子章节:
+
+
 
       s.  References                             s. 参考文献
 
@@ -709,21 +797,26 @@ RFC 7322                     RFC Style Guide              September 2014
    到被引用的草案也准备好发布为止; 然后, RFC Editor 将会更新相应条目, 以
    引用要发布的 RFC, 并同时发布两个文档。
 
+
 4.8.6.1.  RFC 中的 URI
 
    允许在参考文献中使用 URI, 只要该 URI 是非常稳定的 (例, 不太可能更改,
    且预期持续可用), 且可以直接引用。在 RFC 编辑流程中, 将会验证 URI 的
    有效性。
 
+
    如果对某网页的引用, 有一可用的、且含有日期的 URI (包含有该页面的时间
    戳), 则应当使用这种 URI。
 
    注意, URI 不应是为引用条目所提供的唯一信息。
 
+
 4.8.6.2.  引用 RFC
 
    要引用 RFC, 需要使用下面给出的格式。注意, 当对多名作者排序时: 列表中,
    列出的最后一名作者的姓名格式, 不同于所有在他前面列出的其他作者。
+
+
 
    对于一名作者或编辑者:
 
@@ -791,6 +884,8 @@ RFC 7322                     RFC Style Guide              September 2014
    编号。推荐在参考文献章节的引用中包含指向相应 STD 或 BCP 信息页的 URI
    (见 [RFC5741] 中的第 3.2.3 节)。文本中的引用应如下所示。
 
+
+
       See RFC 1034 [STD13].
 
 
@@ -854,6 +949,8 @@ RFC 7322                     RFC Style Guide              September 2014
 
 
 
+
+
 Flanagan & Ginoza             Informational                    [Page 17]
 
 RFC 7322                     RFC Style Guide              September 2014
@@ -873,6 +970,7 @@ RFC 7322                     RFC Style Guide              September 2014
 4.8.6.5.  引用勘误 (Errata)
 
    当需要引用一个勘误报告时, 要求使用下面的格式:
+
 
       [ErrNumber]  RFC Errata, Erratum ID number, RFC number.
 
@@ -908,12 +1006,14 @@ RFC 7322                     RFC Style Guide              September 2014
 
 
 
+
 Flanagan & Ginoza             Informational                    [Page 18]
 
 RFC 7322                     RFC Style Guide              September 2014
 
 
    或者, 当没有作者列表时, 推荐使用下面的格式:
+
 
       [SYMBOLIC-TAG]  Organization, "Document Title", Document
                       reference number, Date of publication,
@@ -940,18 +1040,25 @@ RFC 7322                     RFC Style Guide              September 2014
    使用它来: 公开感谢那些对文档提供反馈的人员、及注明在文本中所借鉴过的
    任何文档。
 
+
 4.11. "贡献者" (Contributors) 章节
 
    此可选章节用于感谢那些对文档作出重要贡献的人员。
 
+
    与 "作者地址" (Author's Address) 章节类似, RFC Editor 不会决定谁应当
    被列为 RFC 的贡献者。谁应当被列为贡献者, 是由发布流决定的。
+
+
 
    "贡献者" 章节可以包含关于特定的贡献内容的简短陈述 ("Sam contributed
    Section 3")、及可以包含所列出的贡献者的所属机构。根据作者的判断, "贡
    献者" 章节中也可以包含贡献者的通讯地址; 因为在将来获取 RFC 相关的信息
    时, 他们的学识可能会很有用。任何通讯信息的格式应当与 "作者地址" 章节
    的信息格式类似。
+
+
+
 
 
 
@@ -965,16 +1072,22 @@ RFC 7322                     RFC Style Guide              September 2014
 
    此必须章节给出了在首页页头中列出的作者的通讯信息。
 
+
    通讯信息中包括一个必须的长期有效的电子邮件地址, 及可选的邮政地址和/或
    电话号码。如果包括了一个邮政地址, 地址中应当包含国家名称, 该名称采用
    由 ISO 3166 Maintenance Agency [ISO_OBP] 所列出的英文缩写。此章节的目
    的是: (1) 明确定义作者身份 (例如, the John Smith who works for FooBar
    Systems); (2) 为将来有疑问或意见的读者提供通讯信息。
 
+
+
+
    伪装邮件地址的做法 (即, 更改电子邮件地址以降低机器人和网络爬虫程序的
    可读性, 从而避免垃圾邮件) 在归档的文档系列中是不合适的。提供作者的通
    讯信息, 为的是读者能够方便地联系到作者, 并提出疑问和/或意见。在 RFC
    中不允许伪装邮件地址。
+
+
 
 5.  关于安全性的考量
 
