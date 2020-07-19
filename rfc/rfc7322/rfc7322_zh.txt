@@ -86,9 +86,9 @@ RFC 7322                     RFC Style Guide              September 2014
       4.8. 备忘录正文  ...............................................12
            4.8.1. "导言" 章节 ........................................12
            4.8.2. "文档要求的用语" 章节 ..............................12
-           4.8.3. "关于 IANA 的考量" 章节 ............................13
-           4.8.4. "关于国际化的考量" 章节 ............................13
-           4.8.5. "关于安全性的考量" 章节 ............................13
+           4.8.3. "IANA 注意事项" 章节 ...............................13
+           4.8.4. "国际化注意事项" 章节 ..............................13
+           4.8.5. "安全注意事项" 章节 ................................13
            4.8.6. "参考文献" 章节 ....................................14
                   4.8.6.1. RFC 中的 URI ..............................15
                   4.8.6.2. 引用 RFC ..................................15
@@ -100,7 +100,7 @@ RFC 7322                     RFC Style Guide              September 2014
       4.10. "致谢" 章节 ..............................................19
       4.11. "贡献者" 章节 ............................................19
       4.12. "作者地址" 章节 ..........................................20
-   5. 关于安全性的考量 ...............................................20
+   5. 安全注意事项 ...................................................20
    6. 参考文献 .......................................................20
       6.1. 前提类参考文献 ............................................20
       6.2. 信息类参考文献 ............................................20
@@ -405,30 +405,30 @@ RFC 7322                     RFC Style Guide              September 2014
 
 
 
-      First-page header            首页页头          * [Required]
-      Title                        标题                [Required]
-      Abstract                     摘要                [Required]
+      First-page header             首页页头         * [Required]
+      Title                         标题               [Required]
+      Abstract                      摘要               [Required]
       RFC Editor or Stream Note                      * [Upon request]
-      Status of This Memo          此备忘录的状态    * [Required]
-      Copyright Notice             版权声明          * [Required]
-      Table of Contents            目录              * [Required]
-      Body of the Memo             备忘录正文          [Required]
-        1.  Introduction              导言             [Required]
+      Status of This Memo           此备忘录的状态   * [Required]
+      Copyright Notice              版权声明         * [Required]
+      Table of Contents             目录             * [Required]
+      Body of the Memo              备忘录正文         [Required]
+        1.  Introduction               导言            [Required]
         2.  Requirements Language (RFC 2119)
-        3.  ...                       ...
-            MAIN BODY OF THE TEXT     文本的主体
-        6.  ...                       ...
-        7.  IANA Considerations       关于 IANA 的考量 [Required in I-D]
+        3.  ...                        ...
+            MAIN BODY OF THE TEXT      文本的主体
+        6.  ...                        ...
+        7.  IANA Considerations        IANA 注意事项   [Required in I-D]
         8.  Internationalization Considerations
-        9.  Security Considerations   关于安全性的考量 [Required]
-        10.  References               参考文献
-        10.1.  Normative References   前提类参考文献
-        10.2.  Informative References 信息类参考文献
-        Appendix A.                   附录 A.
-        Appendix B.                   附录 B.
-      Acknowledgements             致谢
-      Contributors                 贡献者
-      Author's Address             作者地址            [Required]
+        9.  Security Considerations    安全注意事项    [Required]
+        10.  References                参考文献
+        10.1.  Normative References    前提类参考文献
+        10.2.  Informative References  信息类参考文献
+        Appendix A.                    附录 A.
+        Appendix B.                    附录 B.
+      Acknowledgements              致谢
+      Contributors                  贡献者
+      Author's Address              作者地址           [Required]
 
    强烈建议: 在备忘录的正文 (body of the memo) 中, 使用上面所示的顺序。
    对于那些未采用该顺序的例外情况, 可能会受到问询。在备忘录的正文外, 上
@@ -680,15 +680,15 @@ RFC 7322                     RFC Style Guide              September 2014
 
 
 
-4.8.3. "关于 IANA 的考量" (IANA Considerations) 章节
+4.8.3. "IANA 注意事项" (IANA Considerations) 章节
 
    关于如何注册与 IANA 相关的值, 或如何创建新的由 IANA 管理的注册表, 见
    "Guidelines for Writing an IANA Considerations Section in RFCs"
    [BCP26]。
 
    在完成 IANA 分配后, RFC Editor 将会相应地对文本进行更新。建议作者清楚
-   地标出应当更新哪些文本, 以反映新分配的值。例如, 推荐在 "关于 IANA 的
-   考量" 章节、及备忘录正文中, 使用 "TBD1", "TBD2" 等。
+   地标出应当更新哪些文本, 以反映新分配的值。例如, 推荐在 "IANA 注意事
+   项" 章节、及备忘录正文中, 使用 "TBD1", "TBD2" 等。
 
 
 
@@ -702,17 +702,17 @@ RFC 7322                     RFC Style Guide              September 2014
    者发出问询, 以确保该分配流程及分配的值被正确插入到文档中。
 
 
-   如果一个 "关于 IANA 的考量" 章节表示其没有关于 IANA 的考量, 则 RFC
+   如果一个 "IANA 注意事项" 章节表示其没有关于 IANA 的注意事项, 则 RFC
    Editor 将会删除该章节 (尽管, 在 RFC 发布前的互联网草案 Internet-Draft
    阶段确实需要这一章节)。
 
-4.8.4. "关于国际化的考量" (Internationalization Considerations) 章节
+4.8.4. "国际化注意事项" (Internationalization Considerations) 章节
 
    所有处理国际化问题的 RFC 都应当包含这一章节来描述这些问题; 更多信息见
    "IETF Policy on Character Sets and Languages" [BCP18] 中的第 6 节。
 
 
-4.8.5. "关于安全性的考量" (Security Considerations) 章节
+4.8.5. "安全注意事项" (Security Considerations) 章节
 
    所有的 RFC 都应当包含这一章节, 来讨论与该规范相关的安全注意事项。更多
    信息见 "Guidelines for Writing RFC Text on Security Considerations"
@@ -1089,9 +1089,9 @@ RFC 7322                     RFC Style Guide              September 2014
 
 
 
-5.  关于安全性的考量
+5.  安全注意事项
 
-   此文档没有关于安全性的考量。
+   此文档没有关于安全的注意事项。
 
 6.  参考文献
 
