@@ -12,9 +12,9 @@ Category: Standards Track                                      June 2014
 ISSN: 2070-1721
 
 
-   Hypertext Transfer Protocol (HTTP/1.1): Message Syntax and Routing
+              超文本传输协议 (HTTP/1.1): 消息的语法和路由
 
-Abstract
+摘要
 
    The Hypertext Transfer Protocol (HTTP) is a stateless application-
    level protocol for distributed, collaborative, hypertext information
