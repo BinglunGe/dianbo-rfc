@@ -1,4 +1,4 @@
-# dianbo-rfc
+# Dianbo-RFC
 
 准确、清晰地翻译 RFC 文档！
 
