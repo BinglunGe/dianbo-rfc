@@ -11,4 +11,9 @@
 | 语法                 | Syntax
 | 路由                 | Routing
 | 统一资源标识符       | URI, Uniform Resource Identifier
-| 架构                 | Architecture
+| 体系结构             | Architecture
+| 有效载荷             | payload
+| 请求                 | request (n.)
+| 要求                 | request (v.)
+| 响应                 | response (n.)
+| 应答                 | response (v.)

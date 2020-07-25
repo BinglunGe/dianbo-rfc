@@ -18,9 +18,11 @@ ISSN: 2070-1721
 
    超文本传输协议 (Hypertext Transfer Protocol, HTTP) 是一种无状态的应用
    层协议, 被用于分布式的、协作式的、超文本的信息系统。此文档概述了 HTTP
-   的架构及其相关术语, 定义了 "http" 和 "https" 的统一资源标识符 (URI,
-   Uniform Resource Identifier) 的方案，定义了 HTTP/1.1 消息的语法和解析
-   要求，并描述了实现中与安全相关的问题。
+   的体系结构及其相关术语, 定义了 "http" 和 "https" 的统一资源标识符
+   (URI, Uniform Resource Identifier) 的方案, 定义了 HTTP/1.1 消息的语法
+   和解析要求, 并描述了实现中与安全相关的问题。
+
+
 
 Status of This Memo
 
@@ -90,7 +92,7 @@ Copyright Notice
    1. 导言 ............................................................5
       1.1. Requirements Notation ......................................6
       1.2. Syntax Notation ............................................6
-   2. 架构 ....................................................6
+   2. 体系结构 ........................................................6
       2.1. Client/Server Messaging ....................................7
       2.2. Implementation Diversity ...................................8
       2.3. Intermediaries .............................................9
@@ -228,14 +230,14 @@ RFC 7230           HTTP/1.1 Message Syntax and Routing         June 2014
 
 1.  导言
 
-   The Hypertext Transfer Protocol (HTTP) is a stateless application-
-   level request/response protocol that uses extensible semantics and
-   self-descriptive message payloads for flexible interaction with
-   network-based hypertext information systems.  This document is the
-   first in a series of documents that collectively form the HTTP/1.1
-   specification:
+   超文本传输协议 (HTTP, Hypertext Transfer Protocol) 是一种无状态的、应
+   用层的、请求/响应式的协议, 它使用了可扩展的语义和自描述式 (self-
+   descriptive) 的消息有效载荷, 来与基于网络的超文本信息系统进行灵活的交
+   互。此文档是组成 HTTP/1.1 规范的一些列文档中的第一个:
 
-   1.  "Message Syntax and Routing" (this document)
+
+
+   1.  "消息的语法和路由" (此文档)
 
    2.  "Semantics and Content" [RFC7231]
 
@@ -247,33 +249,33 @@ RFC 7230           HTTP/1.1 Message Syntax and Routing         June 2014
 
    6.  "Authentication" [RFC7235]
 
-   This HTTP/1.1 specification obsoletes RFC 2616 and RFC 2145 (on HTTP
-   versioning).  This specification also updates the use of CONNECT to
-   establish a tunnel, previously defined in RFC 2817, and defines the
-   "https" URI scheme that was described informally in RFC 2818.
+   此 HTTP/1.1 规范废弃了 RFC 2616 和 RFC 2145 (有关 HTTP 版本控制)。此
+   规范还更新了以前在 RFC 2817 中定义的 "通过 CONNECT 来建立隧道" 的用
+   法, 且定义了曾在 RFC 2818 中有过非正式描述的 "https" URI 方案。
 
-   HTTP is a generic interface protocol for information systems.  It is
-   designed to hide the details of how a service is implemented by
-   presenting a uniform interface to clients that is independent of the
-   types of resources provided.  Likewise, servers do not need to be
-   aware of each client's purpose: an HTTP request can be considered in
-   isolation rather than being associated with a specific type of client
-   or a predetermined sequence of application steps.  The result is a
-   protocol that can be used effectively in many different contexts and
-   for which implementations can evolve independently over time.
 
-   HTTP is also designed for use as an intermediation protocol for
-   translating communication to and from non-HTTP information systems.
-   HTTP proxies and gateways can provide access to alternative
-   information services by translating their diverse protocols into a
-   hypertext format that can be viewed and manipulated by clients in the
-   same way as HTTP services.
+   HTTP 一种用于信息系统的通用接口协议。HTTP 被设计成: 服务器通过向客户
+   端展示 "独立于其所提供资源类型的" 统一接口, 来隐藏服务器的实现细节。
+   同样, 服务器不需要知道每个客户端的用途: 任一 HTTP 请求可以被孤立考虑,
+   而非与某一特定类型的客户端、或某一预定的应用程序的处理顺序相关联。其
+   结果是: 一个协议可以被有效地用于许多不同的上下文中, 并且协议的实现可
+   以在时间的推移中独立地发展。
 
-   One consequence of this flexibility is that the protocol cannot be
-   defined in terms of what occurs behind the interface.  Instead, we
-   are limited to defining the syntax of communication, the intent of
-   received communication, and the expected behavior of recipients.  If
-   the communication is considered in isolation, then successful actions
+
+
+
+   HTTP 还被设计用来作为一种中间协议, 用于在非 HTTP 信息系统之间来转换通
+   信。HTTP 代理及网关通过将不同协议转换成超文本格式, 能够提供对不同信息
+   服务的访问, 客户端可以像处理 HTTP 服务一样来查看和操作转换后的数据。
+
+
+
+
+   这种灵活性的结果是: 不能根据接口后面发生的事情来定义协议。相反, 我们
+   被仅限于定义: 通信的语法、接收到的通信的意图、及接收者的预期行为。如
+   果孤立地考虑单个通信, 那么成功的操作应当反映在: 对服务器提供的可观察
+
+
 
 
 
@@ -282,19 +284,19 @@ Fielding & Reschke           Standards Track                    [Page 5]
 RFC 7230           HTTP/1.1 Message Syntax and Routing         June 2014
 
 
-   ought to be reflected in corresponding changes to the observable
-   interface provided by servers.  However, since multiple clients might
-   act in parallel and perhaps at cross-purposes, we cannot require that
-   such changes be observable beyond the scope of a single response.
+   接口的相应更改中。但是, 由于可能有多个客户端并行操作, 甚至其目的相互
+   冲突 (cross-purposes), 所以我们不能要求: 在单个响应的范围外, 观察到操
+   作造成的变化。(译者, 其实就是在每次通信中, 客户端的行为给服务器带来的
+   变化, 仅在该此通信的响应中被反映出来)。
 
-   This document describes the architectural elements that are used or
-   referred to in HTTP, defines the "http" and "https" URI schemes,
-   describes overall network operation and connection management, and
-   defines HTTP message framing and forwarding requirements.  Our goal
-   is to define all of the mechanisms necessary for HTTP message
-   handling that are independent of message semantics, thereby defining
-   the complete set of requirements for message parsers and message-
-   forwarding intermediaries.
+   此文档描述了在 HTTP 中被使用或引用了的体系结构中的各个元素, 定义了
+   "http" 和 "https" URI 方案, 描述了整个网络操作和连接管理, 并定义了
+   HTTP 消息在成帧和转发时的要求。我们的目标是给出所有关于 "与消息语义无
+   关的 HTTP 消息处理" 的定义, 从而为消息的解析器及消息的转发中介定义完
+   整的要求集。
+
+
+
 
 1.1.  Requirements Notation
 
@@ -324,7 +326,7 @@ RFC 7230           HTTP/1.1 Message Syntax and Routing         June 2014
    As a convention, ABNF rule names prefixed with "obs-" denote
    "obsolete" grammar rules that appear for historical reasons.
 
-2.  架构
+2.  体系结构
 
    HTTP was created for the World Wide Web (WWW) architecture and has
    evolved over time to support the scalability needs of a worldwide
