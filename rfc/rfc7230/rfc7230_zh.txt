@@ -16,13 +16,11 @@ ISSN: 2070-1721
 
 摘要
 
-   The Hypertext Transfer Protocol (HTTP) is a stateless application-
-   level protocol for distributed, collaborative, hypertext information
-   systems.  This document provides an overview of HTTP architecture and
-   its associated terminology, defines the "http" and "https" Uniform
-   Resource Identifier (URI) schemes, defines the HTTP/1.1 message
-   syntax and parsing requirements, and describes related security
-   concerns for implementations.
+   超文本传输协议 (Hypertext Transfer Protocol, HTTP) 是一种无状态的应用
+   层协议, 被用于分布式的、协作式的、超文本的信息系统。此文档概述了 HTTP
+   的架构及其相关术语, 定义了 "http" 和 "https" 的统一资源标识符 (URI,
+   Uniform Resource Identifier) 的方案，定义了 HTTP/1.1 消息的语法和解析
+   要求，并描述了实现中与安全相关的问题。
 
 Status of This Memo
 
@@ -87,12 +85,12 @@ Copyright Notice
    it for publication as an RFC or to translate it into languages other
    than English.
 
-Table of Contents
+目录
 
-   1. Introduction ....................................................5
+   1. 导言 ............................................................5
       1.1. Requirements Notation ......................................6
       1.2. Syntax Notation ............................................6
-   2. Architecture ....................................................6
+   2. 架构 ....................................................6
       2.1. Client/Server Messaging ....................................7
       2.2. Implementation Diversity ...................................8
       2.3. Intermediaries .............................................9
@@ -228,7 +226,7 @@ Fielding & Reschke           Standards Track                    [Page 4]
 RFC 7230           HTTP/1.1 Message Syntax and Routing         June 2014
 
 
-1.  Introduction
+1.  导言
 
    The Hypertext Transfer Protocol (HTTP) is a stateless application-
    level request/response protocol that uses extensible semantics and
@@ -326,7 +324,7 @@ RFC 7230           HTTP/1.1 Message Syntax and Routing         June 2014
    As a convention, ABNF rule names prefixed with "obs-" denote
    "obsolete" grammar rules that appear for historical reasons.
 
-2.  Architecture
+2.  架构
 
    HTTP was created for the World Wide Web (WWW) architecture and has
    evolved over time to support the scalability needs of a worldwide

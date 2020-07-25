@@ -10,3 +10,5 @@
 |:---------------------|:-------------------------------------
 | 语法                 | Syntax
 | 路由                 | Routing
+| 统一资源标识符       | URI, Uniform Resource Identifier
+| 架构                 | Architecture
