@@ -16,4 +16,14 @@
 | 请求                 | request (n.)
 | 要求                 | request (v.)
 | 响应                 | response (n.)
-| 应答                 | response (v.)
+| 应答                 | respond (v.)
+| 传输层               | transport-layer
+| 会话层               | session-layer
+| 客户端               | client
+| 服务器               | server
+| 用户代理             | user agent
+| 源服务器             | origin server
+| 发送者               | sender
+| 接收者               | recipient
+| 请求修饰符           | request modifiers
+| 状态行               | status line

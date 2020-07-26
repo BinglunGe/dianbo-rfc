@@ -93,7 +93,7 @@ Copyright Notice
       1.1. Requirements Notation ......................................6
       1.2. Syntax Notation ............................................6
    2. 体系结构 ........................................................6
-      2.1. Client/Server Messaging ....................................7
+      2.1. 客户端/服务器的消息传递 ....................................7
       2.2. Implementation Diversity ...................................8
       2.3. Intermediaries .............................................9
       2.4. Caches ....................................................11
@@ -300,9 +300,9 @@ RFC 7230           HTTP/1.1 Message Syntax and Routing         June 2014
 
 1.1.  Requirements Notation
 
-   The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
-   "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
-   document are to be interpreted as described in [RFC2119].
+   在此文档中, 关于关键词【必须】、【禁止】、【必要的】、【应当】、【不
+   应】、【推荐的】、【可能】与【可选的】的解释, 见 [RFC2119] 中的描述。
+
 
    Conformance criteria and considerations regarding error handling are
    defined in Section 2.5.
@@ -328,10 +328,10 @@ RFC 7230           HTTP/1.1 Message Syntax and Routing         June 2014
 
 2.  体系结构
 
-   HTTP was created for the World Wide Web (WWW) architecture and has
-   evolved over time to support the scalability needs of a worldwide
-   hypertext system.  Much of that architecture is reflected in the
-   terminology and syntax productions used to define HTTP.
+   HTTP 是为万维网 (WWW, World Wide Web) 架构而创建的, 且随着时间的推移
+   不断发展以支持全球超文本系统的可伸缩性需求。该架构的大部分内容反映在
+   用于定义 HTTP 的术语与语法产生式中。
+
 
 
 
@@ -340,51 +340,51 @@ Fielding & Reschke           Standards Track                    [Page 6]
 RFC 7230           HTTP/1.1 Message Syntax and Routing         June 2014
 
 
-2.1.  Client/Server Messaging
+2.1.  客户端/服务器的消息传递
 
-   HTTP is a stateless request/response protocol that operates by
-   exchanging messages (Section 3) across a reliable transport- or
-   session-layer "connection" (Section 6).  An HTTP "client" is a
-   program that establishes a connection to a server for the purpose of
-   sending one or more HTTP requests.  An HTTP "server" is a program
-   that accepts connections in order to service HTTP requests by sending
-   HTTP responses.
+   HTTP 是一种无状态的、请求/响应式的协议, 它通过在可靠的传输层或会话层
+   (transport- or session-layer) 所提供的 "连接" ("connection", 见第 6
+   节) 中交换消息 (见第 3 节) 来进行操作。HTTP "客户端" ("client") 是一
+   种程序, 它能够与服务器建立连接, 以发送一个或多个 HTTP 请求。HTTP "服
+   务器" 是一种程序, 它能够接受连接, 以发送 HTTP 响应的方式来服务于 HTTP
+   请求。
 
-   The terms "client" and "server" refer only to the roles that these
-   programs perform for a particular connection.  The same program might
-   act as a client on some connections and a server on others.  The term
-   "user agent" refers to any of the various client programs that
-   initiate a request, including (but not limited to) browsers, spiders
-   (web-based robots), command-line tools, custom applications, and
-   mobile apps.  The term "origin server" refers to the program that can
-   originate authoritative responses for a given target resource.  The
-   terms "sender" and "recipient" refer to any implementation that sends
-   or receives a given message, respectively.
 
-   HTTP relies upon the Uniform Resource Identifier (URI) standard
-   [RFC3986] to indicate the target resource (Section 5.1) and
-   relationships between resources.  Messages are passed in a format
-   similar to that used by Internet mail [RFC5322] and the Multipurpose
-   Internet Mail Extensions (MIME) [RFC2045] (see Appendix A of
-   [RFC7231] for the differences between HTTP and MIME messages).
+   术语 "客户端" 和 "服务器" 仅指明这些程序在特定的连接中所扮演的角色。
+   同一程序可能在一些连接上充当客户端, 而在另一些连接上充当服务器。术语
+   "用户代理" ("user agent") 是指: 能够发起请求的任何种类的客户端程序,
+   包括 (但不限于) 浏览器、爬虫 (网络机器人)、命令行工具、自定义应用程
+   序、和移动应用程序。术语 "源服务器" ("origin server") 是指: 可以针对
+   给定的目标资源产生可靠响应的服务器程序。术语 "发送者" ("sender") 和
+   "接收者" ("recipient") 分别是指: 能够发送或接受给定消息的任何实现。
 
-   Most HTTP communication consists of a retrieval request (GET) for a
-   representation of some resource identified by a URI.  In the simplest
-   case, this might be accomplished via a single bidirectional
-   connection (===) between the user agent (UA) and the origin
-   server (O).
 
-            request   >
+
+
+   HTTP 依据统一资源标识符 (URI, Uniform Resource Identifier) 的标准
+   [RFC3986] 来指示目标资源 (第 5.1 节) 以及资源之间的关系。消息以类似于
+   互联网邮件 (Internet mail) [RFC5322] 和多用途互联网邮件扩展 (MIME,
+   Multipurpose Internet Mail Extensions) [RFC2045] 中所使用的格式进行传
+   递 (有关 HTTP 和 MIME 消息之间的区别, 见 [RFC7231] 中的附录第 A 节)。
+
+
+   大多数 HTTP 通信都包含有一个检索请求 (GET), 该请求会用 URI 来标识某些
+   资源。在最简单的情况下, 这可以通过在用户代理 (UA) 和源服务器 (O) 之间
+   的一个双向连接 (===) 来实现。
+
+
+
+            请求   >
        UA ======================================= O
-                                   <   response
+                                       <   响应
 
-   A client sends an HTTP request to a server in the form of a request
-   message, beginning with a request-line that includes a method, URI,
-   and protocol version (Section 3.1.1), followed by header fields
-   containing request modifiers, client information, and representation
-   metadata (Section 3.2), an empty line to indicate the end of the
-   header section, and finally a message body containing the payload
-   body (if any, Section 3.3).
+   客户端以请求消息 (request message) 的形式向服务器发送 HTTP 请求, 请求
+   消息: 以请求行 (request-line) 作为开始, 其中包含有请求方法 (method)、
+   URI、和协议版本 (第 3.1.1 节); 后跟多个头部字段, 其中包含有请求修饰符
+   (request modifiers)、客户端信息、和用于描述载荷表示形式的元数据 (见
+   3.2 节) 等信息, 头部字段部分以一空行结束; 最后是包含有效载荷主体 (如
+   果有的话, 参见第 3.3 节) 的消息主体部分。
+
 
 
 
@@ -396,23 +396,22 @@ Fielding & Reschke           Standards Track                    [Page 7]
 RFC 7230           HTTP/1.1 Message Syntax and Routing         June 2014
 
 
-   A server responds to a client's request by sending one or more HTTP
-   response messages, each beginning with a status line that includes
-   the protocol version, a success or error code, and textual reason
-   phrase (Section 3.1.2), possibly followed by header fields containing
-   server information, resource metadata, and representation metadata
-   (Section 3.2), an empty line to indicate the end of the header
-   section, and finally a message body containing the payload body (if
-   any, Section 3.3).
+   服务器通过发送一个或多个 HTTP 响应消息来应答客户端的请求, 每个响应消
+   息: 以状态行 (status line) 作为开始, 其中包含有协议版本、表示成功或错
+   误的代码、和文本形式的原因短语 (第 3.1.2 节); 可能后跟多个头部字段,
+   其中包含有服务器信息、资源元数据、和用于描述载荷表示形式的元数据 (见
+   3.2 节) 等信息, 头部字段部分以一空行结束; 最后是包含有效载荷主体 (如
+   果有的话, 参见第 3.3 节) 的消息主体部分。
 
-   A connection might be used for multiple request/response exchanges,
-   as defined in Section 6.3.
 
-   The following example illustrates a typical message exchange for a
-   GET request (Section 4.3.1 of [RFC7231]) on the URI
-   "http://www.example.com/hello.txt":
 
-   Client request:
+   如在第 6.3 节中所定义的, 一个连接可以被用于多个请求/响应的交换。
+
+
+   下面的示例说明了: 针对具体 URI, "http://www.example.com/hello.txt" 上
+   的 GET 请求 ([RFC7231] 中的第 4.3.1 节), 这一典型的消息交换过程:
+
+   客户端请求:
 
      GET /hello.txt HTTP/1.1
      User-Agent: curl/7.16.3 libcurl/7.16.3 OpenSSL/0.9.7l zlib/1.2.3
@@ -420,7 +419,7 @@ RFC 7230           HTTP/1.1 Message Syntax and Routing         June 2014
      Accept-Language: en, mi
 
 
-   Server response:
+   服务器响应:
 
      HTTP/1.1 200 OK
      Date: Mon, 27 Jul 2009 12:28:53 GMT
