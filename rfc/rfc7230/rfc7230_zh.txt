@@ -94,7 +94,7 @@ Copyright Notice
       1.2. Syntax Notation ............................................6
    2. 体系结构 ........................................................6
       2.1. 客户端/服务器的消息传递 ....................................7
-      2.2. Implementation Diversity ...................................8
+      2.2. 实现的多样性 ...............................................8
       2.3. Intermediaries .............................................9
       2.4. Caches ....................................................11
       2.5. Conformance and Error Handling ............................12
@@ -411,6 +411,7 @@ RFC 7230           HTTP/1.1 Message Syntax and Routing         June 2014
    下面的示例说明了: 针对具体 URI, "http://www.example.com/hello.txt" 上
    的 GET 请求 ([RFC7231] 中的第 4.3.1 节), 这一典型的消息交换过程:
 
+
    客户端请求:
 
      GET /hello.txt HTTP/1.1
@@ -433,15 +434,15 @@ RFC 7230           HTTP/1.1 Message Syntax and Routing         June 2014
 
      Hello World! My payload includes a trailing CRLF.
 
-2.2.  Implementation Diversity
+2.2.  实现的多样性
 
-   When considering the design of HTTP, it is easy to fall into a trap
-   of thinking that all user agents are general-purpose browsers and all
-   origin servers are large public websites.  That is not the case in
-   practice.  Common HTTP user agents include household appliances,
-   stereos, scales, firmware update scripts, command-line programs,
-   mobile apps, and communication devices in a multitude of shapes and
-   sizes.  Likewise, common HTTP origin servers include home automation
+   在考虑 HTTP 的设计时, 很容易落入一个陷阱, 即: 认为所有的用户代理都是
+   通用浏览器, 且认为所有的源服务器都是大型公共网站。但实际中并非如此。
+   常见的 HTTP 用户代理包括各种形状和尺寸的家用电器、立体音响、测量仪、
+   电子秤、固件更新脚本、命令行程序、移动应用程序、及通信设备。同样, 常
+   见的 HTTP 源服务器包括家庭自动化单元 (home automation units)、可配置
+   的网络组件、办公用机器、自主机器人、新闻源、交通摄像头、广告选择器、
+   及视频投放平台。
 
 
 
@@ -451,30 +452,30 @@ Fielding & Reschke           Standards Track                    [Page 8]
 RFC 7230           HTTP/1.1 Message Syntax and Routing         June 2014
 
 
-   units, configurable networking components, office machines,
-   autonomous robots, news feeds, traffic cameras, ad selectors, and
-   video-delivery platforms.
 
-   The term "user agent" does not imply that there is a human user
-   directly interacting with the software agent at the time of a
-   request.  In many cases, a user agent is installed or configured to
-   run in the background and save its results for later inspection (or
-   save only a subset of those results that might be interesting or
-   erroneous).  Spiders, for example, are typically given a start URI
-   and configured to follow certain behavior while crawling the Web as a
-   hypertext graph.
 
-   The implementation diversity of HTTP means that not all user agents
-   can make interactive suggestions to their user or provide adequate
-   warning for security or privacy concerns.  In the few cases where
-   this specification requires reporting of errors to the user, it is
-   acceptable for such reporting to only be observable in an error
-   console or log file.  Likewise, requirements that an automated action
-   be confirmed by the user before proceeding might be met via advance
-   configuration choices, run-time options, or simple avoidance of the
-   unsafe action; confirmation does not imply any specific user
-   interface or interruption of normal processing if the user has
-   already made that choice.
+
+
+   术语 "用户代理" 并不意味着在发送请求时, 有一名人类用户在直接与软件代
+   理进行交互。在许多情况下, 用户代理被安装或配置为在后台运行, 并保存其
+   结果供以后检查 (或仅保存结果中可能有趣的或错误的子集)。例如，在将 Web
+   作为超文本图（hypertext graph）进行爬取的时候，通常会为爬虫指定一个起
+   始 URI，并配置其遵循某些特定行为。
+
+
+
+
+   HTTP 的实现的多样性意味着：并非所有的用户代理可以向其用户给出交互式的
+   建议、或提供关于安全或隐私问题的适当警告。在少数情况下，此规范要求向
+   用户报告错误信息，此时仅能在错误信息控制台或日志文件中观察到这些报告，
+   这是可以接收的。类似地，一些自动操作在继续处理前需要用户进行确认，这
+   可以通过预先的配置选项、运行时参数、或简单地避免危险操作的方式解决；
+   如果用户提前做出了选择，则操作的确认过程不会导致任何特殊的用户界面或
+   正常处理的中断。
+
+
+
+
 
 2.3.  Intermediaries
 
