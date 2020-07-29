@@ -27,3 +27,12 @@
 | 接收者               | recipient
 | 请求修饰符           | request modifiers
 | 状态行               | status line
+| 中介                 | intermediary
+| 连接链               | chain of connections
+| 代理服务器（代理）   | proxy
+| 网关服务器（网关）   | gateway
+| 隧道服务器（隧道）   | tunnel
+| 上游                 | upstream
+| 下游                 | downstream
+| 入站                 | inbound
+| 出站                 | outbound

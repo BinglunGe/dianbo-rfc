@@ -458,47 +458,47 @@ RFC 7230           HTTP/1.1 Message Syntax and Routing         June 2014
 
    术语 "用户代理" 并不意味着在发送请求时, 有一名人类用户在直接与软件代
    理进行交互。在许多情况下, 用户代理被安装或配置为在后台运行, 并保存其
-   结果供以后检查 (或仅保存结果中可能有趣的或错误的子集)。例如，在将 Web
-   作为超文本图（hypertext graph）进行爬取的时候，通常会为爬虫指定一个起
-   始 URI，并配置其遵循某些特定行为。
+   结果供以后检查 (或仅保存结果中可能有趣的或错误的子集)。例如, 在将 Web
+   作为超文本图 (hypertext graph) 进行爬取的时候, 通常会为爬虫指定一个起
+   始 URI, 并配置其遵循某些特定行为。
 
 
 
 
-   HTTP 的实现的多样性意味着：并非所有的用户代理可以向其用户给出交互式的
-   建议、或提供关于安全或隐私问题的适当警告。在少数情况下，此规范要求向
-   用户报告错误信息，此时仅能在错误信息控制台或日志文件中观察到这些报告，
-   这是可以接收的。类似地，一些自动操作在继续处理前需要用户进行确认，这
-   可以通过预先的配置选项、运行时参数、或简单地避免危险操作的方式解决；
-   如果用户提前做出了选择，则操作的确认过程不会导致任何特殊的用户界面或
+   HTTP 的实现的多样性意味着: 并非所有的用户代理可以向其用户给出交互式的
+   建议、或提供关于安全或隐私问题的适当警告。在少数情况下, 此规范要求向
+   用户报告错误信息, 此时仅能在错误信息控制台或日志文件中观察到这些报告,
+   这是可以接收的。类似地, 一些自动操作在继续处理前需要用户进行确认, 这
+   可以通过预先的配置选项、运行时参数、或简单地避免危险操作的方式解决;
+   如果用户提前做出了选择, 则操作的确认过程不会导致任何特殊的用户界面或
    正常处理的中断。
 
 
 
 
 
-2.3.  Intermediaries
+2.3.  中介
 
-   HTTP enables the use of intermediaries to satisfy requests through a
-   chain of connections.  There are three common forms of HTTP
-   intermediary: proxy, gateway, and tunnel.  In some cases, a single
-   intermediary might act as an origin server, proxy, gateway, or
-   tunnel, switching behavior based on the nature of each request.
+   HTTP 允许使用中介 (intermediary) 来达到: 使请求在连接链 (chain of
+   connections) 中传递。HTTP 中介有三种常见的形式: 代理 (proxy)、网关
+   (gateway)、和隧道 (tunnel)。在某些情况下, 单个中介可以扮演源服务器、
+   代理、网关、或隧道多个角色, 并根据每个请求的性质来切换行为。
+
 
             >             >             >             >
        UA =========== A =========== B =========== C =========== O
                   <             <             <             <
 
-   The figure above shows three intermediaries (A, B, and C) between the
-   user agent and origin server.  A request or response message that
-   travels the whole chain will pass through four separate connections.
-   Some HTTP communication options might apply only to the connection
-   with the nearest, non-tunnel neighbor, only to the endpoints of the
-   chain, or to all connections along the chain.  Although the diagram
-   is linear, each participant might be engaged in multiple,
-   simultaneous communications.  For example, B might be receiving
-   requests from many clients other than A, and/or forwarding requests
-   to servers other than C, at the same time that it is handling A's
+   上图展示了用户代理和源服务器间的三个中介 (A, B, 和 C)。一个穿过完整通
+   信链的请求或响应, 将会穿过四个单独的连接。有一些 HTTP 通信选项可能:
+   仅应用于与 "距离最近的、且非隧道相连的邻居" 的连接、仅应用于通信链的
+   端点、或应用于通信链上的所有连接。尽管上图是线性的, 但是每个参与者都
+   可能参与到多个同时进行的通信中。例如, B 在处理 A 的请求的同时, 可能正
+   从 A 以外的许多客户端接收请求, 并/或向 C 以外的服务器转发请求。此外,
+   由于负载平衡的动态配置, 之后的请求还可能通过不同的连接路径发送。
+
+
+
 
 
 
@@ -508,16 +508,16 @@ Fielding & Reschke           Standards Track                    [Page 9]
 RFC 7230           HTTP/1.1 Message Syntax and Routing         June 2014
 
 
-   request.  Likewise, later requests might be sent through a different
-   path of connections, often based on dynamic configuration for load
-   balancing.
 
-   The terms "upstream" and "downstream" are used to describe
-   directional requirements in relation to the message flow: all
-   messages flow from upstream to downstream.  The terms "inbound" and
-   "outbound" are used to describe directional requirements in relation
-   to the request route: "inbound" means toward the origin server and
-   "outbound" means toward the user agent.
+
+
+
+   术语 "上游" ("upstream") 和 "下游" ("downstream") 被用于描述与消息流
+   有关的方向性要求: 所有的消息从上游流向下游。术语 "入站" ("inbound")
+   和 "出站" ("outbound") 被用于描述与请求路由有关的方向性要求: "入站"
+   是指指向源服务器, "出站" 是指指向用户代理。
+
+
 
    A "proxy" is a message-forwarding agent that is selected by the
    client, usually via local configuration rules, to receive requests
