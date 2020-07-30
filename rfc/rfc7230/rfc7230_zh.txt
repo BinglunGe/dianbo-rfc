@@ -95,7 +95,7 @@ Copyright Notice
    2. 体系结构 ........................................................6
       2.1. 客户端/服务器的消息传递 ....................................7
       2.2. 实现的多样性 ...............................................8
-      2.3. Intermediaries .............................................9
+      2.3. 中介 .......................................................9
       2.4. Caches ....................................................11
       2.5. Conformance and Error Handling ............................12
       2.6. Protocol Versioning .......................................13
@@ -519,43 +519,43 @@ RFC 7230           HTTP/1.1 Message Syntax and Routing         June 2014
 
 
 
-   A "proxy" is a message-forwarding agent that is selected by the
-   client, usually via local configuration rules, to receive requests
-   for some type(s) of absolute URI and attempt to satisfy those
-   requests via translation through the HTTP interface.  Some
-   translations are minimal, such as for proxy requests for "http" URIs,
-   whereas other requests might require translation to and from entirely
-   different application-level protocols.  Proxies are often used to
-   group an organization's HTTP requests through a common intermediary
-   for the sake of security, annotation services, or shared caching.
-   Some proxies are designed to apply transformations to selected
-   messages or payloads while they are being forwarded, as described in
-   Section 5.7.2.
+   "代理" ("proxy") 是一种消息转发代理服务器: 客户端通常根据其本地的配置
+   规则选择相应的代理; 而代理会选择性接收对某些类型的绝对 URI 的请求, 并
+   尝试通过对 HTTP 接口进行转换来满足这些请求。某些转换过程仅需少量的工
+   作, 例如对一些指定的 "http" URI 的代理请求; 而其它一些请求可能要求在
+   完全不同的应用层协议间进行转换。代理通常被用于对一个机构的 HTTP 请求
+   进行分组, 其通过一个公共的中介, 以满足安全性、标注服务 (annotation
+   services)、或共享缓存的目的。还有些代理被设计为: 在转发一些选定的消息
+   或有效载荷时, 对其进行转换, 见第 5.7.2 节的描述。
 
-   A "gateway" (a.k.a. "reverse proxy") is an intermediary that acts as
-   an origin server for the outbound connection but translates received
-   requests and forwards them inbound to another server or servers.
-   Gateways are often used to encapsulate legacy or untrusted
-   information services, to improve server performance through
-   "accelerator" caching, and to enable partitioning or load balancing
-   of HTTP services across multiple machines.
 
-   All HTTP requirements applicable to an origin server also apply to
-   the outbound communication of a gateway.  A gateway communicates with
-   inbound servers using any protocol that it desires, including private
-   extensions to HTTP that are outside the scope of this specification.
-   However, an HTTP-to-HTTP gateway that wishes to interoperate with
-   third-party HTTP servers ought to conform to user agent requirements
-   on the gateway's inbound connection.
 
-   A "tunnel" acts as a blind relay between two connections without
-   changing the messages.  Once active, a tunnel is not considered a
-   party to the HTTP communication, though the tunnel might have been
-   initiated by an HTTP request.  A tunnel ceases to exist when both
-   ends of the relayed connection are closed.  Tunnels are used to
-   extend a virtual connection through an intermediary, such as when
-   Transport Layer Security (TLS, [RFC5246]) is used to establish
-   confidential communication through a shared firewall proxy.
+
+
+   "网关" ("gateway", 又称为 "反向代理", "reverse proxy") 是一种的中介,
+   其在出站连接中扮演源服务器, 但会对接收到的请求进行转换、并以入站方式
+   转发给其它的服务器。网关通常被用于: 封装过时的、或不受信任的信息服务;
+   通过 "accelerator" 缓存的方式来提高服务器的性能; 以及允许在多台计算机
+   间实现对 HTTP 服务的划分或负载平衡。
+
+
+
+   所有适用于源服务器的 HTTP 协议要求, 同样也适用于网关的出站通信。网关
+   可以使用任何期望的协议来与入站服务器进行通信, 包括超出本规范范围的对
+   HTTP 的私有扩展。但是, 一个从 HTTP 到 HTTP 的网关, 如果希望能够与第三
+   方的 HTTP 服务器互操作, 则应当在网关的入站连接中遵循 HTTP 协议对用户
+   代理的要求。
+
+
+
+   "隧道" ("tunnel") 在两个连接间扮演盲中继, 其不会修改传递的消息。一旦
+   启动, 隧道便不会被认作是 HTTP 通信的参与方, 尽管该隧道可能是由 HTTP
+   请求来初始化的。当中继连接的两端都被关闭时, 隧道就不再存在。隧道被用
+   于扩展一个穿透某些中间层的虚拟连接, 例如: 当使用传输层安全协议 (TLS,
+   Transport Layer Security, [RFC5246]) 来穿透共享防火墙代理, 以建立加密
+   通信的时候。
+
+
 
 
 
@@ -564,34 +564,34 @@ Fielding & Reschke           Standards Track                   [Page 10]
 RFC 7230           HTTP/1.1 Message Syntax and Routing         June 2014
 
 
-   The above categories for intermediary only consider those acting as
-   participants in the HTTP communication.  There are also
-   intermediaries that can act on lower layers of the network protocol
-   stack, filtering or redirecting HTTP traffic without the knowledge or
-   permission of message senders.  Network intermediaries are
-   indistinguishable (at a protocol level) from a man-in-the-middle
-   attack, often introducing security flaws or interoperability problems
-   due to mistakenly violating HTTP semantics.
+   上述对中介的分类, 仅考虑了那些在 HTTP 通信中的参与者。还有一些中介在
+   网络协议栈的较底层上起作用, 它们会过滤或重定向 HTTP 通信, 而无需消息
+   发送者的信息或许可。在协议层面, 很难将网络中介与中间人攻击 (man-in-
+   the-middle attack) 相区别, 再由于错误地违反了 HTTP 的语义, 而经常会引
+   入安全漏洞或互操作性问题。
 
-   For example, an "interception proxy" [RFC3040] (also commonly known
-   as a "transparent proxy" [RFC1919] or "captive portal") differs from
-   an HTTP proxy because it is not selected by the client.  Instead, an
-   interception proxy filters or redirects outgoing TCP port 80 packets
-   (and occasionally other common port traffic).  Interception proxies
-   are commonly found on public network access points, as a means of
-   enforcing account subscription prior to allowing use of non-local
-   Internet services, and within corporate firewalls to enforce network
-   usage policies.
 
-   HTTP is defined as a stateless protocol, meaning that each request
-   message can be understood in isolation.  Many implementations depend
-   on HTTP's stateless design in order to reuse proxied connections or
-   dynamically load balance requests across multiple servers.  Hence, a
-   server MUST NOT assume that two requests on the same connection are
-   from the same user agent unless the connection is secured and
-   specific to that agent.  Some non-standard HTTP extensions (e.g.,
-   [RFC4559]) have been known to violate this requirement, resulting in
-   security and interoperability problems.
+
+
+   例如, "拦截代理" ("interception proxy") [RFC3040] (通常也称为 "透明代
+   理", "transparent proxy" [RFC1919], 或 "强制门户", "captive portal")
+   不同于 HTTP 代理, 因为它不是由客户端来进行选择。相反, 拦截代理会过滤
+   或重定向由 TCP 端口 80 传出的数据包 (有时会重定向由其它常见端口传出的
+   流量)。通常可以在公共网络的访问节点上发现拦截代理, 其作为一种手段: 在
+   允许用户使用非本地的互联网服务前, 强制用户执行账户的订阅; 以及在公司
+   防火墙内强制执行网络的使用政策。
+
+
+
+   HTTP 被定义为无状态协议, 这意味着可以每一个请求消息都可以被单独理解。
+   许多实现依赖于 HTTP 的无状态的设计, 以便重用代理连接、或在多台机器间
+   进行动态负载平衡。因此, 服务器【禁止】假设两个来自同一连接的请求源于
+   同一用户代理, 除非该连接是经加密的、且特定于该代理。已知某些非标准的
+   HTTP 扩展 (例如 [RFC4559]) 违反了这一要求, 从而导致了安全性和互操作性
+   的问题。
+
+
+
 
 2.4.  Caches
 

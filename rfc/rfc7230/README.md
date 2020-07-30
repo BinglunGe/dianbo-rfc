@@ -36,3 +36,8 @@
 | 下游                 | downstream
 | 入站                 | inbound
 | 出站                 | outbound
+| 传输层安全协议       | TLS, Transport Layer Security
+| 中间人攻击           | man-in-the-middle attack
+| 拦截代理             | interception proxy
+| 透明代理             | transparent proxy
+| 强制门户             | captive portal
