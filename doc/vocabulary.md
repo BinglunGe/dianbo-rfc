@@ -9,7 +9,7 @@
 | 【不应】               | SHOULD NOT
 | 【推荐的】             | RECOMMENDED
 | 【不推荐的】           | NOT RECOMMENDED
-| 【可能】               | MAY
+| 【可以】               | MAY
 | 【可选的】             | OPTIONAL
 |                        |
 |                        |
