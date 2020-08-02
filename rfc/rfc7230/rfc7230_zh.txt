@@ -301,7 +301,7 @@ RFC 7230           HTTP/1.1 Message Syntax and Routing         June 2014
 1.1.  Requirements Notation
 
    在此文档中, 关于关键词【必须】、【禁止】、【必要的】、【应当】、【不
-   应】、【推荐的】、【可能】与【可选的】的解释, 见 [RFC2119] 中的描述。
+   应】、【推荐的】、【可以】与【可选的】的解释, 见 [RFC2119] 中的描述。
 
 
    Conformance criteria and considerations regarding error handling are
@@ -593,20 +593,20 @@ RFC 7230           HTTP/1.1 Message Syntax and Routing         June 2014
 
 
 
-2.4.  Caches
+2.4.  缓存
 
-   A "cache" is a local store of previous response messages and the
-   subsystem that controls its message storage, retrieval, and deletion.
-   A cache stores cacheable responses in order to reduce the response
-   time and network bandwidth consumption on future, equivalent
-   requests.  Any client or server MAY employ a cache, though a cache
-   cannot be used by a server while it is acting as a tunnel.
+   "缓存" ("cache") 是指本地存储以及相关的子系统, 其对先前的响应消息进行
+   保存, 并控制其消息的保存、检索、和删除。缓存会对可缓存 (cacheable) 的
+   响应进行保存, 以减少未来应对相同请求时的响应时间和网络带宽消耗。除被
+   用作隧道 (tunnel) 的服务器不能够使用缓存外, 任何客户端或服务器都【可
+   以】使用缓存。
 
-   The effect of a cache is that the request/response chain is shortened
-   if one of the participants along the chain has a cached response
-   applicable to that request.  The following illustrates the resulting
-   chain if B has a cached copy of an earlier response from O (via C)
-   for a request that has not been cached by UA or A.
+
+   缓存的效果是: 如果请求/响应链中的一个参与者 缓存了适用于该请求的响应,
+   则请求/响应链将会缩短。下图说明了: 对于某一请求, B 拥有一个先前 (通过
+   C) 来自于 O 的响应的缓存副本, 但是 UA 或 A 没有时的结果。
+
+
 
                >             >
           UA =========== A =========== B - - - - - - C - - - - - - O
@@ -620,20 +620,20 @@ Fielding & Reschke           Standards Track                   [Page 11]
 RFC 7230           HTTP/1.1 Message Syntax and Routing         June 2014
 
 
-   A response is "cacheable" if a cache is allowed to store a copy of
-   the response message for use in answering subsequent requests.  Even
-   when a response is cacheable, there might be additional constraints
-   placed by the client or by the origin server on when that cached
-   response can be used for a particular request.  HTTP requirements for
-   cache behavior and cacheable responses are defined in Section 2 of
-   [RFC7234].
+   如果允许缓存保存某个响应消息的副本, 以用于应答后续的请求, 则该响应是
+   "可缓存的" ("cacheable")。即使响应是可缓存的, 当可以将被缓存的响应用
+   于特定的请求时, 仍可能有来自客户端或服务器的其它限制。HTTP 协议对缓存
+   行为和可缓存响应的要求, 在 [RFC7234] 中的第 2 节有定义。
 
-   There is a wide variety of architectures and configurations of caches
-   deployed across the World Wide Web and inside large organizations.
-   These include national hierarchies of proxy caches to save
-   transoceanic bandwidth, collaborative systems that broadcast or
-   multicast cache entries, archives of pre-fetched cache entries for
-   use in off-line or high-latency environments, and so on.
+
+
+
+   许多不同架构及配置的缓存 被部署在万维网中及大型机构内部。其中包括: 为
+   节省跨洋带宽的国家级的代理缓存; 用于对缓存项进行广播或多播的协作系统;
+   在离线或高延迟环境中使用的预取 (pre-fetched) 缓存项存档; 等等。
+
+
+
 
 2.5.  Conformance and Error Handling
 

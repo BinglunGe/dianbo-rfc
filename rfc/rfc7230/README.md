@@ -41,3 +41,5 @@
 | 拦截代理             | interception proxy
 | 透明代理             | transparent proxy
 | 强制门户             | captive portal
+| 缓存                 | cache
+| 万维网               | WWW, World Wide Web
