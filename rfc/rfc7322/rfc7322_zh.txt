@@ -317,7 +317,7 @@ RFC 7322                     RFC Style Guide              September 2014
 
    *  引用必须被包裹在方括号中 (例如 "[CITE1]")。
 
-   *  在引用/参考文献的标签中禁止包含空格。
+   *  在引用/参考文献的标签中不得包含空格。
 
          示例: "[RFC2119]" rather than "[RFC 2119]"
 
@@ -583,7 +583,7 @@ RFC 7322                     RFC Style Guide              September 2014
 
 
    同样, 摘要本身应当是完整的。摘要将会单独出现在 RFC 的发布公告及在线索
-   引中。因此, 摘要中禁止包含引用。
+   引中。因此, 摘要中不得包含引用。
 
 
 4.4.  RFC Editor or Stream Notes Section

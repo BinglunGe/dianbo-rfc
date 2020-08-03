@@ -3,7 +3,7 @@
 | 中文                   | 英文
 |:-----------------------|:-------------------------------------
 | 【必须】               | MUST, SHALL
-| 【禁止】               | MUST NOT, SHALL NOT
+| 【不得】               | MUST NOT, SHALL NOT
 | 【必要的】             | REQUIRED
 | 【应当】               | SHOULD
 | 【不应】               | SHOULD NOT

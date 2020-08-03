@@ -11,7 +11,7 @@
 | 标准跟踪文档         | standards track documents
 | 国际互联网工程任务组 | IETF, Internet Engineering Task Force
 | 【必须】             | MUST, SHALL
-| 【禁止】             | MUST NOT, SHALL NOT
+| 【不得】             | MUST NOT, SHALL NOT
 | 【必要的】           | REQUIRED
 | 【应当】             | SHOULD
 | 【不应】             | SHOULD NOT
