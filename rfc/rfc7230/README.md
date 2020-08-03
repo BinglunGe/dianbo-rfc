@@ -43,3 +43,6 @@
 | 强制门户             | captive portal
 | 缓存                 | cache
 | 万维网               | WWW, World Wide Web
+| 头部字段             | header-field
+| 字段名               | field-name
+| 字段值               | field-value
