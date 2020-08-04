@@ -96,8 +96,8 @@ Copyright Notice
       2.1. 客户端/服务器的消息传递 ....................................7
       2.2. 实现的多样性 ...............................................8
       2.3. 中介 .......................................................9
-      2.4. Caches ....................................................11
-      2.5. Conformance and Error Handling ............................12
+      2.4. 缓存 ......................................................11
+      2.5. 一致性和错误处理 ..........................................12
       2.6. Protocol Versioning .......................................13
       2.7. Uniform Resource Identifiers ..............................16
            2.7.1. http URI Scheme ....................................17
@@ -635,7 +635,7 @@ RFC 7230           HTTP/1.1 Message Syntax and Routing         June 2014
 
 
 
-2.5.  Conformance and Error Handling 
+2.5.  一致性和错误处理 
 
    此规范会根据 "在 HTTP 通信中, 参与者所担当的角色" 来制定一致性标准。
    因此, HTTP 协议对发送者、接收者、客户端、服务器、用户代理、中介、源服
@@ -680,42 +680,42 @@ RFC 7230           HTTP/1.1 Message Syntax and Routing         June 2014
 
 
 
-   HTTP does not have specific length limitations for many of its
-   protocol elements because the lengths that might be appropriate will
-   vary widely, depending on the deployment context and purpose of the
-   implementation.  Hence, interoperability between senders and
-   recipients depends on shared expectations regarding what is a
-   reasonable length for each protocol element.  Furthermore, what is
-   commonly understood to be a reasonable length for some protocol
-   elements has changed over the course of the past two decades of HTTP
-   use and is expected to continue changing in the future.
+   HTTP 对其许多协议元素没有设置特定的长度限制, 因为根据部署上下文和实现
+   目的的不同, 合理的长度可能会有很大变化。因此, 发送者和接收者之间的互
+   操作性, 依赖于它们对每个协议元素的合理长度的共同预期。此外, 在过去二
+   十年对 HTTP 的使用中, 一些被普遍知晓的 协议元素的合理长度 发生了变化,
+   而这种变化预计在未来会继续发生。
 
-   At a minimum, a recipient MUST be able to parse and process protocol
-   element lengths that are at least as long as the values that it
-   generates for those same protocol elements in other messages.  For
-   example, an origin server that publishes very long URI references to
-   its own resources needs to be able to parse and process those same
-   references when received as a request target.
 
-   A recipient MUST interpret a received protocol element according to
-   the semantics defined for it by this specification, including
-   extensions to this specification, unless the recipient has determined
-   (through experience or configuration) that the sender incorrectly
-   implements what is implied by those semantics.  For example, an
-   origin server might disregard the contents of a received
-   Accept-Encoding header field if inspection of the User-Agent header
-   field indicates a specific implementation version that is known to
-   fail on receipt of certain content codings.
 
-   Unless noted otherwise, a recipient MAY attempt to recover a usable
-   protocol element from an invalid construct.  HTTP does not define
-   specific error handling mechanisms except when they have a direct
-   impact on security, since different applications of the protocol
-   require different error handling strategies.  For example, a Web
-   browser might wish to transparently recover from a response where the
-   Location header field doesn't parse according to the ABNF, whereas a
-   systems control client might consider any form of error recovery to
-   be dangerous.
+
+
+   最次, 接收者【必须】有能力解析并处理的协议元素长度, 至少应和 它为其它
+   消息中相同的协议元素 所生成的值一样长。例如, 源服务器发布了一个指向其
+   自身资源的非常长的 URI, 则该源服务器在接收到对该资源的请求时, 需要有
+   能力解析并处理这些相同的 URI 引用。
+
+
+
+   接收者【必须】根据 此协议 (包括对此协议的扩展) 为所其定义的语义 来解
+   释所接收到的协议元素, 除非接收者 (通过经验或配置) 已经确定 发送者没有
+   正确地实现这些语义所表示的含义。例如, 如果 User-Agent 头部字段所指出
+   的某一具体实现版本 被已知在接收特定的内容编码时会失败, 则源服务器可
+   能丢弃接收到的 Accept-Encoding 头部字段的内容。
+
+
+
+
+
+   除非另有说明, 否则接收者【可以】尝试从无效结构中修复可用的协议元素。
+   HTTP 没有定义具体的错误处理机制, 除非它们对安全性有直接影响, 因为对协
+   议的不同应用 需要 不同的错误处理策略。例如, 当无法能根据 ABNF 来解析
+   Location 头部字段时, Web 浏览器可能希望能够透明地从响应中恢复; 但是用
+   于系统控制的客户端可能会认为任何形式的错误恢复是危险的。
+
+
+
+
 
 2.6.  Protocol Versioning
 
