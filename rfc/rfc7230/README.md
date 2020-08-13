@@ -46,3 +46,5 @@
 | 头部字段             | header-field
 | 字段名               | field-name
 | 字段值               | field-value
+| 主要版本             | major version
+| 次要版本             | minor version

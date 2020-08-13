@@ -717,13 +717,13 @@ RFC 7230           HTTP/1.1 Message Syntax and Routing         June 2014
 
 
 
-2.6.  Protocol Versioning
+2.6.  协议版本控制
 
-   HTTP uses a "<major>.<minor>" numbering scheme to indicate versions
-   of the protocol.  This specification defines version "1.1".  The
-   protocol version as a whole indicates the sender's conformance with
-   the set of requirements laid out in that version's corresponding
-   specification of HTTP.
+   HTTP 使用 "<major>.<minor>" 编号方案来指示协议的版本。此规范定义了版
+   本 "1.1"。完整的协议版本被用来指明: 发送者所遵循的一系列要求, 这些要
+   求由该版本所对应的 HTTP 规范列出。
+
+
 
 
 
@@ -732,31 +732,31 @@ Fielding & Reschke           Standards Track                   [Page 13]
 RFC 7230           HTTP/1.1 Message Syntax and Routing         June 2014
 
 
-   The version of an HTTP message is indicated by an HTTP-version field
-   in the first line of the message.  HTTP-version is case-sensitive.
+   HTTP 消息的协议版本由消息首行中的 HTTP-version 字段指出。HTTP-version
+   字段是区分大小写的。
 
      HTTP-version  = HTTP-name "/" DIGIT "." DIGIT
      HTTP-name     = %x48.54.54.50 ; "HTTP", case-sensitive
 
-   The HTTP version number consists of two decimal digits separated by a
-   "." (period or decimal point).  The first digit ("major version")
-   indicates the HTTP messaging syntax, whereas the second digit ("minor
-   version") indicates the highest minor version within that major
-   version to which the sender is conformant and able to understand for
-   future communication.  The minor version advertises the sender's
-   communication capabilities even when the sender is only using a
-   backwards-compatible subset of the protocol, thereby letting the
-   recipient know that more advanced features can be used in response
-   (by servers) or in future requests (by clients).
+   HTTP 版本号是由被 "." (句点/小数点) 所分隔的两个十进制数字构成。第一
+   个数字 (主要版本, major version) 用于指明: HTTP 进行消息传递时的语法,
+   而第二个数字 (次要版本, minor version) 用于指明: 在当前主要版本下, 发
+   送者所遵循的、且在后续通信中能够理解的最高的次要版本。次要版本宣布了
+   发送者所具备的通信能力 (即使在实际通信中仅用了协议中向后兼容的子集),
+   因此使接收者知道了: 在 (服务器) 响应、或将来的 (客户端) 请求中, 所能
+   够使用的更多高级特性。
 
-   When an HTTP/1.1 message is sent to an HTTP/1.0 recipient [RFC1945]
-   or a recipient whose version is unknown, the HTTP/1.1 message is
-   constructed such that it can be interpreted as a valid HTTP/1.0
-   message if all of the newer features are ignored.  This specification
-   places recipient-version requirements on some new features so that a
-   conformant sender will only use compatible features until it has
-   determined, through configuration or the receipt of a message, that
-   the recipient supports HTTP/1.1.
+
+
+
+   当给 HTTP/1.0 的接收者 [RFC1945]、或版本未知的接收者发送一个 HTTP/1.1
+   的消息时, 该 HTTP/1.1 的消息会被构造成: 只要将所有的新特性忽略, 便能
+   够被解析为有效 HTTP/1.0 消息的形式, 此规范中的一些新特性对接收者的版
+   本有要求, 因此在通过配置或所接收的消息等方式, 来确定接收者是否支持
+   HTTP/1.1 之前, 一个符合规范的发送者将只会使用兼容特性。
+
+
+
 
    The interpretation of a header field does not change between minor
    versions of the same major HTTP version, though the default behavior
